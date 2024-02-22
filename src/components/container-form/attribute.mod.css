@@ -1,0 +1,8 @@
+.attribute {
+  display: flex;
+  width: 100%;
+}
+
+.attribute > * {
+  margin-right: var(--spacing-s);
+}

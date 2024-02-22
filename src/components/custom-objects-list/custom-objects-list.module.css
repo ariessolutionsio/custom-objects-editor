@@ -1,0 +1,41 @@
+.iconInput {
+  position: relative;
+  width: var(--constraint-m);
+}
+
+.icon {
+  position: absolute;
+  top: 0.3em;
+  right: 0.3em;
+}
+
+.value > .item {
+  margin-bottom: var(--spacing-s);
+}
+
+.nested {
+  margin-top: var(--spacing-s);
+  border-left: 1px solid var(--color-neutral);
+  padding-left: var(--spacing-m);
+}
+
+.nested .nested {
+  margin-top: 0;
+}
+
+.listItem {
+  background-color: var(--color-neutral-95);
+  border-radius: var(--spacing-s);
+  padding: var(--spacing-s);
+  margin-bottom: var(--spacing-s);
+}
+
+.listItem:last-child {
+  margin-bottom: 0;
+}
+
+.listItem > .nested {
+  border-left: none;
+  padding-left: 0;
+  margin-top: 0;
+}

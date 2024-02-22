@@ -1,0 +1,21 @@
+query GetCustomObjects(
+  $where: String
+  $sort: [String!]
+  $limit: Int
+  $offset: Int
+  $container: String!
+) {
+  customObjects(where: $where, sort: $sort, limit: $limit, offset: $offset, container: $container)
+ {
+    count
+    total
+    offset
+    results {
+      id
+      lastModifiedAt
+      container
+      key
+      value
+    }
+  }
+}

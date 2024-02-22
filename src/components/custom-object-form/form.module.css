@@ -1,0 +1,10 @@
+
+.field-card {
+  border: 1px solid var(--color-neutral);
+  margin: var(--spacing-s);
+  flex: 1 48%;
+}
+
+.type-select-wrapper {
+  min-width: var(--constraint-l);
+}
