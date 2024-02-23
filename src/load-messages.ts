@@ -23,6 +23,7 @@ const loadMessages = async (locale: string): Promise<TMergedMessages> => {
     const chunkImport = await getChunkImport(locale);
     // Prefer loading `default` (for ESM bundles) and
     // fall back to normal import (for CJS bundles).
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     return chunkImport.default || chunkImport;
   } catch (error) {

@@ -37,40 +37,46 @@ export const generateAttribute = ({
   displayNested = faker.random.boolean(),
   set = faker.random.boolean(),
   languages = times(2, () => faker.random.locale()),
-}) => ({
-  name: faker.random.words(),
-  type,
-  set,
-  required: faker.random.boolean(),
-  display,
-  ...(type === TYPES.Object && {
-    attributes: generateAttributes(displayNested), // eslint-disable-line no-use-before-define
-  }),
-  ...(type === TYPES.Reference && {
-    reference: {
-      by: faker.random.arrayElement(Object.values(REFERENCE_BY)),
-      type: faker.random.arrayElement(Object.values(REFERENCE_TYPES)),
-    },
-  }),
-  ...(type === TYPES.Enum && {
-    enum: times(2, () => ({
-      value: JSON.stringify(faker.random.number()),
-      label: faker.random.words(),
-    })),
-  }),
-  ...(type === TYPES.LocalizedEnum && {
-    lenum: times(2, () => ({
-      value: JSON.stringify(faker.random.number()),
-      label: reduce(
-        languages,
-        (label, language) => ({ ...label, [language]: faker.random.words() }),
-        {}
-      ),
-    })),
-  }),
-});
+}) => {
+  const generateAttributes = (display = faker.random.boolean()): any =>
+    times(faker.random.number({ min: 1, max: 5 }), () =>
+      generateAttribute({ display })
+    );
+  return {
+    name: faker.random.words(),
+    type,
+    set,
+    required: faker.random.boolean(),
+    display,
+    ...(type === TYPES.Object && {
+      attributes: generateAttributes(displayNested),
+    }),
+    ...(type === TYPES.Reference && {
+      reference: {
+        by: faker.random.arrayElement(Object.values(REFERENCE_BY)),
+        type: faker.random.arrayElement(Object.values(REFERENCE_TYPES)),
+      },
+    }),
+    ...(type === TYPES.Enum && {
+      enum: times(2, () => ({
+        value: JSON.stringify(faker.random.number()),
+        label: faker.random.words(),
+      })),
+    }),
+    ...(type === TYPES.LocalizedEnum && {
+      lenum: times(2, () => ({
+        value: JSON.stringify(faker.random.number()),
+        label: reduce(
+          languages,
+          (label, language) => ({ ...label, [language]: faker.random.words() }),
+          {}
+        ),
+      })),
+    }),
+  };
+};
 
-const generateAttributes = (display = faker.random.boolean()) =>
+const generateAttributes = (display = faker.random.boolean()): any =>
   times(faker.random.number({ min: 1, max: 5 }), () =>
     generateAttribute({ display })
   );
@@ -110,7 +116,7 @@ export const generateFormValues = () => ({
 export const generateCustomObject = (
   container = generateContainer(),
   currencies = times(2, () => faker.finance.currencyCode()),
-  languages = times(2, faker.random.locale())
+  languages: Array<string> = times(2, faker.random.locale())
 ) => ({
   id: faker.random.uuid(),
   version: faker.random.number({ min: 1, max: 10 }),

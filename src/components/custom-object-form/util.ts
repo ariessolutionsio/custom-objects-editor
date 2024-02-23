@@ -1,11 +1,11 @@
+/* eslint-disable import/namespace */
 import camelCase from 'lodash/camelCase';
 import get from 'lodash/get';
 import isNil from 'lodash/isNil';
 import reduce from 'lodash/reduce';
 import LocalizedTextInput from '@commercetools-uikit/localized-text-input';
 import { IntlShape, MessageDescriptor } from 'react-intl';
-import { addMethod, array, object, string } from 'yup';
-import * as yup from 'yup';
+import { addMethod, array, object, string, number, date, boolean } from 'yup';
 import {
   AttributeValue,
   Reference,
@@ -102,7 +102,25 @@ const getValidation = (
   messages: any,
   intl: IntlShape
 ) => {
-  const validation = yup[method]();
+  let validation: any;
+  switch (method) {
+    case 'string':
+      validation = string();
+      break;
+    case 'number':
+      validation = number();
+      break;
+    case 'date':
+      validation = date();
+      break;
+    case 'boolean':
+      validation = boolean();
+      break;
+    default:
+      validation = string();
+      break;
+  }
+
   //"<FormattedMessage {...messages.required} />
   return required
     ? validation.required(intl.formatMessage(messages.required))
@@ -117,9 +135,10 @@ const getLocalizedStringValidation = (
   addMethod(object, 'atLeastOneOf', function (list) {
     return this.test({
       name: 'atLeastOneOf',
-      message: messages.required, //<FormattedMessage {...messages.required} />,
+      message: messages.required as any, //<FormattedMessage {...messages.required} />,
       exclusive: true,
-      test: (value) => value == null || list.some((f) => !isNil(get(value, f))),
+      test: (value) =>
+        value == null || list.some((f: any) => !isNil(get(value, f))),
     });
   });
 
@@ -128,7 +147,7 @@ const getLocalizedStringValidation = (
     (name, lang) => ({ ...name, [lang]: string() }),
     {}
   );
-  const validation = object(localizedStringSchema);
+  const validation: any = object(localizedStringSchema);
 
   return required ? validation.atLeastOneOf(languages) : validation;
 };
@@ -172,8 +191,8 @@ const getValidationByType = (
       });
 
     case TYPES.Object:
-      // eslint-disable-next-line @typescript-eslint/no-use-before-define
       return object(
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
         getAttributeValidation(attributes, languages, messages, intl)
       );
 
@@ -197,7 +216,7 @@ export const getAttributeValidation = (
   languages: Array<string>,
   messages: { [key: string]: MessageDescriptor },
   intl: IntlShape
-): { [key: string]: unknown } => {
+): { [key: string]: any } => {
   return attributes.reduce((result, attribute) => {
     return {
       ...result,

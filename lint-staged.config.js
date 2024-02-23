@@ -10,6 +10,5 @@ module.exports = {
   '*.graphql': [
     'yarn lint:graphql --reporters=jest-silent-reporter --onlyChanged',
     'yarn format:graphql',
-  ],
-  '*.md': ['prettier --write'],
+  ]
 };

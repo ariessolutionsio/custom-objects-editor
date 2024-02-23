@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import React from 'react';
 import { shallow } from 'enzyme';
 import { FormattedMessage } from 'react-intl';
@@ -8,10 +9,10 @@ import {
 import { mockShowNotification } from '@commercetools-frontend/actions-global';
 import { CONTAINER, ROOT_PATH } from '../../constants';
 import ContainerForm from '../container-form';
-import CreateContainer from './create-container';
 import CreateContainerCustomObject from '../update-custom-object.rest.graphql';
-import messages from './messages';
 import { generateFormValues } from '../../test-utils';
+import CreateContainer from './create-container';
+import messages from './messages';
 
 const formValues = generateFormValues();
 
@@ -60,6 +61,7 @@ describe('create container', () => {
     setMutation({ error });
     const wrapper = loadCreateContainer();
     await submitForm(wrapper).catch(() =>
+      // eslint-disable-next-line jest/no-conditional-expect
       expect(mockShowNotification).toHaveBeenCalledWith({
         text: (
           <FormattedMessage
