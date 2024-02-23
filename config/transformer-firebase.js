@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
 // This transformer will generate a `firebase.json` config file, based on the application
 // environment config and custom headers. If you are deploying to a Firebase project with multiple

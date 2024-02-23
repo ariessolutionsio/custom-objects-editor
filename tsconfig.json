@@ -1,3 +1,9 @@
 {
+  "compilerOptions": {
+    "jsx": "react"
+  },
+  "compilerOptions": {
+    "jsx": "react"
+  },
   "extends": "@commercetools-frontend/application-config/tsconfig-mc-app.json"
 }

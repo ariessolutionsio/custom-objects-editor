@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import React from 'react';
 import { shallow } from 'enzyme';
 import last from 'lodash/last';
@@ -9,9 +10,9 @@ import Pagination from '../pagination';
 import ViewHeader from '../view-header';
 import { generateContainers } from '../../test-utils';
 import GetContainers from '../get-custom-objects.ctp.graphql';
+import { SORT_OPTIONS } from '../../constants';
 import ContainerList from './container-list';
 import { DEFAULT_VARIABLES, FIELDS, PAGE_SIZE } from './constants';
-import { SORT_OPTIONS } from '../../constants';
 
 const mocks = {
   match: {

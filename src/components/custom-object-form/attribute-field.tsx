@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import get from 'lodash/get';
 import { useIntl } from 'react-intl';
 import { FieldArray } from 'formik';
@@ -17,7 +17,7 @@ import messages from './messages';
 import styles from './attribute-field.module.css';
 
 type Props = {
-  type: string;
+  type: any;
   title: string;
   isRequired?: boolean;
   isSet?: boolean;
@@ -28,15 +28,9 @@ type Props = {
   errors?: any;
   onChange(...args: unknown[]): unknown;
   onBlur(...args: unknown[]): unknown;
-  attributes?: unknown[];
-  reference?: {
-    by?: string;
-    type?: string;
-  };
-  options?: {
-    value?: string;
-    label?: string | object;
-  }[];
+  attributes?: any[];
+  reference?: any;
+  options?: any[];
 };
 
 const AttributeField: FC<Props> = ({
@@ -77,7 +71,7 @@ const AttributeField: FC<Props> = ({
           value: option.value,
           label: option.label[dataLocale],
         };
-        })
+      })
       : options;
 
   return (

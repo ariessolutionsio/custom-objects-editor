@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import React from 'react';
 import { shallow } from 'enzyme';
 import faker from 'faker';
@@ -115,7 +116,7 @@ describe('custom object details', () => {
         try {
           await commands.find(ConfirmationDialog).props().onConfirm();
         } catch (error) {
-          // eslint-disable-next-line jest/no-try-expect
+          // eslint-disable-next-line jest/no-conditional-expect
           expect(mockShowNotification).toHaveBeenCalledWith({
             text: <FormattedMessage {...messages.deleteError} />,
           });

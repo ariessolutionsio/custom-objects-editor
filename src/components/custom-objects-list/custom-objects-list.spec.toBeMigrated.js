@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import React from 'react';
 import { shallow } from 'enzyme';
 import faker from 'faker';
@@ -11,7 +12,7 @@ import { stringify } from 'qs';
 import { FormattedDate } from 'react-intl';
 import { useQuery, setQuery } from '@commercetools-frontend/application-shell';
 import { NO_VALUE_FALLBACK } from '@commercetools-frontend/constants';
-import PaginatedTable from '../paginated-table';
+import PaginatedTable from '../paginated-table/paginated-table';
 import useEffectMock from '../../test-utils/use-effect-mock';
 import {
   generateAttribute,
@@ -22,6 +23,7 @@ import {
 import * as ContainerContext from '../../context/container-context';
 import { TYPES } from '../container-form/constants';
 import GetCustomObjects from '../get-custom-objects.ctp.graphql';
+import { SORT_OPTIONS } from '../../constants';
 import CustomObjectsList from './custom-objects-list';
 import {
   DATE_FORMAT,
@@ -29,7 +31,6 @@ import {
   DEFAULT_VARIABLES,
   PAGE_SIZE,
 } from './constants';
-import { SORT_OPTIONS } from '../../constants';
 import { COLUMN_KEYS } from './column-definitions';
 
 const containerContext = generateContainerContext();

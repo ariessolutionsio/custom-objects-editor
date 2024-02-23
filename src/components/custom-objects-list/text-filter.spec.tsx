@@ -11,7 +11,7 @@ const mocks = {
   onSubmit: jest.fn(),
 };
 
-const filterWrapper = 'filter-wrapper';
+//const filterWrapper = 'filter-wrapper';
 const filterInput = 'filter-input';
 const clearButton = 'clear-button';
 const filterButton = 'filter-button';
