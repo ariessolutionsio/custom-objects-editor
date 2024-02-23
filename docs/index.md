@@ -7,9 +7,8 @@ permalink: /
 
 <!--prettier-ignore-start-->
 # Custom Objects Editor
-{: .fs-9 }
 
-A starter custom application for building a custom object editor within the commercetools' Merchant Center.
+Manage your custom objects directly from the Merchant Center.
 {: .fs-6 .fw-300 }
 
 commercetools offers unparalleled data configuration; however, there are
@@ -97,23 +96,9 @@ with a Merchant Center project.
 
 ## License
 
-[MIT license](https://github.com/commercetools/commercetools/commercetools-mc-custom-objects-starter/LICENSE.txt).
+Aries code and modifications licensed under the [GNU AGPLv3 license](https://www.gnu.org/licenses/agpl-3.0.en.html).
 
-## Contributing
-
-When contributing to this repository, please first discuss the change you wish
-to make through a new issue. Changes that are business or company specific
-should not be merged into this repository.
-
-### Thank you to the contributors!
-
-<ul class="list-style-none">
-{% for contributor in site.github.contributors %}
-  <li class="d-inline-block mr-1">
-     <a href="{{ contributor.html_url }}"><img src="{{ contributor.avatar_url }}" width="32" height="32" alt="{{ contributor.login }}"/></a>
-  </li>
-{% endfor %}
-</ul>
+If you would like to discuss alternative licensing or leveraging this application in your composable stack, please [reach out to Aries Solutions](https://www.ariessolutions.io/contact-aries/) to discuss options.
 
 #### Disclaimer
 
@@ -135,5 +120,5 @@ before use in any non-testing environment.
 
 ## Support
 
-Need help with your project? Contact the Professional Services team for
+Need help with your project? Contact the Aries Solutions team for
 assistance.

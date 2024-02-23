@@ -3,9 +3,10 @@ description: Create and manage custom objects on the commercetools platform.
 remote_theme: pmarsceill/just-the-docs
 aux_links:
   'View on GitHub':
-    - '//github.com/commercetools/commercetools-mc-custom-objects-starter'
+    - '//github.com/ariessolutionsio/custom-objects-editor/'
 footer_content: ''
-logo: 'assets/commercetools.svg'
-color_scheme: commercetools
+logo: 'assets/aries-logo-dark.png'
+color_scheme: aries
 plugins:
   - jekyll-remote-theme
+  - jekyll-include-cache
