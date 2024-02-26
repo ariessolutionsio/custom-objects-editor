@@ -12,9 +12,9 @@ import {
   REFERENCE_TYPES,
   TYPES,
 } from '../container-form/constants';
+import { generateContainer } from '../../test-utils';
 import AttributeInput from './attribute-input';
 import messages from './messages';
-import { generateContainer } from '../../test-utils';
 import { getValue } from './util';
 import AttributeField from './attribute-field';
 

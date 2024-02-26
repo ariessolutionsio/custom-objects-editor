@@ -1,4 +1,4 @@
-import React, { lazy, useState } from 'react';
+import { lazy, useState } from 'react';
 import { FormattedDate, FormattedMessage, useIntl } from 'react-intl';
 import camelCase from 'lodash/camelCase';
 import includes from 'lodash/includes';
@@ -179,7 +179,7 @@ const CustomObjectsList = () => {
         return { ...display, [key]: value };
       }
       if (isPlainObject(value)) {
-        const nested: any = getDisplayValues(key, attributes);
+        const nested: any = getDisplayValues({ [key]: value }, attributes);
         if (!isEmpty(nested)) {
           return { ...display, [key]: nested };
         }
@@ -229,7 +229,7 @@ const CustomObjectsList = () => {
     setContainer(value);
   }
 
-  const { results, count, total, offset } = customObjectsPaginatedResult;
+  const { results, count, total } = customObjectsPaginatedResult;
 
   const containerOptions = map(containers, ({ key: containerKey }) => ({
     label: containerKey,

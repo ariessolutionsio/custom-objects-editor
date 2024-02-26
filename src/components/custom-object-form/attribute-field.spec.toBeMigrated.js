@@ -13,8 +13,8 @@ import {
   REFERENCE_TYPES,
   TYPES,
 } from '../container-form/constants';
-import AttributeField from './attribute-field';
 import { generateContainer } from '../../test-utils';
+import AttributeField from './attribute-field';
 import { getValue } from './util';
 import AttributeInput from './attribute-input';
 

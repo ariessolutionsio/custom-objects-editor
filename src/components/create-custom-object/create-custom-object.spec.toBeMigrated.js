@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import React from 'react';
 import { shallow } from 'enzyme';
 import faker from 'faker';
@@ -12,8 +13,8 @@ import { ROOT_PATH } from '../../constants';
 import * as ContainerContext from '../../context/container-context';
 import { generateContainerContext } from '../../test-utils';
 import CreateCustomObjectMutation from '../update-custom-object.rest.graphql';
-import CreateCustomObject from './create-custom-object';
 import CustomObjectForm from '../custom-object-form';
+import CreateCustomObject from './create-custom-object';
 import messages from './messages';
 
 const containerContext = generateContainerContext();
@@ -64,6 +65,7 @@ describe('create custom object', () => {
     setMutation({ error });
     const wrapper = loadCreateCustomObject();
     await submitForm(wrapper).catch(() =>
+      // eslint-disable-next-line jest/no-conditional-expect
       expect(mockShowNotification).toHaveBeenCalledWith({
         text: (
           <FormattedMessage

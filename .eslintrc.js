@@ -6,7 +6,7 @@ process.env.ENABLE_NEW_JSX_TRANSFORM = 'true';
 module.exports = {
   extends: [
     '@commercetools-frontend/eslint-config-mc-app',
-    "eslint:recommended",
+    'eslint:recommended',
     // "plugin:react/recommended",
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
@@ -27,14 +27,20 @@ module.exports = {
       },
     },
   ],
-  ignorePatterns: ['public/', 'node_nodules/', '*.config.js', '.eslintrc.js', '*.d.ts'],
+  ignorePatterns: [
+    'public/',
+    'node_nodules/',
+    '*.config.js',
+    '.eslintrc.js',
+    '*.d.ts',
+  ],
   rules: {
     quotes: ['error', 'single'],
     // we want to force semicolons
     semi: ['error', 'always'],
     // we use 2 spaces to indent our code
-    indent: ['error', 2, { "SwitchCase": 1 }],
-    
+    indent: ['error', 2, { SwitchCase: 1 }],
+
     // we want to avoid extraneous spaces
     'no-multi-spaces': ['error'],
     'react/jsx-uses-react': ['error'],

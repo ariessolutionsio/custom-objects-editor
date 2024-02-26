@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import capitalize from 'lodash/capitalize';
 import startCase from 'lodash/startCase';
 import { useIntl } from 'react-intl';
@@ -28,7 +28,7 @@ const AttributeLabel: FC<Props> = ({ type, title, isRequired, reference }) => {
             reference
               ? `${startCase(reference.type)} ${capitalize(
                 reference.by
-                )} ${intl.formatMessage(messages.referenceLabel)}`
+              )} ${intl.formatMessage(messages.referenceLabel)}`
               : ''
           }
         />
