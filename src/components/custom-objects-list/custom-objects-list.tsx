@@ -276,7 +276,6 @@ const CustomObjectsList = () => {
                   data-testid="container-filter"
                   name="container"
                   placeholder={intl.formatMessage(messages.container)}
-                  isClearable
                   value={container}
                   options={containerOptions}
                   onChange={filterByContainer}
