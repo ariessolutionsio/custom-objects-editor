@@ -4,7 +4,7 @@ import { entryPointUriPathToPermissionKeys } from '@commercetools-frontend/appli
 export const entryPointUriPath =
   typeof window === 'undefined'
     ? process.env.ENTRY_POINT_URI_PATH
-    : 'custom-objects';
+    : window.app.entryPointUriPath;
 
 export const PERMISSIONS = entryPointUriPathToPermissionKeys(
   entryPointUriPath,
