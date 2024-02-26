@@ -8,11 +8,9 @@ module.exports = {
     '@commercetools-frontend/eslint-config-mc-app',
     "eslint:recommended",
     // "plugin:react/recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:import/recommended",
-    "plugin:import/typescript",
-    "plugin:prettier/recommended"
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:import/typescript',
   ],
   plugins: ['graphql', 'unused-imports'],
   overrides: [
