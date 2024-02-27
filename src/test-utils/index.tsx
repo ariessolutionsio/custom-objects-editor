@@ -6,11 +6,11 @@ import {
   type TRenderAppOptions,
   type TRenderAppWithReduxOptions,
 } from '@commercetools-frontend/application-shell/test-utils';
-import faker from 'faker';
 import kebabCase from 'lodash/kebabCase';
 import map from 'lodash/map';
 import reduce from 'lodash/reduce';
 import times from 'lodash/times';
+import faker from 'faker';
 import { entryPointUriPath, CONTAINER } from '../constants';
 import ApplicationRoutes from '../routes';
 import {

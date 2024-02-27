@@ -29,8 +29,8 @@ type Formik = ReturnType<typeof useFormik<TFormValues>>;
 type Props = {
   name: string;
   value: AttributeValue;
-  touched: Formik['touched'];
-  errors: Formik['errors'];
+  touched: any;
+  errors: any;
   handleBlur: Formik['handleBlur'];
   handleChange: Formik['handleChange'];
   remove: () => void;

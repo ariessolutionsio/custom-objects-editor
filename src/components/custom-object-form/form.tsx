@@ -78,11 +78,11 @@ const Form: FC<Props> = ({
       setFieldValue('value', value);
       setFieldValue('attributes', attributes);
     }
-  }, [values.container]);
+  }, [currencies, initialValues.container, initialValues.value, languages, setFieldValue, values.container]);
 
   React.useEffect(() => {
-    onAttributesChange(values.attributes); // eslint-disable-line react/prop-types
-  }, [values.attributes]); // eslint-disable-line react/prop-types
+    onAttributesChange(values.attributes);
+  }, [values.attributes]);
 
   return (
     <Spacings.Stack scale="m">

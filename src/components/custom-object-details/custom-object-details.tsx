@@ -40,7 +40,7 @@ type Props = {
   onClose: () => void;
 };
 
-const getValueForAttributes = (value: Value, empty: Value): Value => {
+const getValueForAttributes = (value: any, empty: any): any => {
   return reduce(
     empty,
     (result, val, key) => ({

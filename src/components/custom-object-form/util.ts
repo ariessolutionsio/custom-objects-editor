@@ -1,4 +1,3 @@
-/* eslint-disable import/namespace */
 import camelCase from 'lodash/camelCase';
 import get from 'lodash/get';
 import isNil from 'lodash/isNil';
