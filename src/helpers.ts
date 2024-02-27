@@ -4,11 +4,6 @@ import {
 } from '@commercetools-frontend/l10n';
 import { ApolloError, type ServerError } from '@apollo/client';
 import type { TChannel } from './types/generated/ctp';
-import type {
-  TGraphqlUpdateAction,
-  TSyncAction,
-  TChangeNameActionPayload,
-} from './types';
 
 export const getErrorMessage = (error: ApolloError) =>
   error.graphQLErrors?.map((e) => e.message).join('\n') || error.message;
@@ -36,17 +31,17 @@ export const extractErrorFromGraphQlResponse = (graphQlResponse: unknown) => {
   return graphQlResponse;
 };
 
-const getNameFromPayload = (payload: TChangeNameActionPayload) => ({
+const getNameFromPayload = (payload: any) => ({
   name: transformLocalizedStringToLocalizedField(payload.name),
 });
 
 const isChangeNameActionPayload = (
   actionPayload: Record<string, unknown>
-): actionPayload is TChangeNameActionPayload => {
-  return (actionPayload as TChangeNameActionPayload)?.name !== undefined;
+): actionPayload is any => {
+  return (actionPayload as any)?.name !== undefined;
 };
 
-const convertAction = (action: TSyncAction): TGraphqlUpdateAction => {
+const convertAction = (action: any): any => {
   const { action: actionName, ...actionPayload } = action;
   return {
     [actionName]:
@@ -56,8 +51,8 @@ const convertAction = (action: TSyncAction): TGraphqlUpdateAction => {
   };
 };
 
-export const createGraphQlUpdateActions = (actions: TSyncAction[]) =>
-  actions.reduce<TGraphqlUpdateAction[]>(
+export const createGraphQlUpdateActions = (actions: any[]) =>
+  actions.reduce<any[]>(
     (previousActions, syncAction) => [
       ...previousActions,
       convertAction(syncAction),

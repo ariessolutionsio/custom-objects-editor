@@ -7,7 +7,6 @@ import SecondaryButton from '@commercetools-uikit/secondary-button';
 import FieldLabel from '@commercetools-uikit/field-label';
 import { PlusBoldIcon } from '@commercetools-uikit/icons';
 import Spacings from '@commercetools-uikit/spacings';
-// eslint-disable-next-line import/no-cycle
 import AttributeGroup from './attribute-group';
 import messages from './messages';
 import styles from './nested-attributes.module.css';
@@ -75,7 +74,7 @@ const ObjectAttributes: FC<Props> = ({
                 }
               />
             </Constraints.Horizontal>
-            {value.map((objectValue, objectIndex) => (
+            {value.map((objectValue: any, objectIndex) => (
               <AttributeGroup
                 data-testid={`attribute-${objectIndex}`}
                 key={objectIndex}

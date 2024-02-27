@@ -37,8 +37,8 @@ type Props = {
     type?: string;
   };
   options?: {
-    value?: string;
-    label?: string;
+    value: string;
+    label: string;
   }[];
 };
 
@@ -129,7 +129,6 @@ const AttributeInput: FC<Props> = ({
             value={JSON.stringify(value)}
             hasError={!!(touched && errors)}
             onChange={onChange}
-            onBlur={onBlur}
           >
             {title}
           </CheckboxInput>
@@ -181,7 +180,6 @@ const AttributeInput: FC<Props> = ({
         <Spacings.Stack scale="xs">
           <TimeInput
             data-testid="field-type-time"
-            timeZone={timeZone}
             name={name}
             value={value}
             hasError={!!(touched && errors)}
@@ -234,7 +232,7 @@ const AttributeInput: FC<Props> = ({
     }
 
     case TYPES.Reference: {
-      const referenceBy = get(reference, 'by');
+      const referenceBy: any = get(reference, 'by');
       const refValue = get(value, referenceBy, '');
       const refTouched = get(touched, referenceBy);
       const refErrors = get(errors, referenceBy);
@@ -260,7 +258,7 @@ const AttributeInput: FC<Props> = ({
       return (
         <div className={`${nestedStyles.nested}`}>
           <Spacings.Stack scale="s">
-            {map(attributes, (attribute, index) => {
+            {map(attributes, (attribute: any, index) => {
               const attributeName = camelCase(attribute.name);
               return (
                 <AttributeField

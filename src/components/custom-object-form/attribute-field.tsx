@@ -12,7 +12,7 @@ import Spacings from '@commercetools-uikit/spacings';
 import { TYPES } from '../container-form/constants';
 import { getValue } from './util';
 import AttributeLabel from './attribute-label';
-import AttributeInput from './attribute-input'; // eslint-disable-line import/no-cycle
+import AttributeInput from './attribute-input';
 import messages from './messages';
 import styles from './attribute-field.module.css';
 

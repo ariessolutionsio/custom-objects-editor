@@ -113,5 +113,8 @@
   "StatusBadge.label.published": "Published",
   "StatusBadge.label.unpublish": "Unpublish",
   "StatusBadge.label.unpublished": "Unpublished",
-  "ThrottledSearch.input.placeholder": "Search"
+  "ThrottledSearch.input.placeholder": "Search",
+  "ProjectSwitcher.projectsLabel": "Projects",
+  "UserSettingsMenu.menuLabel": "Settings",
+  "LocaleSwitcher.localesLabel": "Languages"
 }

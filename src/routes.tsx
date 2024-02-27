@@ -6,7 +6,7 @@ import {
 import { FormattedMessage } from 'react-intl';
 import { useIsAuthorized } from '@commercetools-frontend/permissions';
 import LockedDiamondSVG from '@commercetools-frontend/assets/images/locked-diamond.svg';
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { ContentNotification } from '@commercetools-uikit/notifications';
 import LoadingSpinner from '@commercetools-uikit/loading-spinner';
 import Spacings from '@commercetools-uikit/spacings';

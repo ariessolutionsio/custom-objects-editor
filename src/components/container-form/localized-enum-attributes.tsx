@@ -21,7 +21,7 @@ import nestedStyles from './nested-attributes.module.css';
 
 export type TFormValue = {
   value: string;
-  label: object;
+  label: any;
 };
 
 export type Formik = ReturnType<typeof useFormik<TFormValue>>;

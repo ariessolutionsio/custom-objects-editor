@@ -14,7 +14,7 @@ export const messages = defineMessages({
   },
 });
 
-const loadMessages = (lang) => {
+const loadMessages = (lang: string) => {
   let loadAppI18nPromise;
   switch (lang) {
     case 'de':
