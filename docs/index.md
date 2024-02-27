@@ -14,73 +14,46 @@ Manage your custom objects directly from the Merchant Center.
 commercetools offers unparalleled data configuration; however, there are
 situations where a company needs to store information that does not fit neatly
 into an existing endpoint. In these situations, commercetools offers a generic
-endpoint - [Custom Objects](https://docs.commercetools.com/http-api-projects-custom-objects).
+endpoint - [Custom Objects](https://docs.commercetools.com/api/projects/custom-objects).
 Custom Objects are a great way to store your JSON data. Some example use-cases may include 
 brand data, company profiles, shared product data, and feature flags.
 
 This application extends the commercetools Merchant Center to allow an end-user to define
 a JSON data schema and Create, Read, Update, and Delete objects tied to that schema.
 
-_Always speak with a commercetools professional when modeling your data._
+_NOTE: Data modeling is an important aspect of any project and can have a big impact on your
+project's success and application performance. We recommend getting advice from an experience 
+professional. Please feel free to [reach out](https://www.ariessolutions.io/contact-aries/) with any questions._
 
-[Get started now](#getting-started){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } [View it on GitHub](https://github.com/commercetools/commercetools-mc-custom-objects-starter){: .btn .fs-5 .mb-4 .mb-md-0 }
+[Get started now](#getting-started){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } [View it on GitHub](https://github.com/ariessolutionsio/custom-objects-editor){: .btn .fs-5 .mb-4 .mb-md-0 }
 
 ---
 
 
 ## Getting started
-### Installation
 
-Clone the repository.
+### Configure Custom Application with Merchant Center
 
-Simply run `yarn` or `yarn install` from the repository root to install the
-application's dependencies.
 
-```bash
-yarn
-```
 
-Run local
+In order to use this custom application, you'll need to register it inside of the Merchant Center.
+You can **demo** the application with our hosted version. For use in production please deploy the
+application to your own cloud environment or contact us for help.
 
-```bash
-yarn start
-```
+ - [TBD](LINK)
 
-### Build & Deployment
+To register your Custom Application with a Merchant Center project:
 
-Run the following command to build the
-[production bundles](https://docs.commercetools.com/custom-applications/deployment/production-build)
-with webpack:
+1. In the main navigation of the Merchant Center, navigate to **User Icon > Manage Organization and Teams**. Click on the organizaiton where you want to install the application.
 
-```bash
-yarn build
-```
+2. From your organization page, navigate to the tab **Custom Applications** and clck the **Configure Custom Applications** button. Then click the **Add a Custom Application** button.
+    
+3.  Fill in the fields as follows:
 
-The application includes configuration for both AWS (S3 & CloudFront) and
-Firebase serverless deployments built with `mc-script compile-html`.
-
-- [Firebase](https://appkit.commercetools.com/deployment/example-firebase):
-  `yarn compile-html:firebase`
-- [AWS - S3 & CloudFront](https://appkit.commercetools.com/deployment/example-aws-s3-cloudfront):
-  `yarn compile-html:aws`
-
-For either deployment option, the corresponding `production-{cloud}.env.json`
-and `production-{cloud}.headers.json` files must be modified with values that
-match your deployment environment.
-
-### Registration with Merchant Center
-
-After deploying the custom application, it needs to be
-[registered](https://docs.commercetools.com/custom-applications/register-applications/configuring-a-custom-application)
-with a Merchant Center project.
-
-<!--prettier-ignore-start-->
-#### Configuration Values
-{: .no_toc }
-<!--prettier-ignore-end-->
-
-- **Main Route Path**: `custom-objects`
-- **Link Permissions**: Manage Products, Manage Orders, Manage Customers
+- **Application Name**: Custom Objects
+- **Application Url**: Your hosting location
+- **Application entry point URI path**: `custom-objects`
+- **Permissions**: Manage Products, Manage Orders, Manage Customers
 - **Sub Navigation** _(Optional)_
   - Custom Object List
     - **Link To**: `/`
@@ -88,15 +61,17 @@ with a Merchant Center project.
   - Container Schema List
     - **Link To**: `containers`
     - **Link Permissions**: Manage Products, Manage Orders, Manage Customers
+        
+4.  Click **Register Custom Application**.
 
-![Merchant Center Registration - Main Nav](assets/custom-application-registration-main.png)
-![Merchant Center Registration - Sub Nav](assets/custom-application-registration-sub.png)
+5.  Install the application in your desired projects. From the organization's Custom Applications screen click on the **Install Custom Applications** button. Choose the application. Install in all or selected projects for that organization.
 
 ---
 
 ## License
 
 Aries code and modifications licensed under the [GNU AGPLv3 license](https://www.gnu.org/licenses/agpl-3.0.en.html).
+Libraries, dependencies, and code pulled into this project will retain their existing license.
 
 If you would like to discuss alternative licensing or leveraging this application in your composable stack, please [reach out to Aries Solutions](https://www.ariessolutions.io/contact-aries/) to discuss options.
 

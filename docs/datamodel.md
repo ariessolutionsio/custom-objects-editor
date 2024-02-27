@@ -16,10 +16,9 @@ nav_order: 3
 ### Container Schema
 
 Container schemas are
-[Custom Objects](https://docs.commercetools.com/http-api-projects-custom-objects).
+[Custom Objects](https://docs.commercetools.com/api/projects/custom-objects).
 
-- **container** -
-  [`mc-custom-object-schema`](https://github.com/commercetools/commercetools-mc-custom-objects-starter/blob/89382c773b420756f55f06a583baf6d6e18f1597/src/constants.js#L7)
+- **container** - `mc-custom-object-schema`
 - **key** - String, matching the pattern `[-_~.a-zA-Z0-9]+` - Required
 - **value** - Object
   - **attributes** - Array of [Attribute](#attribute) - Required
@@ -56,16 +55,16 @@ Container schemas are
 List of available types.
 
 - Text
-- [Localized Text](https://docs.commercetools.com/http-api-types#localizedstring)
+- [Localized Text](https://docs.commercetools.com/api/types#localizedstring)
 - Number
 - Boolean
-- [Money](https://docs.commercetools.com/http-api-types#money)
-- [Date](https://docs.commercetools.com/http-api-types#date)
-- [Time](https://docs.commercetools.com/http-api-types#time)
-- [Date and time](https://docs.commercetools.com/http-api-types#datetime)
+- [Money](https://docs.commercetools.com/api/types#moneys)
+- [Date](https://docs.commercetools.com/api/types#date)
+- [Time](https://docs.commercetools.com/api/types#time)
+- [Date and time](https://docs.commercetools.com/api/types#datetime)
 - List (enum)
 - Localized List (enum)
-- [Reference](https://docs.commercetools.com/http-api-types#resourceidentifier)
+- [Reference](https://docs.commercetools.com/api/types#reference)
   by ID or key
 - Object
 
@@ -76,7 +75,7 @@ List of available types.
 
 - **by** - Enum (id, key)
 - **type** -
-  [ReferenceType](https://docs.commercetools.com/http-api-types#referencetype)
+  [ReferenceType](https://docs.commercetools.com/api/types#reference)
 
 <!--prettier-ignore-start-->
 #### Enum
@@ -94,7 +93,7 @@ List of available types.
 
 - **value** - String - Required
 - **label** -
-  [LocalizedString](https://docs.commercetools.com/http-api-types#localizedstring) -
+  [LocalizedString](https://docs.commercetools.com/api/types#localizedstring) -
   Required
 
 ![Schema Data Model](assets/schema-data-model.png)
@@ -106,7 +105,7 @@ List of available types.
 
 ```json
 {
-  "id": "0b1fa712-ba9f-4785-b394-3da71b401207",
+  "id": "a372c000-9f4c-4b8a-9e13-8d2e64f51bcd",
   "version": 1,
   "container": "mc-custom-object-schema",
   "key": "example-schema",
@@ -153,15 +152,15 @@ List of available types.
       }
     ]
   },
-  "createdAt": "2020-09-02T15:25:52.545Z",
-  "lastModifiedAt": "2020-09-02T15:25:52.545Z",
+  "createdAt": "2024-01-02T15:25:52.545Z",
+  "lastModifiedAt": "2024-01-02T15:25:52.545Z",
   "lastModifiedBy": {
     "isPlatformClient": true,
-    "user": { "typeId": "user", "id": "f2303e24-a06c-458c-8986-363b8cf208c4" }
+    "user": { "typeId": "user", "id": "a372c000-9f4c-4b8a-9e13-8d2e64f51bcd" }
   },
   "createdBy": {
     "isPlatformClient": true,
-    "user": { "typeId": "user", "id": "f2303e24-a06c-458c-8986-363b8cf208c4" }
+    "user": { "typeId": "user", "id": "a372c000-9f4c-4b8a-9e13-8d2e64f51bcd" }
   }
 }
 ```
@@ -184,7 +183,7 @@ List of available types.
 
 ```json
 {
-  "id": "9d04530b-24dc-41eb-b3ed-7555cab532d8",
+  "id": "a372c000-9f4c-4b8a-9e13-8d2e64f51bcd",
   "version": 1,
   "container": "example-schema",
   "key": "example-custom-object",
@@ -194,20 +193,20 @@ List of available types.
     "object": {
       "text": ["hello", "world"],
       "product": {
-        "id": "1aa491b0-f23d-4900-b8dc-41fd94bdcffa",
+        "id": "a372c000-9f4c-4b8a-9e13-8d2e64f51bcd",
         "typeId": "product"
       }
     }
   },
-  "createdAt": "2020-09-02T15:28:57.702Z",
-  "lastModifiedAt": "2020-09-02T15:28:57.702Z",
+  "createdAt": "2024-01-02T15:28:57.702Z",
+  "lastModifiedAt": "2024-01-02T15:28:57.702Z",
   "lastModifiedBy": {
     "isPlatformClient": true,
-    "user": { "typeId": "user", "id": "f2303e24-a06c-458c-8986-363b8cf208c4" }
+    "user": { "typeId": "user", "id": "a372c000-9f4c-4b8a-9e13-8d2e64f51bcd" }
   },
   "createdBy": {
     "isPlatformClient": true,
-    "user": { "typeId": "user", "id": "f2303e24-a06c-458c-8986-363b8cf208c4" }
+    "user": { "typeId": "user", "id": "a372c000-9f4c-4b8a-9e13-8d2e64f51bcd" }
   }
 }
 ```

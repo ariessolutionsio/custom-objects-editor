@@ -28,19 +28,38 @@ nav_order: 3
 - [ESLint](https://eslint.org/docs/user-guide/getting-started) - JS, CSS, and
   GraphQL linter
 
-### Start the development server
+
+### Installation
+
+Clone the repository.
+
+Simply run `yarn` or `yarn install` from the repository root to install the
+application's dependencies.
+
+```bash
+yarn
+```
+If this is the first time running the application locally, create an `env.json`
+file at the root directory using `env.local.json` as an example. Based on your
+[region](https://docs.commercetools.com/api/general-concepts#regions), you may find it
+necessary to modify the values of `frontendHost`, `mcApiUrl`, and `location`.
 
 Run the following command to start the development server and launch the
 application:
 
-```shell
+```bash
 yarn start
 ```
 
-If this is the first time running the application locally, create an `env.json`
-file at the root directory using `env.local.json` as an example. Based on your
-[region](https://docs.commercetools.com/http-api.html#regions), you may find it
-necessary to modify the values of `frontendHost`, `mcApiUrl`, and `location`.
+### Build
+
+Run the following command to build the
+[production bundles](https://docs.commercetools.com/custom-applications/development/going-to-production#building-production-bundles)
+with webpack:
+
+```bash
+yarn build
+```
 
 ### Linting & Formatting
 
@@ -77,7 +96,7 @@ new Types, Queries or Mutations, the local `schema.graphql` must be updated.
 1. If you haven't done so already, create an API client under
    `Settings -> Developer Settings` in Merchant Center for your project
 2. Generate an access token using the
-   [Client Credentials flow](https://docs.commercetools.com/http-api-authorization#client-credentials-flow)
+   [Client Credentials flow](https://docs.commercetools.com/tutorials/mobile-spa#creating-a-regular-token-with-the-client-credentials-flow)
 3. Export both your Merchant Center project key and generated access token as
    environment variables
 4. Retrieve schema with `graphql-cli`
