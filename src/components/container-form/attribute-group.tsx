@@ -5,7 +5,7 @@ import LocalizedTextInput from '@commercetools-uikit/localized-text-input';
 import Spacings from '@commercetools-uikit/spacings';
 import { useFormik } from 'formik';
 import { get } from 'lodash';
-import { ATTRIBUTES, AttributeValue, REFERENCE_BY, TYPES } from './constants';
+import { ATTRIBUTES, AttributeValue, REFERENCE_BY, TYPES } from '../../constants';
 import Attribute from './attribute';
 import EnumAttributes from './enum-attributes';
 import LocalizedEnumAttributes from './localized-enum-attributes';

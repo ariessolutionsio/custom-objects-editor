@@ -8,7 +8,7 @@ import {
   REFERENCE_BY,
   REFERENCE_TYPES,
   TYPES,
-} from '../container-form/constants';
+} from '../../constants';
 import AttributeLabel from './attribute-label';
 
 const mocks = {

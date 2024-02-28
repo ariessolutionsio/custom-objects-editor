@@ -11,14 +11,11 @@ import map from 'lodash/map';
 import reduce from 'lodash/reduce';
 import times from 'lodash/times';
 import faker from 'faker';
-import { entryPointUriPath, CONTAINER } from '../constants';
-import ApplicationRoutes from '../routes';
-import {
-  REFERENCE_BY,
+import { entryPointUriPath, CONTAINER, REFERENCE_BY,
   REFERENCE_TYPES,
-  TYPES,
-} from '../components/container-form/constants';
-import { getAttributeValues } from '../components/custom-object-form/util';
+  TYPES, } from '../constants';
+import ApplicationRoutes from '../routes';
+import { getAttributeValues } from '../form-utils';
 
 const mergeWithDefaultOptions = (
   options: Partial<TRenderAppOptions> | Partial<TRenderAppWithReduxOptions> = {}

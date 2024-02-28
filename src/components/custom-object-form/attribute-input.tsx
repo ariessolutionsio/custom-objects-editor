@@ -15,7 +15,7 @@ import TextInput from '@commercetools-uikit/text-input';
 import SelectInput from '@commercetools-uikit/select-input';
 import { ErrorMessage } from '@commercetools-uikit/messages';
 import Spacings from '@commercetools-uikit/spacings';
-import { TYPES } from '../container-form/constants';
+import { TYPES } from '../../constants';
 import nestedStyles from '../container-form/nested-attributes.module.css';
 import AttributeField from './attribute-field'; // eslint-disable-line import/no-cycle
 

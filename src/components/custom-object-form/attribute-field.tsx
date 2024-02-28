@@ -9,8 +9,8 @@ import Card from '@commercetools-uikit/card';
 import Constraints from '@commercetools-uikit/constraints';
 import { BinLinearIcon, PlusBoldIcon } from '@commercetools-uikit/icons';
 import Spacings from '@commercetools-uikit/spacings';
-import { TYPES } from '../container-form/constants';
-import { getValue } from './util';
+import { TYPES } from '../../constants';
+import { getValueByType } from '../../helpers';
 import AttributeLabel from './attribute-label';
 import AttributeInput from './attribute-input';
 import messages from './messages';
@@ -57,7 +57,7 @@ const AttributeField: FC<Props> = ({
       dataLocale: context.dataLocale ?? '',
     })
   );
-  const emptyValue = getValue(
+  const emptyValue = getValueByType(
     type,
     attributes,
     reference,

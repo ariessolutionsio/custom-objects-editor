@@ -11,8 +11,8 @@ import TextField from '@commercetools-uikit/text-field';
 import Spacings from '@commercetools-uikit/spacings';
 import { useFormik } from 'formik';
 import { useContainerContext } from '../../context/container-context';
+import { getAttributeValidation, getAttributeValues } from '../../form-utils';
 import AttributeField from './attribute-field';
-import { getAttributeValidation, getAttributeValues } from './util';
 import messages from './messages';
 import styles from './form.module.css';
 import { Items } from './custom-object-form';
@@ -52,7 +52,7 @@ const Form: FC<Props> = ({
     value: JSON.stringify(container),
   }));
 
-  function onAttributesChange(attributes: any) {
+  const onAttributesChange = React.useCallback((attributes: any) => {
     if (attributes) {
       const valueSchema = getAttributeValidation(
         attributes,
@@ -64,7 +64,7 @@ const Form: FC<Props> = ({
       );
       updateSchemaValidation(valueSchema);
     }
-  }
+  }, [intl, languages, updateSchemaValidation]);
 
   React.useEffect(() => {
     if (values.container) {

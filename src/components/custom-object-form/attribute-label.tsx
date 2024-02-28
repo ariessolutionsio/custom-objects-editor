@@ -3,7 +3,7 @@ import capitalize from 'lodash/capitalize';
 import startCase from 'lodash/startCase';
 import { useIntl } from 'react-intl';
 import FieldLabel from '@commercetools-uikit/field-label';
-import { TYPES } from '../container-form/constants';
+import { TYPES } from '../../constants';
 import messages from './messages';
 
 type Props = {

@@ -5,8 +5,8 @@ import times from 'lodash/times';
 import * as ApplicationContext from '@commercetools-frontend/application-shell-connectors';
 import useEffectMock from '../../test-utils/use-effect-mock';
 import { generateContainers } from '../../test-utils';
+import { getAttributeValues } from '../../form-utils';
 import Form from './form';
-import { getAttributeValues } from './util';
 
 const project = {
   currencies: times(2, () => faker.finance.currencyCode()),

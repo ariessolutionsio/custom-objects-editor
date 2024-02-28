@@ -10,9 +10,9 @@ import {
   REFERENCE_BY,
   REFERENCE_TYPES,
   TYPES,
-} from '../container-form/constants';
-import { getAttributeValues, getAttributeValidation } from './util';
-import messages from './messages';
+} from './constants';
+import { getAttributeValues, getAttributeValidation } from './form-utils';
+import messages from './components/custom-object-form/messages';
 
 const currencies = times(2, () => faker.finance.currencyCode());
 const languages = times(2, () => faker.random.locale());

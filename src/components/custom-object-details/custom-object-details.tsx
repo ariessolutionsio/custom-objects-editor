@@ -19,14 +19,13 @@ import Spacings from '@commercetools-uikit/spacings';
 import { reduce, isPlainObject, get } from 'lodash';
 import { useApplicationContext } from '@commercetools-frontend/application-shell-connectors';
 import { useIsAuthorized } from '@commercetools-frontend/permissions';
-import { PERMISSIONS } from '../../constants';
+import { PERMISSIONS, AttributeValue } from '../../constants';
 import { TCustomObject } from '../../types/generated/ctp';
 import { getErrorMessage } from '../../helpers';
-import { AttributeValue } from '../container-form/constants';
 import CustomObjectForm, {
   Items,
 } from '../custom-object-form/custom-object-form';
-import { getAttributeValues } from '../custom-object-form/util';
+import { getAttributeValues } from '../../form-utils';
 import { useContainerContext } from '../../context/container-context';
 import { Value } from '../custom-object-form/constants';
 import {
