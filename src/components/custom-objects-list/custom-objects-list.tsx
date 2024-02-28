@@ -33,7 +33,7 @@ import {
 import { useContainerContext } from '../../context/container-context';
 import { TCustomObject, TQuery } from '../../types/generated/ctp';
 import { getErrorMessage } from '../../helpers';
-import { AttributeValue } from '../container-form/constants';
+import { AttributeValue } from '../../constants';
 
 import { useCustomObjectsFetcher } from '../../hooks/use-custom-object-connector/use-custom-object-connector';
 import { columnDefinitions, COLUMN_KEYS } from './column-definitions';

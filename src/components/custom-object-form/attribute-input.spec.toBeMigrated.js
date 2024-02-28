@@ -11,11 +11,11 @@ import {
   REFERENCE_BY,
   REFERENCE_TYPES,
   TYPES,
-} from '../container-form/constants';
+} from '../../constants';
 import { generateContainer } from '../../test-utils';
+import { getValueByType } from '../../helpers';
 import AttributeInput from './attribute-input';
 import messages from './messages';
-import { getValue } from './util';
 import AttributeField from './attribute-field';
 
 const dataLocale = faker.random.locale();
@@ -828,7 +828,7 @@ describe('attribute input', () => {
     const type = TYPES.Object;
     const container = generateContainer();
     const { attributes } = container.value;
-    const value = getValue(
+    const value = getValueByType(
       type,
       attributes,
       faker.random.arrayElement(Object.values(REFERENCE_TYPES)),

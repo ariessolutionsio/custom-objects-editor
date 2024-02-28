@@ -10,10 +10,10 @@ import FieldLabel from '@commercetools-uikit/field-label';
 import TextField from '@commercetools-uikit/text-field';
 import { PlusBoldIcon } from '@commercetools-uikit/icons';
 import Spacings from '@commercetools-uikit/spacings';
+import { emptyAttribute } from '../../constants';
 import AttributeGroup from './attribute-group';
 import messages from './messages';
 import styles from './form.module.css';
-import { emptyAttribute } from './constants';
 
 type Formik = ReturnType<typeof useFormik<TFormValues>>;
 

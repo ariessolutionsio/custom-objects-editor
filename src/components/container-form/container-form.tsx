@@ -1,11 +1,11 @@
 import React, { FC, ReactElement } from 'react';
-import { Formik, useFormik, FormikProvider } from 'formik';
+import { useFormik, FormikProvider } from 'formik';
 import { useIntl } from 'react-intl';
 import reduce from 'lodash/reduce';
 import { useApplicationContext } from '@commercetools-frontend/application-shell-connectors';
 import { array, bool, lazy, object, string } from 'yup';
+import { ContainerValue, TYPES } from '../../constants';
 import messages from './messages';
-import { ContainerValue, TYPES } from './constants';
 import Form from './form';
 
 type Formik = ReturnType<typeof useFormik>;

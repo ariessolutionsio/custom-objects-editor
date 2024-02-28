@@ -11,10 +11,8 @@ import {
   FormModalPage,
 } from '@commercetools-frontend/application-components';
 import { useIsAuthorized } from '@commercetools-frontend/permissions';
-import { CONTAINER, PERMISSIONS } from '../../constants';
+import { CONTAINER, PERMISSIONS, emptyAttribute } from '../../constants';
 import ContainerForm from '../container-form';
-
-import { emptyAttribute } from '../container-form/constants';
 import { useCustomObjectUpdater } from '../../hooks/use-custom-object-connector/use-custom-object-connector';
 import messages from './messages';
 

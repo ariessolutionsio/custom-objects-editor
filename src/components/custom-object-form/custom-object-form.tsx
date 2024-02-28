@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 import { useFormik, FormikProvider } from 'formik';
 import { useApplicationContext } from '@commercetools-frontend/application-shell-connectors';
 import { object, string } from 'yup';
-import { AttributeValue } from '../container-form/constants';
+import { AttributeValue } from '../../constants';
 import messages from './messages';
 import { Value } from './constants';
 import Form from './form';

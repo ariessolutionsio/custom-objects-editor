@@ -10,7 +10,7 @@ import Spacings from '@commercetools-uikit/spacings';
 import Text from '@commercetools-uikit/text';
 import Tooltip from '@commercetools-uikit/tooltip';
 import { useFormik } from 'formik';
-import { ATTRIBUTES, AttributeValue, TYPES } from './constants';
+import { ATTRIBUTES, AttributeValue, TYPES } from '../../constants';
 import messages from './messages';
 import styles from './attribute.mod.css';
 
@@ -71,7 +71,7 @@ type Props = {
   name: string;
   value: AttributeValue;
   touched: Formik['touched'];
-  errors: Formik['errors'];
+  errors?: any;
   handleChange: Formik['handleChange'];
   handleBlur: Formik['handleBlur'];
   remove: () => void;
@@ -101,6 +101,7 @@ const Attribute: FC<Props> = ({
   //     });
   //   }
   // }, [value.type]);
+
 
   return (
     <Spacings.Inline alignItems="center" justifyContent="space-between">
@@ -149,7 +150,6 @@ const Attribute: FC<Props> = ({
               isChecked={value.required}
               isDisabled={isRequiredDisabled}
               onChange={handleChange}
-              onBlur={handleBlur}
             >
               <FormattedMessage {...messages.requiredTitle} />
             </CheckboxInput>
@@ -158,7 +158,6 @@ const Attribute: FC<Props> = ({
               value={JSON.stringify(value.set)}
               isChecked={value.set}
               onChange={handleChange}
-              onBlur={handleBlur}
             >
               <FormattedMessage {...messages.setTitle} />
             </CheckboxInput>
@@ -168,7 +167,6 @@ const Attribute: FC<Props> = ({
               isDisabled={isDisplayed}
               isChecked={value.display}
               onChange={handleChange}
-              onBlur={handleBlur}
             >
               <FormattedMessage {...messages.displayTitle} />
             </CheckboxInput>

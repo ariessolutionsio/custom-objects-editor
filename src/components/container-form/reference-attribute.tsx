@@ -5,7 +5,7 @@ import SelectField from '@commercetools-uikit/select-field';
 import Spacings from '@commercetools-uikit/spacings';
 import Text from '@commercetools-uikit/text';
 import { useFormik } from 'formik';
-import { REFERENCE_BY, REFERENCE_TYPES } from './constants';
+import { REFERENCE_BY, REFERENCE_TYPES } from '../../constants';
 import messages from './messages';
 import styles from './nested-attributes.module.css';
 

@@ -6,7 +6,7 @@ import kebabCase from 'lodash/kebabCase';
 import times from 'lodash/times';
 import { Formik } from 'formik';
 import * as AppContext from '@commercetools-frontend/application-shell-connectors';
-import { TYPES } from '../container-form/constants';
+import { TYPES } from '../../constants';
 import CustomObjectForm from './custom-object-form';
 
 const project = {

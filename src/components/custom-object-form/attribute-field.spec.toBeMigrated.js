@@ -12,10 +12,10 @@ import {
   REFERENCE_BY,
   REFERENCE_TYPES,
   TYPES,
-} from '../container-form/constants';
+} from '../../constants';
 import { generateContainer } from '../../test-utils';
+import { getValueByType } from '../../helpers';
 import AttributeField from './attribute-field';
-import { getValue } from './util';
 import AttributeInput from './attribute-input';
 
 const project = {
@@ -100,7 +100,7 @@ describe('attribute field', () => {
     it('when add button clicked, should display an additional attribute', () => {
       attributes.find('[data-testid="add-attribute"]').props().onClick();
       expect(fieldArrayMocks.push).toHaveBeenCalledWith(
-        getValue(
+        getValueByType(
           mockType,
           mocks.attributes,
           mocks.reference,
