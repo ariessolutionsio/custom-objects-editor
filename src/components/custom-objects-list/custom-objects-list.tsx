@@ -174,14 +174,16 @@ const CustomObjectsList = () => {
     value: { [key: string]: unknown },
     attributes: Array<string>
   ) {
-    return Object.entries(value).reduce((display, [key, value]) => {
-      if (includes(attributes, key)) {
-        return { ...display, [key]: value };
+    return Object.entries(value).reduce((display, [itemKey, itemValue]) => {
+
+      if (includes(attributes, itemKey)) {
+        return { ...display, [itemKey]: itemValue };
       }
-      if (isPlainObject(value)) {
-        const nested: any = getDisplayValues({ [key]: value }, attributes);
+
+      if (isPlainObject(itemValue)) {
+        const nested: any = getDisplayValues({ [itemKey]: itemValue }, attributes);
         if (!isEmpty(nested)) {
-          return { ...display, [key]: nested };
+          return { ...display, [itemKey]: nested };
         }
       }
 

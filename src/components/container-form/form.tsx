@@ -10,7 +10,7 @@ import FieldLabel from '@commercetools-uikit/field-label';
 import TextField from '@commercetools-uikit/text-field';
 import { PlusBoldIcon } from '@commercetools-uikit/icons';
 import Spacings from '@commercetools-uikit/spacings';
-import { emptyAttribute } from '../../constants';
+import { AttributeValue, emptyAttribute } from '../../constants';
 import AttributeGroup from './attribute-group';
 import messages from './messages';
 import styles from './form.module.css';
@@ -19,17 +19,7 @@ type Formik = ReturnType<typeof useFormik<TFormValues>>;
 
 type TFormValues = {
   key: string;
-  attributes: Array<{
-    name?: string;
-    type?: string;
-    required?: boolean;
-    set?: boolean;
-    attributes?: Array<any>;
-    reference?: {
-      by?: string;
-      type?: string;
-    };
-  }>;
+  attributes: Array<AttributeValue>;
 };
 
 type Props = {
@@ -100,12 +90,11 @@ const Form: FC<Props> = ({
                       onClick={() => push(emptyAttribute)}
                     />
                   </Constraints.Horizontal>
-                  {values.attributes.map((value, index) => {
+                  {values.attributes.map((val, index) => {
                     return (
                       <Card type="flat" theme="dark" key={index}>
                         <AttributeGroup
                           name={`attributes.${index}`}
-                          index={index}
                           value={values.attributes[index]}
                           touched={get(touched, `attributes[${index}]`, {})}
                           errors={get(errors, `attributes[${index}]`, {})}
