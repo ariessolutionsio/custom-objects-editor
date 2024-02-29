@@ -79,7 +79,6 @@ const ObjectAttributes: FC<Props> = ({
                 data-testid={`attribute-${objectIndex}`}
                 key={objectIndex}
                 name={`${name}.${objectIndex}`}
-                // index={objectIndex}
                 value={objectValue}
                 touched={get(touched, objectIndex, {})}
                 errors={get(errors, objectIndex, {})}
