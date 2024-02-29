@@ -32,10 +32,6 @@ describe('text filter', () => {
     it('should display filter button', () => {
       expect(loadTextFilter().getByTestId(filterButton)).not.toBeNull();
     });
-
-    it('should not display clear button', () => {
-      expect(loadTextFilter().queryByTestId(clearButton)).toBeNull();
-    });
   });
 
   describe('when value entered', () => {

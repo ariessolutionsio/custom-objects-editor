@@ -1,5 +1,6 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import { shallow, configure } from 'enzyme';
 import faker from 'faker';
 import camelCase from 'lodash/camelCase';
 import map from 'lodash/map';
@@ -17,6 +18,8 @@ import { generateContainer } from '../../test-utils';
 import { getValueByType } from '../../helpers';
 import AttributeField from './attribute-field';
 import AttributeInput from './attribute-input';
+
+configure({adapter: new Adapter()});
 
 const project = {
   currencies: times(2, () => faker.finance.currencyCode()),
@@ -45,7 +48,6 @@ const fieldArrayMocks = {
   push: jest.fn(),
   remove: jest.fn(),
 };
-
 const loadAttributeField = ({
   isSet = faker.random.boolean(),
   isNestedSet = faker.random.boolean(),

@@ -5,7 +5,7 @@ import { TCustomObject } from './types/generated/ctp';
 export const entryPointUriPath =
   typeof window === 'undefined'
     ? process.env.ENTRY_POINT_URI_PATH
-    : window.app.entryPointUriPath;
+    : window.app.entryPointUriPath ?? 'custom-objs';
 
 export const PERMISSIONS = entryPointUriPathToPermissionKeys(
   entryPointUriPath,
