@@ -48,7 +48,7 @@ const ContainerProvider: React.FC<Props> = ({ results, children }) => {
     const parent = document.getElementById('loader-for-requests-in-flight')?.parentElement;
     const loaderElement = document.getElementById('loader-for-requests-in-flight');
     parent?.insertBefore(ariesLogoElement, loaderElement);
-  });
+  },[]);
 
   return (
     <containerContext.Provider value={containerContextValue}>
