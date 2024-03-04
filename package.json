@@ -101,5 +101,6 @@
     "eslint-react": "0.0.4",
     "enzyme": "3.11.0",
     "enzyme-adapter-react-16": "1.15.8"
-  }
+  },
+  "packageManager": "yarn@1.22.21"
 }
