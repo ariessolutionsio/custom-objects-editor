@@ -6,7 +6,7 @@ import {
 import { FormattedMessage } from 'react-intl';
 import { useIsAuthorized } from '@commercetools-frontend/permissions';
 import LockedDiamondSVG from '@commercetools-frontend/assets/images/locked-diamond.svg';
-import React, { ReactNode, useEffect } from 'react';
+import React, { ReactNode } from 'react';
 import { ContentNotification } from '@commercetools-uikit/notifications';
 import LoadingSpinner from '@commercetools-uikit/loading-spinner';
 import Spacings from '@commercetools-uikit/spacings';
@@ -23,23 +23,6 @@ type ApplicationRoutesProps = {
   children?: ReactNode;
 };
 const ApplicationRoutes = (_props: ApplicationRoutesProps) => {
-
-  useEffect(() => {
-    const ariesLogoElement = document.createElement('div');
-    const anchor = document.createElement('a');
-    const img = document.createElement('img');
-    img.src = 'https://res.cloudinary.com/dlwdq84ig/image/upload/v1705673742/kkepkrfkpmxqz52cg9ns.png';
-    img.alt='aries-logo';
-    img.style.width = 'inherit';
-    img.style.height = '32px';
-    img.style.marginLeft = '20px';
-    anchor.href = '/aries_dev-1';
-    anchor.appendChild(img);
-    ariesLogoElement.appendChild(anchor);
-    const parent = document.getElementById('loader-for-requests-in-flight')?.parentElement;
-    const loaderElement = document.getElementById('loader-for-requests-in-flight');
-    parent?.insertBefore(ariesLogoElement, loaderElement);
-  },[]);
 
   const match = useRouteMatch();
 
