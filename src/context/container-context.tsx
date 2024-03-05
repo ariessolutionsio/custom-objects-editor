@@ -1,5 +1,4 @@
 import React, { PropsWithChildren, useContext, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import map from 'lodash/map';
 import { TCustomObject } from '../types/generated/ctp';
 import { ARIES_LOGO_URL, ARIES_LOGO_ALT, ARIES_LOGO_ID, LOGO_TARGET_ID } from '../constants';
@@ -36,11 +35,8 @@ const ContainerProvider: React.FC<Props> = ({ results, children }) => {
     where: `container in (${map(results, ({ key }) => `"${key}"`).join(',')})`,
   };
 
-  const location: any = useLocation();
-  const brandingFlag = location?.query?.branding ?? true;
-
   useEffect(() => {
-    if(brandingFlag && !document.getElementById(ARIES_LOGO_ID)){
+    if(!document.getElementById(ARIES_LOGO_ID)){
       const ariesLogoElement = document.createElement('div');
       const anchor = document.createElement('a');
       const img = document.createElement('img');
@@ -57,7 +53,7 @@ const ContainerProvider: React.FC<Props> = ({ results, children }) => {
       const parentElement = targetElement?.parentElement;
       parentElement?.insertBefore(ariesLogoElement, targetElement);
     }
-  }, [brandingFlag]);
+  }, []);
 
   return (
     <containerContext.Provider value={containerContextValue}>
