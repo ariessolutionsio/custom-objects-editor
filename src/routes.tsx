@@ -87,6 +87,7 @@ const ApplicationRoutes = (_props: ApplicationRoutesProps) => {
   if (!customObjectsPaginatedResult) {
     return <PageNotFound />;
   }
+  
   const { results } = customObjectsPaginatedResult || {};
 
   return (
