@@ -162,8 +162,3 @@ export const emptyAttribute: AttributeValue = {
   set: false,
   required: false,
 };
-
-export const ARIES_LOGO_URL = 'https://res.cloudinary.com/dlwdq84ig/image/upload/v1705673742/kkepkrfkpmxqz52cg9ns.png';
-export const ARIES_LOGO_ALT = 'Aries Logo';
-export const ARIES_LOGO_ID = 'aries-logo';
-export const LOGO_TARGET_ID = 'loader-for-requests-in-flight';
