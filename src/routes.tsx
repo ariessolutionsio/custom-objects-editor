@@ -12,7 +12,7 @@ import LoadingSpinner from '@commercetools-uikit/loading-spinner';
 import Spacings from '@commercetools-uikit/spacings';
 import Link from '@commercetools-uikit/link';
 import Text from '@commercetools-uikit/text';
-import ariesLabsLogo from '../public/aries_labs_log.svg';
+import ariesLabsLogo from './assets/aries-labs-logo.svg';
 import ContainerList from './components/container-list';
 import CustomObjectsList from './components/custom-objects-list';
 import { messages } from './messages';
