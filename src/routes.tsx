@@ -12,7 +12,7 @@ import LoadingSpinner from '@commercetools-uikit/loading-spinner';
 import Spacings from '@commercetools-uikit/spacings';
 import Link from '@commercetools-uikit/link';
 import Text from '@commercetools-uikit/text';
-import ariesLabsLogo from './assets/aries-labs-logo.svg';
+import ariesLabsLogo from './assets/img/aries-labs-logo.svg';
 import ContainerList from './components/container-list';
 import CustomObjectsList from './components/custom-objects-list';
 import { messages } from './messages';
@@ -20,6 +20,7 @@ import { CONTAINER, PERMISSIONS } from './constants';
 import { ContainerProvider } from './context/container-context';
 import { useCustomObjectsFetcher } from './hooks/use-custom-object-connector/use-custom-object-connector';
 import { getErrorMessage } from './helpers';
+import AllCustomObjectsList from './components/all-custom-objects-list';
 
 type ApplicationRoutesProps = {
   children?: ReactNode;
@@ -96,6 +97,7 @@ const ApplicationRoutes = (_props: ApplicationRoutesProps) => {
     <ContainerProvider results={results}>
       <Switch>
         <Route path={`${match.path}/containers`} component={ContainerList} />
+        <Route path={`${match.path}/all-custom-objects`} component={AllCustomObjectsList} />
         <Route component={CustomObjectsList} />
       </Switch>
       <Spacings.Stack alignItems="center">

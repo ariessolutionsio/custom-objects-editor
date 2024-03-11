@@ -45,6 +45,10 @@ const config = {
       defaultLabel: 'Container Schema Manager',
       uriPath: 'containers',
     },
+    {
+      defaultLabel: 'View All Custom Objects',
+      uriPath: 'all-custom-objects',
+    },
   ],
 };
 
