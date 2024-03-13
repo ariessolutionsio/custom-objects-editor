@@ -1,4 +1,6 @@
-<img align="right" alt="Aries MACH Booster" width="300" src="https://www.ariessolutions.io/wp-content/uploads/2024/01/aries-about-us-imagery.png">
+<center>
+<img alt="Aries Labs" width="300" src="docs/assets/Labs-For-Dk_BG.svg">
+</center>
 
 
 # Custom Object Editor

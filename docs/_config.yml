@@ -5,7 +5,7 @@ aux_links:
   'View on GitHub':
     - '//github.com/ariessolutionsio/custom-objects-editor/'
 footer_content: ''
-logo: 'assets/aries-logo-dark.png'
+logo: 'assets/Labs-For-Dk_BG.svg'
 color_scheme: aries
 plugins:
   - jekyll-remote-theme
