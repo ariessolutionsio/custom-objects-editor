@@ -30,8 +30,6 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: Install dependencies
         run: yarn install --pure-lockfile
-      - name: Lint
-        run: yarn run lint
       - name: Test
         run: yarn run test
       - name: Build

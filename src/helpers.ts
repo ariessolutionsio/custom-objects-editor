@@ -27,8 +27,8 @@ const isServerError = (
   return Boolean((error as ServerError)?.result);
 };
 
-export const extractErrorFromGraphQlResponse = (graphQlResponse: unknown) => {
-  if (graphQlResponse instanceof ApolloError) {
+export const extractErrorFromGraphQlResponse = (graphQlResponse: any) => {
+  if (graphQlResponse && graphQlResponse.networkError) {
     if (
       isServerError(graphQlResponse.networkError) &&
       graphQlResponse.networkError?.result?.errors.length > 0
