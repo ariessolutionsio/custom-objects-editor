@@ -4,7 +4,7 @@ export default defineMessages({
   title: {
     id: 'AllCustomObjectsList.title',
     description: 'The page title of the custom object list view',
-    defaultMessage: 'View All Custom Objects',
+    defaultMessage: 'View All Undefined Custom Objects',
   },
   titleResults: {
     id: 'AllCustomObjectsList.title.results',
@@ -65,7 +65,7 @@ export default defineMessages({
     id: 'AllCustomObjectsList.error.noResults',
     description: 'Error title when no results are returned',
     defaultMessage:
-      'No custom objects with selected container found on this project.',
+      'No custom objects found on this project.',
   },
   containerColumn: {
     id: 'AllCustomObjectsList.column.container',
@@ -76,6 +76,11 @@ export default defineMessages({
     id: 'AllCustomObjectsList.column.key',
     description: 'The label for the key column',
     defaultMessage: 'Key',
+  },
+  search:{
+    id: 'AllCustomObjectsList.search.label',
+    description: 'Label for Search',
+    defaultMessage: 'Search:',
   },
   valueColumn: {
     id: 'AllCustomObjectsList.column.value',

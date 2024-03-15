@@ -11,9 +11,9 @@ import {
   FormModalPage,
 } from '@commercetools-frontend/application-components';
 import { useIsAuthorized } from '@commercetools-frontend/permissions';
-import { CONTAINER, PERMISSIONS, emptyAttribute } from '../../constants';
+import { PERMISSIONS, emptyAttribute } from '../../constants';
 import ContainerForm from '../container-form';
-import { useCustomObjectUpdater } from '../../hooks/use-custom-object-connector/use-custom-object-connector';
+import { useCustomObjectUpdater } from '../../hooks/use-custom-object-connectors-graphql/use-custom-object-connectors-graphql';
 import messages from './messages';
 
 type Props = {
@@ -30,11 +30,11 @@ const CreateContainer: FC<Props> = ({ onClose }) => {
   const customObjectUpdater = useCustomObjectUpdater();
 
   const onSubmit = async (values: any) => {
-    const { key, attributes } = values;
+    const { key, container, attributes } = values;
 
     await customObjectUpdater.execute({
       draft: {
-        container: CONTAINER,
+        container,
         key,
         value: JSON.stringify({ attributes }),
       },
@@ -61,6 +61,7 @@ const CreateContainer: FC<Props> = ({ onClose }) => {
       onSubmit={onSubmit}
       initialValues={{
         key: '',
+        container: '',
         attributes: [emptyAttribute],
       }}
     >

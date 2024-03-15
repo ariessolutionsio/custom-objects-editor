@@ -17,7 +17,7 @@ import LoadingSpinner from '@commercetools-uikit/loading-spinner';
 import { ContentNotification } from '@commercetools-uikit/notifications';
 import Spacings from '@commercetools-uikit/spacings';
 import { useIsAuthorized } from '@commercetools-frontend/permissions';
-import { CONTAINER, PERMISSIONS } from '../../constants';
+import { PERMISSIONS } from '../../constants';
 
 import { getErrorMessage } from '../../helpers';
 import ContainerForm from '../container-form';
@@ -25,7 +25,7 @@ import {
   useCustomObjectDeleter,
   useCustomObjectFetcher,
   useCustomObjectUpdater,
-} from '../../hooks/use-custom-object-connector/use-custom-object-connector';
+} from '../../hooks/use-custom-object-connectors-graphql/use-custom-object-connectors-graphql';
 import messages from './messages';
 
 type Props = {
@@ -42,7 +42,7 @@ const ContainerDetails: FC<Props> = ({ onClose }) => {
   const customObjectUpdater = useCustomObjectUpdater();
   const customObjectDeleter = useCustomObjectDeleter();
 
-  const { customObject, error, refetch, loading } = useCustomObjectFetcher({
+  const { customObject, error, refetch, loading }: any = useCustomObjectFetcher({
     id: id,
   });
 
@@ -51,7 +51,7 @@ const ContainerDetails: FC<Props> = ({ onClose }) => {
 
     await customObjectUpdater.execute({
       draft: {
-        container: CONTAINER,
+        container: customObject?.container,
         key,
         value: JSON.stringify({
           attributes: attributes,
@@ -94,7 +94,7 @@ const ContainerDetails: FC<Props> = ({ onClose }) => {
     return <PageNotFound />;
   }
 
-  const { key, version } = customObject;
+  const { key, container, version } = customObject;
 
   const handleDelete = async () => {
     if (id && version) {
@@ -125,6 +125,7 @@ const ContainerDetails: FC<Props> = ({ onClose }) => {
       onSubmit={onSubmit}
       initialValues={{
         key: key,
+        container: container,
         attributes: customObject.value.attributes as any,
       }}
     >

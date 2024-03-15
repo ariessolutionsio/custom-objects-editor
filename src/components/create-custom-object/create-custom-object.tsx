@@ -14,7 +14,7 @@ import { useIsAuthorized } from '@commercetools-frontend/permissions';
 import { PERMISSIONS } from '../../constants';
 import CustomObjectForm from '../custom-object-form';
 
-import { useCustomObjectUpdater } from '../../hooks/use-custom-object-connector/use-custom-object-connector';
+import { useCustomObjectUpdater } from '../../hooks/use-custom-object-connectors-graphql/use-custom-object-connectors-graphql';
 import messages from './messages';
 
 type Props = {

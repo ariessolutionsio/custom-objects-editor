@@ -6,29 +6,28 @@ import {
 import { FormattedMessage } from 'react-intl';
 import { useIsAuthorized } from '@commercetools-frontend/permissions';
 import LockedDiamondSVG from '@commercetools-frontend/assets/images/locked-diamond.svg';
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useEffect, useCallback } from 'react';
 import { ContentNotification } from '@commercetools-uikit/notifications';
 import LoadingSpinner from '@commercetools-uikit/loading-spinner';
 import Spacings from '@commercetools-uikit/spacings';
 import Link from '@commercetools-uikit/link';
 import Text from '@commercetools-uikit/text';
+import { useFetchAllCustomObjects } from './hooks/use-custom-object-connectors-rest/use-custom-object-connectors-rest';
 import ariesLabsLogo from './assets/img/aries-labs-logo.svg';
 import ContainerList from './components/container-list';
 import CustomObjectsList from './components/custom-objects-list';
+import UndefinedCustomObjects from './components/undefined-custom-objects-list';
 import { messages } from './messages';
-import { CONTAINER, PERMISSIONS } from './constants';
+import { PERMISSIONS } from './constants';
 import { ContainerProvider } from './context/container-context';
-import { useCustomObjectsFetcher } from './hooks/use-custom-object-connector/use-custom-object-connector';
 import { getErrorMessage } from './helpers';
-import AllCustomObjectsList from './components/all-custom-objects-list';
 
 type ApplicationRoutesProps = {
   children?: ReactNode;
 };
 const ApplicationRoutes = (_props: ApplicationRoutesProps) => {
-
+  
   const match = useRouteMatch();
-
   /**
    * When using routes, there is a good chance that you might want to
    * restrict the access to a certain route based on the user permissions.
@@ -61,12 +60,15 @@ const ApplicationRoutes = (_props: ApplicationRoutesProps) => {
   const canManageCustomObjects = true;
   //canManageProducts && canManageOrders && canManageCustomers;
 
-  const { customObjectsPaginatedResult, loading, error } =
-    useCustomObjectsFetcher({
-      limit: 500,
-      offset: 0,
-      container: CONTAINER,
-    });
+  const { data: customObjectsData, error, loading, fetchData } = useFetchAllCustomObjects();
+
+  const fetchUndefinedCustomObjects = useCallback(()=> {
+    fetchData({sort: [{by: 'lastModifiedAt', direction: 'desc'}]});
+  },[fetchData]);
+
+  useEffect(() => {
+    fetchUndefinedCustomObjects();
+  }, [fetchUndefinedCustomObjects]);
 
   if (!canManageCustomObjects) {
     return <PageUnauthorized />;
@@ -87,17 +89,17 @@ const ApplicationRoutes = (_props: ApplicationRoutesProps) => {
     );
   }
 
-  if (!customObjectsPaginatedResult) {
+  if (!customObjectsData) {
     return <PageNotFound />;
   }
   
-  const { results } = customObjectsPaginatedResult || {};
+  const { results } = customObjectsData || {};
 
   return (
     <ContainerProvider results={results}>
       <Switch>
         <Route path={`${match.path}/containers`} component={ContainerList} />
-        <Route path={`${match.path}/all-custom-objects`} component={AllCustomObjectsList} />
+        <Route path={`${match.path}/undefined-custom-objects`} component={UndefinedCustomObjects} />
         <Route component={CustomObjectsList} />
       </Switch>
       <Spacings.Stack alignItems="center">

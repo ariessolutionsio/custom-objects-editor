@@ -35,7 +35,7 @@ import { TCustomObject, TQuery } from '../../types/generated/ctp';
 import { getErrorMessage } from '../../helpers';
 import { AttributeValue } from '../../constants';
 
-import { useCustomObjectsFetcher } from '../../hooks/use-custom-object-connector/use-custom-object-connector';
+import { useCustomObjectsFetcher } from '../../hooks/use-custom-object-connectors-graphql/use-custom-object-connectors-graphql';
 import { columnDefinitions, COLUMN_KEYS } from './column-definitions';
 import messages from './messages';
 import styles from './custom-objects-list.module.css';

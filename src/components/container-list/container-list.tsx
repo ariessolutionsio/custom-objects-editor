@@ -24,7 +24,7 @@ import { ContentNotification } from '@commercetools-uikit/notifications';
 import LoadingSpinner from '@commercetools-uikit/loading-spinner';
 import { CONTAINER, SORT_OPTIONS } from '../../constants';
 import { getErrorMessage } from '../../helpers';
-import { useCustomObjectsFetcher } from '../../hooks/use-custom-object-connector/use-custom-object-connector';
+import { useCustomObjectsFetcher } from '../../hooks/use-custom-object-connectors-graphql/use-custom-object-connectors-graphql';
 import { FIELDS } from './constants';
 import messages from './messages';
 

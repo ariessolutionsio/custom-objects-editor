@@ -46,8 +46,8 @@ const config = {
       uriPath: 'containers',
     },
     {
-      defaultLabel: 'View All Custom Objects',
-      uriPath: 'all-custom-objects',
+      defaultLabel: 'View Undefined Objects',
+      uriPath: 'undefined-custom-objects',
     },
   ],
 };
