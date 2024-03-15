@@ -11,10 +11,15 @@ export default defineMessages({
     description: 'Title for container information panel',
     defaultMessage: 'Schema Information',
   },
-  keyTitle: {
-    id: 'Container.form.key.title',
+  containerKeyTitle: {
+    id: 'Container.form.containerKey.title',
     description: 'Title for key field',
     defaultMessage: 'Container key',
+  },
+  containerNameTitle: {
+    id: 'Container.form.containerName.title',
+    description: 'Title for name field',
+    defaultMessage: 'Container name',
   },
   attributesTitle: {
     id: 'Container.form.attributes.title',

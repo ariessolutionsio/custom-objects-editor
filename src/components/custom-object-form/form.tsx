@@ -48,7 +48,7 @@ const Form: FC<Props> = ({
   }));
 
   const containerOptions = map(containers, (container) => ({
-    label: container.key,
+    label: container.container,
     value: JSON.stringify(container),
   }));
 
@@ -83,7 +83,7 @@ const Form: FC<Props> = ({
   React.useEffect(() => {
     onAttributesChange(values.attributes);
   }, [values.attributes]);
-
+  console.log('initialValues', initialValues);
   return (
     <Spacings.Stack scale="m">
       <CollapsiblePanel
@@ -99,6 +99,7 @@ const Form: FC<Props> = ({
             title={<FormattedMessage {...messages.containerTitle} />}
             isRequired
             options={containerOptions}
+            isDisabled={!!initialValues.container}
             value={values.container}
             touched={touched.container}
             //errors={errors.container}

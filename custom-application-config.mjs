@@ -45,6 +45,10 @@ const config = {
       defaultLabel: 'Container Schema Manager',
       uriPath: 'containers',
     },
+    {
+      defaultLabel: 'View Undefined Objects',
+      uriPath: 'undefined-custom-objects',
+    },
   ],
 };
 

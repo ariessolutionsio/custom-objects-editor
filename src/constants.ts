@@ -150,6 +150,7 @@ export type Value = {
 
 export type ContainerValue = {
   key: string;
+  container: string;
 } & Value;
 
 export type ValueObject = {

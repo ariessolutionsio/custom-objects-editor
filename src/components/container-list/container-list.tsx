@@ -1,4 +1,4 @@
-import React, { lazy, ReactNode } from 'react';
+import React, { lazy, ReactNode, useCallback, useEffect } from 'react';
 import { Link, Switch, useHistory, useRouteMatch } from 'react-router-dom';
 import { SuspendedRoute } from '@commercetools-frontend/application-shell';
 import { FormattedMessage, useIntl } from 'react-intl';
@@ -22,9 +22,9 @@ import {
 } from '@commercetools-uikit/hooks';
 import { ContentNotification } from '@commercetools-uikit/notifications';
 import LoadingSpinner from '@commercetools-uikit/loading-spinner';
-import { CONTAINER, SORT_OPTIONS } from '../../constants';
+import { SORT_OPTIONS } from '../../constants';
 import { getErrorMessage } from '../../helpers';
-import { useCustomObjectsFetcher } from '../../hooks/use-custom-object-connector/use-custom-object-connector';
+import { useFetchAllCustomObjects } from '../../hooks/use-custom-object-connectors-rest/use-custom-object-connectors-rest';
 import { FIELDS } from './constants';
 import messages from './messages';
 
@@ -66,13 +66,18 @@ const ContainerList = () => {
     order: 'asc',
   });
 
-  const { customObjectsPaginatedResult, loading, error, refetch } =
-    useCustomObjectsFetcher({
-      container: CONTAINER,
-      sort: [`${tableSorting.value.key} ${tableSorting.value.order}`],
-      limit: perPage.value,
-      offset: (page.value - 1) * perPage.value,
-    });
+  const { data: customObjectsPaginatedResult, error, loading, fetchData } = useFetchAllCustomObjects();
+
+  const fetchAllCustomObjects = useCallback(()=> {
+    fetchData({sort: [{by: tableSorting.value.key, direction: tableSorting.value.order}], where: ['value(attributes is defined)']});
+  },[fetchData, tableSorting.value.key, tableSorting.value.order]);
+
+
+  useEffect(() => {
+    fetchAllCustomObjects();
+  }, [fetchAllCustomObjects]);
+
+  console.log('customObjectsData', customObjectsPaginatedResult, 'error', error, 'loading', loading);
 
   const handleSortChange = (event: any) => {
     const { value } = event.target;
@@ -99,7 +104,9 @@ const ContainerList = () => {
     return <PageNotFound />;
   }
 
-  const { results, count, total } = customObjectsPaginatedResult;
+  const results = customObjectsPaginatedResult?.results || [];
+  const count = customObjectsPaginatedResult?.count || 0;
+  const total = customObjectsPaginatedResult?.total || 0;
 
   return (
     <InfoMainPage
@@ -145,7 +152,7 @@ const ContainerList = () => {
             gridTemplateColumns={`repeat(auto-fill, minmax(${customProperties.constraint6}, 1fr))`}
           >
             {results &&
-              results.map(({ id, key, value }) => {
+              results.map(({ id, key, value }:any) => {
                 return (
                   <Link key={id} to={`${match.url}/${id}`}>
                     <Card theme="dark">
@@ -177,19 +184,18 @@ const ContainerList = () => {
             onPerPageChange={perPage.onChange}
           />
         </Spacings.Stack>
-      ) : (
-        count === 0 && (
+      ) : 
+        (
           <Text.Body
             data-testid="no-results-error"
             intlMessage={messages.errorNoResults}
           />
-        )
-      )}
+        )}
       <Switch>
         <SuspendedRoute path={`${match.path}/new`}>
           <CreateContainer
             onClose={() => {
-              refetch();
+              fetchAllCustomObjects();
               push(`${match.url}`);
             }}
           />
@@ -197,7 +203,7 @@ const ContainerList = () => {
         <SuspendedRoute path={`${match.path}/:id`}>
           <ContainerDetails
             onClose={() => {
-              refetch();
+              fetchAllCustomObjects();
               push(`${match.url}`);
             }}
           />

@@ -18,7 +18,6 @@ import Spacings from '@commercetools-uikit/spacings';
 import Text from '@commercetools-uikit/text';
 import { SuspendedRoute } from '@commercetools-frontend/application-shell';
 import SecondaryButton from '@commercetools-uikit/secondary-button';
-import SelectInput from '@commercetools-uikit/select-input';
 import { Link, Switch, useHistory, useRouteMatch } from 'react-router-dom';
 import DataTable, { TColumn } from '@commercetools-uikit/data-table';
 import {
@@ -35,7 +34,7 @@ import { TCustomObject, TQuery } from '../../types/generated/ctp';
 import { getErrorMessage } from '../../helpers';
 import { AttributeValue } from '../../constants';
 
-import { useCustomObjectsFetcher } from '../../hooks/use-custom-object-connector/use-custom-object-connector';
+import { useCustomObjectsFetcher } from '../../hooks/use-custom-object-connectors-graphql/use-custom-object-connectors-graphql';
 import { columnDefinitions, COLUMN_KEYS } from './column-definitions';
 import messages from './messages';
 import styles from './custom-objects-list.module.css';
@@ -226,17 +225,9 @@ const CustomObjectsList = () => {
     }
   };
 
-  function filterByContainer(event: any) {
-    const { value } = event.target;
-    setContainer(value);
-  }
 
   const { results, count, total } = customObjectsPaginatedResult;
 
-  const containerOptions = map(containers, ({ key: containerKey }) => ({
-    label: containerKey,
-    value: containerKey,
-  }));
 
   return (
     <InfoMainPage
@@ -272,17 +263,6 @@ const CustomObjectsList = () => {
         {hasContainers && (
           <Card theme="dark" type="flat">
             <Spacings.Inline scale="m" alignItems="center">
-              <Text.Body intlMessage={messages.filter} />
-              <Constraints.Horizontal max={'scale'}>
-                <SelectInput
-                  data-testid="container-filter"
-                  name="container"
-                  placeholder={intl.formatMessage(messages.container)}
-                  value={container}
-                  options={containerOptions}
-                  onChange={filterByContainer}
-                />
-              </Constraints.Horizontal>
               <Constraints.Horizontal max={'scale'}>
                 <TextFilter
                   placeholder={intl.formatMessage(messages.key)}

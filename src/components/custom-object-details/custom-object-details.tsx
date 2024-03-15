@@ -32,7 +32,7 @@ import {
   useCustomObjectDeleter,
   useCustomObjectFetcher,
   useCustomObjectUpdater,
-} from '../../hooks/use-custom-object-connector/use-custom-object-connector';
+} from '../../hooks/use-custom-object-connectors-graphql/use-custom-object-connectors-graphql';
 import messages from './messages';
 
 type Props = {
@@ -59,7 +59,7 @@ const initializeCustomObjectValues = (
   languages: Array<string>
 ): Items => {
   const container = containers.find((item) => {
-    return item.key === customObject.container;
+    return item.container === customObject.container;
   });
 
   const attributes: Array<AttributeValue> =
@@ -97,6 +97,8 @@ const CustomObjectDetails: FC<Props> = ({ onClose }) => {
   const { customObject, error, refetch, loading } = useCustomObjectFetcher({
     id: id,
   });
+
+  console.log('customObject', customObject, 'error', error, 'loading', loading);
 
   if (error) {
     return (

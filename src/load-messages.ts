@@ -1,38 +1,39 @@
-import type {
-  TI18NImportData,
-  TMergedMessages,
+import {
+  TMessageTranslations,
+  parseChunkImport,
 } from '@commercetools-frontend/i18n';
 
-const getChunkImport = (locale: string): Promise<TI18NImportData> => {
+const loadMessages = (locale: string): Promise<TMessageTranslations> => {
+  let loadAppI18nPromise;
   switch (locale) {
     case 'de':
-      return import(
-        /* webpackChunkName: "app-i18n-de" */
-        './i18n/data/de.json'
+      loadAppI18nPromise = import(
+        './i18n/data/de.json' /* webpackChunkName: "app-i18n-de" */
       );
+      break;
+    case 'es':
+      loadAppI18nPromise = import(
+        './i18n/data/es.json' /* webpackChunkName: "app-i18n-es" */
+      );
+      break;
     default:
-      return import(
-        /* webpackChunkName: "app-i18n-en" */
-        './i18n/data/en.json'
+      loadAppI18nPromise = import(
+        './i18n/data/en.json' /* webpackChunkName: "app-i18n-en" */
       );
   }
-};
 
-const loadMessages = async (locale: string): Promise<TMergedMessages> => {
-  try {
-    const chunkImport = await getChunkImport(locale);
-    // Prefer loading `default` (for ESM bundles) and
-    // fall back to normal import (for CJS bundles).
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    return chunkImport.default || chunkImport;
-  } catch (error) {
-    console.warn(
-      `Something went wrong while loading the app messages for ${locale}`,
-      error
-    );
-    return {};
-  }
+  return loadAppI18nPromise.then(
+    (result) => parseChunkImport(result),
+    (error) => {
+      // eslint-disable-next-line no-console
+      console.warn(
+        `Something went wrong while loading the app messages for ${locale}`,
+        error
+      );
+
+      return {};
+    }
+  );
 };
 
 export default loadMessages;

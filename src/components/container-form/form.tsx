@@ -19,6 +19,7 @@ type Formik = ReturnType<typeof useFormik<TFormValues>>;
 
 type TFormValues = {
   key: string;
+  container: string;
   attributes: Array<AttributeValue>;
 };
 
@@ -51,11 +52,24 @@ const Form: FC<Props> = ({
         <div className={styles.form}>
           <Card type="flat" className={styles['field-card']}>
             <TextField
+              name="container"
+              value={values.container}
+              title={<FormattedMessage {...messages.containerNameTitle} />}
+              isRequired
+              //errors={TextField.toFieldErrors<TFormValues>(errors).key}
+              touched={touched.container}
+              onBlur={handleBlur}
+              onChange={handleChange}
+              //renderError={(key, error) => error}
+            />
+          </Card>
+          <Card type="flat" className={styles['field-card']}>
+            <TextField
               name="key"
               value={values.key}
-              title={<FormattedMessage {...messages.keyTitle} />}
+              title={<FormattedMessage {...messages.containerKeyTitle} />}
               isRequired
-              errors={TextField.toFieldErrors<TFormValues>(errors).key}
+              //errors={TextField.toFieldErrors<TFormValues>(errors).key}
               touched={touched.key}
               onBlur={handleBlur}
               onChange={handleChange}

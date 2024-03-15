@@ -1,0 +1,10 @@
+.filterWrapper {
+  width: 100%;
+  position: relative;
+}
+
+.iconContainer {
+  position: absolute;
+  top: 0.66rem;
+  right: 0.66rem;
+}
