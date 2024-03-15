@@ -63,7 +63,7 @@ const ApplicationRoutes = (_props: ApplicationRoutesProps) => {
   const { data: customObjectsData, error, loading, fetchData } = useFetchAllCustomObjects();
 
   const fetchUndefinedCustomObjects = useCallback(()=> {
-    fetchData({sort: [{by: 'lastModifiedAt', direction: 'desc'}]});
+    fetchData({sort: [{by: 'lastModifiedAt', direction: 'desc'}], where: []});
   },[fetchData]);
 
   useEffect(() => {
