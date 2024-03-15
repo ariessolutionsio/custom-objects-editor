@@ -98,7 +98,6 @@ const CustomObjectDetails: FC<Props> = ({ onClose }) => {
     id: id,
   });
 
-  console.log('customObject', customObject, 'error', error, 'loading', loading);
 
   if (error) {
     return (

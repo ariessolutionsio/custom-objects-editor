@@ -157,7 +157,7 @@ const CustomObjectsList = () => {
   function getDisplayAttributes(
     attributes: Array<AttributeValue>
   ): Array<string> {
-    return attributes.reduce<Array<string>>((display, attribute) => {
+    return attributes?.reduce<Array<string>>((display, attribute) => {
       if (attribute.display) {
         return [...display, camelCase(attribute.name)];
       }
@@ -173,7 +173,7 @@ const CustomObjectsList = () => {
     value: { [key: string]: unknown },
     attributes: Array<string>
   ) {
-    return Object.entries(value).reduce((display, [itemKey, itemValue]) => {
+    return Object.entries(value)?.reduce((display, [itemKey, itemValue]) => {
 
       if (includes(attributes, itemKey)) {
         return { ...display, [itemKey]: itemValue };

@@ -77,7 +77,6 @@ const ContainerList = () => {
     fetchAllCustomObjects();
   }, [fetchAllCustomObjects]);
 
-  console.log('customObjectsData', customObjectsPaginatedResult, 'error', error, 'loading', loading);
 
   const handleSortChange = (event: any) => {
     const { value } = event.target;
