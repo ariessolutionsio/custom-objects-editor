@@ -83,7 +83,6 @@ const Form: FC<Props> = ({
   React.useEffect(() => {
     onAttributesChange(values.attributes);
   }, [values.attributes]);
-  console.log('initialValues', initialValues);
   return (
     <Spacings.Stack scale="m">
       <CollapsiblePanel

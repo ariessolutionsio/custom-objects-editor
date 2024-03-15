@@ -45,7 +45,6 @@ const AllCustomObjectsList = () => {
     fetchUndefinedCustomObjects();
   }, [fetchUndefinedCustomObjects]);
 
-  console.log('customObjectsData', customObjectsData, 'error', error, 'loading', loading);
 
 
   let results = customObjectsData?.results || [];
