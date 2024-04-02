@@ -99,7 +99,7 @@ const ApplicationRoutes = (_props: ApplicationRoutesProps) => {
         <Route component={CustomObjectsList} />
       </Switch>
       <Spacings.Stack alignItems="center">
-        <Link to='/'>
+        <Link to='https://www.ariessolutions.io/' isExternal={true}>
           <img src={ariesLabsLogo} alt="Aries Labs Logo" width="100"/>
         </Link>
       </Spacings.Stack>
