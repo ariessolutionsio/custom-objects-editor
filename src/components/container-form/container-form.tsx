@@ -43,16 +43,17 @@ const ContainerForm: FC<Props> = ({ onSubmit, initialValues, children }) => {
     required: bool(),
     display: bool(),
     attributes: array(lazy(() => object(attributeSchema))),
-    reference: object().when('type', {
-      is: (val: any) => val === TYPES.Reference,
-      then: object({
-        by: stringSchema,
-        type: stringSchema,
+    reference: object()
+      .when('type', {
+        is: (val: any) => val === TYPES.Reference,
+        then: (schema) => object({
+          by: stringSchema,
+          type: stringSchema,
+        })
       }),
-    }),
     enum: array().when('type', {
       is: (val: any) => val === TYPES.Enum,
-      then: array(
+      then: (schema) => array(
         object({
           value: string().required(requiredFieldMessage),
           label: string().required(requiredFieldMessage),
@@ -61,7 +62,7 @@ const ContainerForm: FC<Props> = ({ onSubmit, initialValues, children }) => {
     }),
     lenum: array().when('type', {
       is: (val: any) => val === TYPES.LocalizedEnum,
-      then: array(
+      then: (schema) => array(
         object({
           value: string().required(requiredFieldMessage),
           label: object(
