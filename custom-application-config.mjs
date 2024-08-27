@@ -5,8 +5,9 @@ import { PERMISSIONS, entryPointUriPath } from './src/constants';
  */
 const config = {
   name: 'Custom Objects Editor',
-  entryPointUriPath,
+  entryPointUriPath: '${env:ENTRY_POINT_URI_PATH}',
   cloudIdentifier: '${env:CLOUD_IDENTIFIER}',
+  mcApiUrl: '${env:MC_API_URL}',
   env: {
     production: {
       applicationId: '${env:APPLICATION_ID}',
