@@ -95,11 +95,12 @@
     "@types/eslint": "<9",
     "@types/react": "<18",
     "@types/react-dom": "<18",
-    "@types/react-router": "<6"
+    "@types/react-router": "<6",
+    "cheerio": "=1.0.0-rc.3"
   },
   "devDependencies": {
-    "enzyme": "3.11.0",
-    "enzyme-adapter-react-16": "1.15.8",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.8",
     "eslint-react": "0.0.4"
   },
   "packageManager": "yarn@1.22.21"
