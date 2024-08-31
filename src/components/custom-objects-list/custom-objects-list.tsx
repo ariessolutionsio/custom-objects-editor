@@ -175,13 +175,15 @@ const CustomObjectsList = () => {
     attributes: Array<string>
   ) {
     return Object.entries(value).reduce((display, [itemKey, itemValue]) => {
-
       if (includes(attributes, itemKey)) {
         return { ...display, [itemKey]: itemValue };
       }
 
       if (isPlainObject(itemValue)) {
-        const nested: any = getDisplayValues({ [itemKey]: itemValue }, attributes);
+        const nested: any = getDisplayValues(
+          { [itemKey]: itemValue },
+          attributes
+        );
         if (!isEmpty(nested)) {
           return { ...display, [itemKey]: nested };
         }
@@ -212,7 +214,12 @@ const CustomObjectsList = () => {
               customObjectContainer.value.attributes as Array<AttributeValue>
             )) ||
           [];
-        const value = getDisplayValues(customObject.value, displayAttributes);
+
+        const value =
+          !displayAttributes || isEmpty(displayAttributes)
+            ? customObject.value
+            : getDisplayValues(customObject.value, displayAttributes);
+
         return (
           <div className={styles.value} data-testid="custom-object-value">
             {renderObject(isEmpty(value) ? customObject.value : value)}
