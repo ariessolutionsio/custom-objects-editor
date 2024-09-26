@@ -1,5 +1,4 @@
 import { IntlShape, MessageDescriptor } from 'react-intl';
-import camelCase from 'lodash/camelCase';
 import {
   AttributeValue,
 } from './constants';
@@ -14,7 +13,7 @@ export const getAttributeValues = (
     (value, { name, type, set, attributes: nested, reference }) => {
       return {
         ...value,
-        [camelCase(name)]: getInitialValueByType(
+        [name]: getInitialValueByType(
           type,
           set,
           nested,
@@ -37,7 +36,7 @@ export const getAttributeValidation = (
   return attributes.reduce((result, attribute) => {
     return {
       ...result,
-      [camelCase(attribute.name)]: getValidationSpecification(
+      [attribute.name]: getValidationSpecification(
         attribute,
         languages,
         messages,

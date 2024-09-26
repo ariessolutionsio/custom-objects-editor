@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import camelCase from 'lodash/camelCase';
 import get from 'lodash/get';
 import map from 'lodash/map';
 import { useApplicationContext } from '@commercetools-frontend/application-shell-connectors';
@@ -259,7 +258,7 @@ const AttributeInput: FC<Props> = ({
         <div className={`${nestedStyles.nested}`}>
           <Spacings.Stack scale="s">
             {map(attributes, (attribute: any, index) => {
-              const attributeName = camelCase(attribute.name);
+              const attributeName = attribute.name;
               return (
                 <AttributeField
                   data-testid={`field-type-object-${index}`}

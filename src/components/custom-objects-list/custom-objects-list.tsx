@@ -1,6 +1,5 @@
 import { lazy, useState } from 'react';
 import { FormattedDate, FormattedMessage, useIntl } from 'react-intl';
-import camelCase from 'lodash/camelCase';
 import includes from 'lodash/includes';
 import isEmpty from 'lodash/isEmpty';
 import isPlainObject from 'lodash/isPlainObject';
@@ -160,7 +159,7 @@ const CustomObjectsList = () => {
   ): Array<string> {
     return attributes.reduce<Array<string>>((display, attribute) => {
       if (attribute.display) {
-        return [...display, camelCase(attribute.name)];
+        return [...display, attribute.name];
       }
       if (attribute.attributes) {
         const nested = getDisplayAttributes(attribute.attributes);

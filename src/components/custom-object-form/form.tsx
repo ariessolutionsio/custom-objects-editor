@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import camelCase from 'lodash/camelCase';
 import get from 'lodash/get';
 import map from 'lodash/map';
 import { FormattedMessage, useIntl } from 'react-intl';
@@ -130,7 +129,7 @@ const Form: FC<Props> = ({
           }
         >
           {values.attributes.map((attribute, index) => {
-            const name = `value.${camelCase(attribute.name)}`;
+            const name = `value.${attribute.name}`;
             return (
               <Card
                 key={index}
