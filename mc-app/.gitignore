@@ -1,0 +1,13 @@
+node_modules/
+dist/
+coverage/
+public/
+csp.json
+env.json
+.env.local
+.firebase/
+.firebaserc
+firebase.json
+lambda.js
+_site/
+.sass-cache/

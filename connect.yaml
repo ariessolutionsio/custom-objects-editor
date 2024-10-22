@@ -1,0 +1,47 @@
+deployAs:
+  - name: mc-app 
+    applicationType: merchant-center-custom-application
+    configuration:
+      standardConfiguration:
+        - key: CUSTOM_APPLICATION_ID
+          description: The Custom Application ID
+          required: true
+        - key: APPLICATION_URL
+          description: The Custom Application URL
+          required: true
+        - key: ENTRY_POINT_URI_PATH
+          description: The Application entry point URI path
+          required: true
+          default: 'retail-reprice'
+        - key: INITIAL_PROJECT_KEY
+          description: development project key
+          required: true
+        - key: CLOUD_IDENTIFIER
+          description: one of the following gcp-us, gcp-eu, aws-us, aws-eu
+          required: false
+          default: 'gcp-us'
+        - key: MC_API_URL
+          description: full mc-api url if not using cloud_identifier (e.g. https://mc-api.eastus.azure.commercetools.com)
+          required: false
+  - name: validation-service
+    applicationType: service
+    endpoint: /validation
+    configuration:
+      standardConfiguration:
+        - key: CTP_REGION
+          description: commercetools Composable Commerce API region
+          required: true
+          default: "us-central1.gcp"
+        - key: CTP_PROJECT_KEY
+          description: commercetools Composable Commerce project key
+          required: true
+        - key: CTP_CLIENT_ID
+          description: commercetools Composable Commerce client ID
+          required: true
+        - key: CTP_SCOPE
+          description: commercetools Composable Commerce client scope
+          required: true
+      securedConfiguration:
+        - key: CTP_CLIENT_SECRET
+          description: commercetools Composable Commerce client secret
+          required: true
