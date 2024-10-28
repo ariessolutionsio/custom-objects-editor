@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Request, Response } from 'express';
 import { apiSuccess } from '../api/success.api';
 import CustomError from '../errors/custom.error';
@@ -23,6 +24,7 @@ export const post = async (request: Request, response: Response) => {
     return result;
   } catch (error) {
     response.status(400).json({
+      // @ts-ignore
       message: error.message,
     });
   }
