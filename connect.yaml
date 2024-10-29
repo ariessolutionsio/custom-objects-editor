@@ -23,6 +23,9 @@ deployAs:
         - key: MC_API_URL
           description: full mc-api url if not using cloud_identifier (e.g. https://mc-api.eastus.azure.commercetools.com)
           required: false
+        - key: CUSTOM_OBJECT_ENDPOINT
+          description: full URL path to validation-service
+          required: true
   - name: validation-service
     applicationType: service
     endpoint: /validation
