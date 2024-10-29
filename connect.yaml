@@ -12,7 +12,7 @@ deployAs:
         - key: ENTRY_POINT_URI_PATH
           description: The Application entry point URI path
           required: true
-          default: 'retail-reprice'
+          default: 'custom-object-editor'
         - key: INITIAL_PROJECT_KEY
           description: development project key
           required: true
