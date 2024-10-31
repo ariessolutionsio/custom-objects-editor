@@ -22,7 +22,8 @@ deployAs:
           default: 'gcp-us'
         - key: MC_API_URL
           description: full mc-api url if not using cloud_identifier (e.g. https://mc-api.eastus.azure.commercetools.com)
-          required: false
+          required: true
+          default: 'https://mc-api.us-central1.gcp.commercetools.com'
         - key: CUSTOM_OBJECT_ENDPOINT
           description: full URL path to validation-service
           required: true
