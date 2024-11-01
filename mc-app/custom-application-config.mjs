@@ -7,7 +7,6 @@ const config = {
   name: 'Custom Objects Editor',
   entryPointUriPath: '${env:ENTRY_POINT_URI_PATH}',
   cloudIdentifier: '${env:CLOUD_IDENTIFIER}',
-  mcApiUrl: '${env:MC_API_URL}',
   env: {
     production: {
       applicationId: '${env:CUSTOM_APPLICATION_ID}',
