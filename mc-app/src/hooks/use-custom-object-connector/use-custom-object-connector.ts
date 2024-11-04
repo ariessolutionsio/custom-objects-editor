@@ -18,8 +18,7 @@ import GetCustomObjects from "./get-custom-objects.ctp.graphql";
 import GetCustomObject from "./get-custom-object.rest.graphql";
 import DeleteCustomObject from "./delete-custom-object.rest.graphql";
 import { useApplicationContext } from "@commercetools-frontend/application-shell-connectors";
-// import UpdateCustomObject from './update-custom-object.rest.graphql';
-
+import axios from "axios";
 type TUseCustomObjectsFetcher = (variables: TQuery_CustomObjectsArgs) => {
   customObjectsPaginatedResult?: TQuery["customObjects"];
   error?: ApolloError;
@@ -92,23 +91,20 @@ export const useCustomObjectUpdater = () => {
   }) => {
 
     try {
-      const response = await fetch(customObjectEndpoint, {
-        method: 'POST',
+      const response = await axios.post(customObjectEndpoint, {
+        container: draft.container,
+        key: draft.key,
+        value: draft.value,
+        schemaType: draft.container,
+      }, {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          container: draft.container,
-          key: draft.key,
-          value: draft.value,
-          schemaType: draft.container,
-        }),
-        
       }).then(async (res) => {
-        if (res.status === 200) {
-          return res.json();
+        if (res?.status === 200) {
+          return res.data;
         }
-        throw (await res.json());
+        throw res.status;
       });
       
       onCompleted && onCompleted();
