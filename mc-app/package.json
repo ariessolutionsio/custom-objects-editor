@@ -100,6 +100,7 @@
     "cheerio": "=1.0.0-rc.3"
   },
   "devDependencies": {
+    "@types/axios": "^0.14.4",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.8",
     "eslint-react": "0.0.4"
