@@ -1,123 +1,122 @@
 // Make sure to import the helper functions from the `ssr` entry point.
-import { entryPointUriPathToPermissionKeys } from '@commercetools-frontend/application-shell/ssr';
-import { TCustomObject } from './types/generated/ctp';
+import { entryPointUriPathToPermissionKeys } from "@commercetools-frontend/application-shell/ssr";
+import { TCustomObject } from "./types/generated/ctp";
 
 export const entryPointUriPath =
-  typeof window === 'undefined'
+  typeof window === "undefined"
     ? process.env.ENTRY_POINT_URI_PATH
-    : window.app.entryPointUriPath ?? 'custom-objs';
+    : window.app.entryPointUriPath ?? "custom-objs";
 
 export const PERMISSIONS = entryPointUriPathToPermissionKeys(
   entryPointUriPath,
-  ['products', 'orders', 'customers']
+  ["products", "orders", "customers"]
 );
 
-export const SORT_OPTIONS = { ASC: 'asc', DESC: 'desc' };
+export const SORT_OPTIONS = { ASC: "asc", DESC: "desc" };
 
-export const CONTAINER = 'mc-custom-object-schema';
+export const CONTAINER = "mc-custom-object-schema";
 
 export const groupNames = {
-  products: 'products',
-  orders: 'orders',
-  customers: 'customers',
+  products: "products",
+  orders: "orders",
+  customers: "customers",
 };
 
-
 export const TYPES = {
-  String: 'String',
-  LocalizedString: 'LocalizedString',
-  Number: 'Number',
-  Boolean: 'Boolean',
-  Money: 'Money',
-  Date: 'Date',
-  Time: 'Time',
-  DateTime: 'DateTime',
-  Enum: 'Enum',
-  LocalizedEnum: 'LocalizedEnum',
-  Object: 'Object',
-  Reference: 'Reference',
+  String: "String",
+  LocalizedString: "LocalizedString",
+  Number: "Number",
+  Boolean: "Boolean",
+  Money: "Money",
+  Date: "Date",
+  Time: "Time",
+  DateTime: "DateTime",
+  Enum: "Enum",
+  LocalizedEnum: "LocalizedEnum",
+  Object: "Object",
+  Reference: "Reference",
 };
 
 export enum TYPES_ENUM {
-  String = 'String',
-  LocalizedString = 'LocalizedString',
-  Number = 'Number',
-  Boolean = 'Boolean',
-  Money = 'Money',
-  Date = 'Date',
-  Time = 'Time',
-  DateTime = 'DateTime',
-  Enum = 'Enum',
-  LocalizedEnum = 'LocalizedEnum',
-  Object = 'Object',
-  Reference = 'Reference',
+  String = "String",
+  LocalizedString = "LocalizedString",
+  Number = "Number",
+  Boolean = "Boolean",
+  Money = "Money",
+  Date = "Date",
+  Time = "Time",
+  DateTime = "DateTime",
+  Enum = "Enum",
+  LocalizedEnum = "LocalizedEnum",
+  Object = "Object",
+  Reference = "Reference",
 }
 
 export const REFERENCE_BY = {
-  Key: 'key',
-  Id: 'id',
+  Key: "key",
+  Id: "id",
 };
 
 export enum REFERENCE_TYPES_ENUM {
-  Cart = 'cart',
-  CartDiscount = 'cart-discount',
-  Category = 'category',
-  Channel = 'channel',
-  Customer = 'customer',
-  CustomerGroup = 'customer-group',
-  DiscountCode = 'discount-code',
-  KeyValueDocument = 'key-value-document',
-  Payment = 'payment',
-  Product = 'product',
-  ProductDiscount = 'product-discount',
-  ProductPrice = 'product-price',
-  ProductType = 'product-type',
-  Order = 'order',
-  OrderEdit = 'order-edit',
-  ShippingMethod = 'shipping-method',
-  ShoppingList = 'shopping-list',
-  State = 'state',
-  Store = 'store',
-  TaxCategory = 'tax-category',
-  Type = 'type',
-  Zone = 'zone',
+  Cart = "cart",
+  CartDiscount = "cart-discount",
+  Category = "category",
+  Channel = "channel",
+  Customer = "customer",
+  CustomerGroup = "customer-group",
+  DiscountCode = "discount-code",
+  KeyValueDocument = "key-value-document",
+  Payment = "payment",
+  Product = "product",
+  ProductDiscount = "product-discount",
+  ProductPrice = "product-price",
+  ProductType = "product-type",
+  Order = "order",
+  OrderEdit = "order-edit",
+  ShippingMethod = "shipping-method",
+  ShoppingList = "shopping-list",
+  State = "state",
+  Store = "store",
+  TaxCategory = "tax-category",
+  Type = "type",
+  Zone = "zone",
 }
 
 export const REFERENCE_TYPES = {
-  Cart: 'cart',
-  CartDiscount: 'cart-discount',
-  Category: 'category',
-  Channel: 'channel',
-  Customer: 'customer',
-  CustomerGroup: 'customer-group',
-  DiscountCode: 'discount-code',
-  KeyValueDocument: 'key-value-document',
-  Payment: 'payment',
-  Product: 'product',
-  ProductDiscount: 'product-discount',
-  ProductPrice: 'product-price',
-  ProductType: 'product-type',
-  Order: 'order',
-  OrderEdit: 'order-edit',
-  ShippingMethod: 'shipping-method',
-  ShoppingList: 'shopping-list',
-  State: 'state',
-  Store: 'store',
-  TaxCategory: 'tax-category',
-  Type: 'type',
-  Zone: 'zone',
+  Cart: "cart",
+  CartDiscount: "cart-discount",
+  Category: "category",
+  Channel: "channel",
+  Customer: "customer",
+  CustomerGroup: "customer-group",
+  DiscountCode: "discount-code",
+  KeyValueDocument: "key-value-document",
+  Payment: "payment",
+  Product: "product",
+  ProductDiscount: "product-discount",
+  ProductPrice: "product-price",
+  ProductType: "product-type",
+  Order: "order",
+  OrderEdit: "order-edit",
+  ShippingMethod: "shipping-method",
+  ShoppingList: "shopping-list",
+  State: "state",
+  Store: "store",
+  TaxCategory: "tax-category",
+  Type: "type",
+  Zone: "zone",
 };
 
 export const ATTRIBUTES = {
-  Name: 'name',
-  Type: 'type',
-  Required: 'required',
-  Set: 'set',
-  Display: 'display',
-  Attributes: 'attributes',
-  Reference: 'reference',
-  Enum: 'enum',
-  LocalizedEnum: 'lenum',
+  Name: "name",
+  Type: "type",
+  Required: "required",
+  Set: "set",
+  Display: "display",
+  Attributes: "attributes",
+  Reference: "reference",
+  Enum: "enum",
+  LocalizedEnum: "lenum",
 };
 
 export type LocalizedEnum = {
@@ -154,10 +153,10 @@ export type ContainerValue = {
 
 export type ValueObject = {
   value: Value;
-} & Pick<TCustomObject, 'container' | 'id' | 'key'>;
+} & Pick<TCustomObject, "container" | "id" | "key">;
 
 export const emptyAttribute: AttributeValue = {
-  name: '',
+  name: "",
   type: TYPES_ENUM.Boolean,
   set: false,
   required: false,

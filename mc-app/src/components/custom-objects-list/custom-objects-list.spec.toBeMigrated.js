@@ -1,37 +1,37 @@
 /* eslint-disable import/no-unresolved */
-import React from 'react';
-import { shallow } from 'enzyme';
-import faker from 'faker';
-import camelCase from 'lodash/camelCase';
-import first from 'lodash/first';
-import last from 'lodash/last';
-import startCase from 'lodash/startCase';
-import times from 'lodash/times';
-import moment from 'moment';
-import { stringify } from 'qs';
-import { FormattedDate } from 'react-intl';
-import { useQuery, setQuery } from '@commercetools-frontend/application-shell';
-import { NO_VALUE_FALLBACK } from '@commercetools-frontend/constants';
-import PaginatedTable from '../paginated-table/paginated-table';
-import useEffectMock from '../../test-utils/use-effect-mock';
+import React from "react";
+import { shallow } from "enzyme";
+import faker from "faker";
+import camelCase from "lodash/camelCase";
+import first from "lodash/first";
+import last from "lodash/last";
+import startCase from "lodash/startCase";
+import times from "lodash/times";
+import moment from "moment";
+import { stringify } from "qs";
+import { FormattedDate } from "react-intl";
+import { useQuery, setQuery } from "@commercetools-frontend/application-shell";
+import { NO_VALUE_FALLBACK } from "@commercetools-frontend/constants";
+import PaginatedTable from "../paginated-table/paginated-table";
+import useEffectMock from "../../test-utils/use-effect-mock";
 import {
   generateAttribute,
   generateContainer,
   generateContainerContext,
   generateCustomObject,
-} from '../../test-utils';
-import * as ContainerContext from '../../context/container-context';
-import { TYPES } from '../container-form/constants';
-import GetCustomObjects from '../get-custom-objects.ctp.graphql';
-import { SORT_OPTIONS } from '../../constants';
-import CustomObjectsList from './custom-objects-list';
+} from "../../test-utils";
+import * as ContainerContext from "../../context/container-context";
+import { TYPES } from "../container-form/constants";
+import GetCustomObjects from "../get-custom-objects.ctp.graphql";
+import { SORT_OPTIONS } from "../../constants";
+import CustomObjectsList from "./custom-objects-list";
 import {
   DATE_FORMAT,
   DATE_TIME_FORMAT,
   DEFAULT_VARIABLES,
   PAGE_SIZE,
-} from './constants';
-import { COLUMN_KEYS } from './column-definitions';
+} from "./constants";
+import { COLUMN_KEYS } from "./column-definitions";
 
 const containerContext = generateContainerContext();
 
@@ -62,13 +62,13 @@ const containerFilter = '[data-testid="container-filter"]';
 const keyFilter = '[data-testid="key-filter"]';
 const noContainerError = '[data-testid="no-containers-error"]';
 
-const containerContextSpy = jest.spyOn(ContainerContext, 'useContainerContext');
+const containerContextSpy = jest.spyOn(ContainerContext, "useContainerContext");
 
 const loadCustomObjectsList = () => shallow(<CustomObjectsList {...mocks} />);
 
-describe('custom objects list', () => {
+describe("custom objects list", () => {
   beforeAll(() => {
-    jest.spyOn(React, 'useEffect').mockImplementation(useEffectMock);
+    jest.spyOn(React, "useEffect").mockImplementation(useEffectMock);
   });
 
   beforeEach(() => {
@@ -76,7 +76,7 @@ describe('custom objects list', () => {
     useQuery.mockClear();
   });
 
-  it('should retrieve custom objects', () => {
+  it("should retrieve custom objects", () => {
     loadCustomObjectsList();
     expect(useQuery).toHaveBeenCalledWith(GetCustomObjects, {
       variables: {
@@ -90,71 +90,71 @@ describe('custom objects list', () => {
     });
   });
 
-  it('should display title', () => {
+  it("should display title", () => {
     const wrapper = loadCustomObjectsList();
     expect(wrapper.find('[data-testid="title"]').exists()).toEqual(true);
   });
 
-  describe('when custom object query fails', () => {
+  describe("when custom object query fails", () => {
     let wrapper;
     beforeEach(() => {
-      setQuery({ error: { message: 'failed to load' } });
+      setQuery({ error: { message: "failed to load" } });
       wrapper = loadCustomObjectsList();
     });
 
-    it('should display error message', () => {
+    it("should display error message", () => {
       expect(wrapper.find('[data-testid="loading-error"]').exists()).toEqual(
         true
       );
     });
 
-    it('should not display custom object list', () => {
+    it("should not display custom object list", () => {
       expect(wrapper.find(PaginatedTable).exists()).toEqual(false);
     });
   });
 
-  describe('when custom object query returns data', () => {
+  describe("when custom object query returns data", () => {
     let wrapper;
     beforeEach(() => {
       setQuery({ data: generateCustomObjects() });
       wrapper = loadCustomObjectsList();
     });
 
-    it('should display result count', () => {
+    it("should display result count", () => {
       expect(wrapper.find('[data-testid="subtitle"]').exists()).toEqual(true);
     });
 
-    it('should display custom object list', () => {
+    it("should display custom object list", () => {
       expect(wrapper.find(PaginatedTable).exists()).toEqual(true);
     });
   });
 
-  describe('when custom object returns an empty list', () => {
+  describe("when custom object returns an empty list", () => {
     let wrapper;
     beforeEach(() => {
       setQuery({ data: generateCustomObjects(0) });
       wrapper = loadCustomObjectsList();
     });
 
-    it('should not display result count', () => {
+    it("should not display result count", () => {
       expect(wrapper.find('[data-testid="subtitle"]').exists()).toEqual(false);
     });
 
-    it('should not display custom object list', () => {
+    it("should not display custom object list", () => {
       expect(wrapper.find(PaginatedTable).exists()).toEqual(false);
     });
 
-    it('should display error message', () => {
+    it("should display error message", () => {
       expect(wrapper.find('[data-testid="no-results-error"]').exists()).toEqual(
         true
       );
     });
   });
 
-  describe('list columns', () => {
+  describe("list columns", () => {
     const data = generateCustomObjects();
 
-    it('should render fallback for default column', () => {
+    it("should render fallback for default column", () => {
       setQuery({ data });
       const wrapper = loadCustomObjectsList();
       const actual = wrapper
@@ -164,7 +164,7 @@ describe('custom objects list', () => {
       expect(actual).toEqual(NO_VALUE_FALLBACK);
     });
 
-    it('should render custom object container for container column', () => {
+    it("should render custom object container for container column", () => {
       setQuery({ data });
       const { container } = first(data.customObjects.results);
       const wrapper = loadCustomObjectsList();
@@ -175,7 +175,7 @@ describe('custom objects list', () => {
       expect(actual).toEqual(container);
     });
 
-    it('should render custom object key for key column', () => {
+    it("should render custom object key for key column", () => {
       setQuery({ data });
       const { key } = first(data.customObjects.results);
       const wrapper = loadCustomObjectsList();
@@ -186,7 +186,7 @@ describe('custom objects list', () => {
       expect(actual).toEqual(key);
     });
 
-    it('should render custom object last modified date for last modified column', () => {
+    it("should render custom object last modified date for last modified column", () => {
       setQuery({ data });
       const { lastModifiedAt } = first(data.customObjects.results);
       const wrapper = loadCustomObjectsList();
@@ -197,7 +197,7 @@ describe('custom objects list', () => {
       expect(actual.props.value).toEqual(lastModifiedAt);
     });
 
-    describe('value column', () => {
+    describe("value column", () => {
       const valueKey = camelCase(faker.random.words());
 
       const renderValueColumn = (value) => {
@@ -225,27 +225,27 @@ describe('custom objects list', () => {
         );
       };
 
-      it('should render custom object key in start case format', () => {
-        const actual = renderValueColumn('');
+      it("should render custom object key in start case format", () => {
+        const actual = renderValueColumn("");
         expect(actual.find('[data-testid="value-title"]').html()).toContain(
           startCase(valueKey)
         );
       });
 
-      it('when custom object key value is a string, should render string value', () => {
+      it("when custom object key value is a string, should render string value", () => {
         const value = faker.random.words();
         const actual = renderValueColumn(value);
         expect(actual.text()).toContain(value);
       });
 
-      it('when custom object key value is a number, should render number as string value', () => {
+      it("when custom object key value is a number, should render number as string value", () => {
         const value = faker.random.number({ min: 1, max: 10 });
         const actual = renderValueColumn(value);
         expect(actual.text()).toContain(value);
       });
 
-      it('when custom object key value is a date, should render formatted date', () => {
-        const value = moment(faker.date.recent()).format('YYYY-MM-DD');
+      it("when custom object key value is a date, should render formatted date", () => {
+        const value = moment(faker.date.recent()).format("YYYY-MM-DD");
         const actual = renderValueColumn(value);
         expect(actual.find(FormattedDate).props()).toEqual({
           value,
@@ -253,7 +253,7 @@ describe('custom objects list', () => {
         });
       });
 
-      it('when custom object key value is a datetime, should render formatted datetime', () => {
+      it("when custom object key value is a datetime, should render formatted datetime", () => {
         const value = faker.date.recent().toISOString();
         const actual = renderValueColumn(value);
         expect(actual.find(FormattedDate).props()).toEqual({
@@ -262,19 +262,19 @@ describe('custom objects list', () => {
         });
       });
 
-      it('when custom object key value is a time, should render time as a string value', () => {
-        const value = moment(faker.date.recent()).format('h:mm A');
+      it("when custom object key value is a time, should render time as a string value", () => {
+        const value = moment(faker.date.recent()).format("h:mm A");
         const actual = renderValueColumn(value);
         expect(actual.text()).toContain(value);
       });
 
-      it('when custom object key value is a boolean, should render boolean value as string value', () => {
+      it("when custom object key value is a boolean, should render boolean value as string value", () => {
         const value = faker.random.boolean();
         const actual = renderValueColumn(value);
         expect(actual.text()).toContain(value);
       });
 
-      it('when custom object key value is an object, should render object values', () => {
+      it("when custom object key value is an object, should render object values", () => {
         const value = faker.random.boolean();
         const actual = renderValueColumn({ value });
         expect(actual.find('[data-testid="object-value"]').exists()).toEqual(
@@ -282,7 +282,7 @@ describe('custom objects list', () => {
         );
       });
 
-      it('when custom object key value is an array, should render each list item', () => {
+      it("when custom object key value is an array, should render each list item", () => {
         const value = faker.random.boolean();
         const list = [value, value];
         const actual = renderValueColumn(list);
@@ -291,7 +291,7 @@ describe('custom objects list', () => {
         );
       });
 
-      describe('display attribute in list', () => {
+      describe("display attribute in list", () => {
         function renderValueColumnWithContext(attributes) {
           const container = generateContainer(attributes);
           const context = generateContainerContext([container]);
@@ -317,7 +317,7 @@ describe('custom objects list', () => {
         }
         const attributeValue = '[data-testid="custom-object-value"] > div';
 
-        it('when container schema has one display in list attribute, should only display that attribute', () => {
+        it("when container schema has one display in list attribute, should only display that attribute", () => {
           const attributes = [
             generateAttribute({ display: true }),
             generateAttribute({ display: false, displayNested: false }),
@@ -326,7 +326,7 @@ describe('custom objects list', () => {
           expect(actual.find(attributeValue).length).toEqual(1);
         });
 
-        it('when container schema has no display in list attributes, should display all available attribute', () => {
+        it("when container schema has no display in list attributes, should display all available attribute", () => {
           const attributes = times(2, () =>
             generateAttribute({ display: false, displayNested: false })
           );
@@ -334,7 +334,7 @@ describe('custom objects list', () => {
           expect(actual.find(attributeValue).length).toEqual(attributes.length);
         });
 
-        it('when container schema has object attribute with nested display in list attributes', () => {
+        it("when container schema has object attribute with nested display in list attributes", () => {
           const attribute = generateAttribute({
             type: TYPES.Object,
             display: false,
@@ -353,8 +353,8 @@ describe('custom objects list', () => {
     });
   });
 
-  describe('container filter', () => {
-    const value = 'container-search';
+  describe("container filter", () => {
+    const value = "container-search";
     let wrapper;
 
     beforeEach(() => {
@@ -362,7 +362,7 @@ describe('custom objects list', () => {
       wrapper = loadCustomObjectsList();
     });
 
-    it('when container selected, should query for custom objects in selected container', () => {
+    it("when container selected, should query for custom objects in selected container", () => {
       wrapper.find(containerFilter).props().onChange({ target: { value } });
       const result = last(useQuery.mock.calls)[1];
       expect(result.variables.queryString).toContain(
@@ -370,11 +370,11 @@ describe('custom objects list', () => {
       );
     });
 
-    it('when container cleared, should query for custom objects in all managed containers', () => {
+    it("when container cleared, should query for custom objects in all managed containers", () => {
       wrapper
         .find(containerFilter)
         .props()
-        .onChange({ target: { value: '' } });
+        .onChange({ target: { value: "" } });
       const result = last(useQuery.mock.calls)[1];
       expect(result.variables.queryString).toContain(
         stringify(`where=${containerContext.where}`)
@@ -382,8 +382,8 @@ describe('custom objects list', () => {
     });
   });
 
-  describe('key filter', () => {
-    const value = 'key-search';
+  describe("key filter", () => {
+    const value = "key-search";
     let wrapper;
 
     beforeEach(() => {
@@ -391,7 +391,7 @@ describe('custom objects list', () => {
       wrapper = loadCustomObjectsList();
     });
 
-    it('when key filter entered, should query for custom objects with key value', () => {
+    it("when key filter entered, should query for custom objects with key value", () => {
       wrapper.find(keyFilter).props().onSubmit(value);
       const result = last(useQuery.mock.calls)[1];
       expect(result.variables.queryString).toContain(
@@ -399,8 +399,8 @@ describe('custom objects list', () => {
       );
     });
 
-    it('when container cleared, should query for custom objects in all managed containers', () => {
-      wrapper.find(keyFilter).props().onSubmit('');
+    it("when container cleared, should query for custom objects in all managed containers", () => {
+      wrapper.find(keyFilter).props().onSubmit("");
       const result = last(useQuery.mock.calls)[1];
       expect(result.variables.queryString).toContain(
         stringify(`where=${containerContext.where}`)
@@ -408,7 +408,7 @@ describe('custom objects list', () => {
     });
   });
 
-  it('when next pagination button clicked, should query for next page', () => {
+  it("when next pagination button clicked, should query for next page", () => {
     setQuery({ data: generateCustomObjects() });
     const wrapper = loadCustomObjectsList();
     wrapper.find(PaginatedTable).props().next();
@@ -420,7 +420,7 @@ describe('custom objects list', () => {
 
   // In the UI, clicking previous on the first page is disallowed, but for ease of testing
   // that's what is happening here, hence the strange expectation.
-  it('when previous pagination button clicked, should query for previous page', () => {
+  it("when previous pagination button clicked, should query for previous page", () => {
     setQuery({ data: generateCustomObjects() });
     const wrapper = loadCustomObjectsList();
     wrapper.find(PaginatedTable).props().previous();
@@ -430,7 +430,7 @@ describe('custom objects list', () => {
     );
   });
 
-  it('when table column sort direction clicked, should update table sort order', () => {
+  it("when table column sort direction clicked, should update table sort order", () => {
     setQuery({ data: generateCustomObjects() });
     const wrapper = loadCustomObjectsList();
     wrapper
@@ -444,7 +444,7 @@ describe('custom objects list', () => {
     );
   });
 
-  it('when row clicked, should open custom object details', () => {
+  it("when row clicked, should open custom object details", () => {
     const data = generateCustomObjects(1);
     const customObject = data.customObjects.results[0];
     setQuery({ data });
@@ -455,31 +455,31 @@ describe('custom objects list', () => {
     );
   });
 
-  describe('when container context has containers', () => {
+  describe("when container context has containers", () => {
     let wrapper;
 
     beforeEach(() => {
       wrapper = loadCustomObjectsList();
     });
 
-    it('should display container filter', () => {
+    it("should display container filter", () => {
       expect(wrapper.find(containerFilter).exists()).toEqual(true);
     });
 
-    it('should display key filter', () => {
+    it("should display key filter", () => {
       expect(wrapper.find(keyFilter).exists()).toEqual(true);
     });
 
-    it('should display create custom object button', () => {
+    it("should display create custom object button", () => {
       expect(wrapper.find(createButton).exists()).toEqual(true);
     });
 
-    it('should not display no container error', () => {
+    it("should not display no container error", () => {
       expect(wrapper.find(noContainerError).exists()).toEqual(false);
     });
   });
 
-  describe('when container context has no containers', () => {
+  describe("when container context has no containers", () => {
     let wrapper;
 
     beforeEach(() => {
@@ -487,7 +487,7 @@ describe('custom objects list', () => {
       containerContextSpy.mockReturnValue({
         hasContainers: false,
         containers: [],
-        where: '',
+        where: "",
       });
     });
 
@@ -495,15 +495,15 @@ describe('custom objects list', () => {
       wrapper = loadCustomObjectsList();
     });
 
-    it('should not display container filter', () => {
+    it("should not display container filter", () => {
       expect(wrapper.find(containerFilter).exists()).toEqual(false);
     });
 
-    it('should not display create custom object button', () => {
+    it("should not display create custom object button", () => {
       expect(wrapper.find(createButton).exists()).toEqual(false);
     });
 
-    it('should display no container error', () => {
+    it("should display no container error", () => {
       expect(wrapper.find(noContainerError).exists()).toEqual(true);
     });
   });

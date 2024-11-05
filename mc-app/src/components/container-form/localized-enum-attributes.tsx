@@ -1,23 +1,23 @@
-import React, { FC } from 'react';
-import get from 'lodash/get';
-import upperCase from 'lodash/upperCase';
-import { FieldArray, useFormik } from 'formik';
-import { FormattedMessage, useIntl } from 'react-intl';
-import { useApplicationContext } from '@commercetools-frontend/application-shell-connectors';
-import SecondaryIconButton from '@commercetools-uikit/secondary-icon-button';
-import SecondaryButton from '@commercetools-uikit/secondary-button';
-import Constraints from '@commercetools-uikit/constraints';
-import { customProperties } from '@commercetools-uikit/design-system';
-import FieldLabel from '@commercetools-uikit/field-label';
-import Grid from '@commercetools-uikit/grid';
-import { BinLinearIcon, PlusBoldIcon } from '@commercetools-uikit/icons';
-import TextInput from '@commercetools-uikit/text-input';
-import LocalizedTextInput from '@commercetools-uikit/localized-text-input';
-import { ErrorMessage } from '@commercetools-uikit/messages';
-import Spacings from '@commercetools-uikit/spacings';
-import messages from './messages';
-import styles from './enum-attributes.module.css';
-import nestedStyles from './nested-attributes.module.css';
+import React, { FC } from "react";
+import get from "lodash/get";
+import upperCase from "lodash/upperCase";
+import { FieldArray, useFormik } from "formik";
+import { FormattedMessage, useIntl } from "react-intl";
+import { useApplicationContext } from "@commercetools-frontend/application-shell-connectors";
+import SecondaryIconButton from "@commercetools-uikit/secondary-icon-button";
+import SecondaryButton from "@commercetools-uikit/secondary-button";
+import Constraints from "@commercetools-uikit/constraints";
+import { customProperties } from "@commercetools-uikit/design-system";
+import FieldLabel from "@commercetools-uikit/field-label";
+import Grid from "@commercetools-uikit/grid";
+import { BinLinearIcon, PlusBoldIcon } from "@commercetools-uikit/icons";
+import TextInput from "@commercetools-uikit/text-input";
+import LocalizedTextInput from "@commercetools-uikit/localized-text-input";
+import { ErrorMessage } from "@commercetools-uikit/messages";
+import Spacings from "@commercetools-uikit/spacings";
+import messages from "./messages";
+import styles from "./enum-attributes.module.css";
+import nestedStyles from "./nested-attributes.module.css";
 
 export type TFormValue = {
   value: string;
@@ -29,10 +29,10 @@ export type Formik = ReturnType<typeof useFormik<TFormValue>>;
 type Props = {
   name: string;
   value: Array<TFormValue>;
-  touched: Formik['touched'];
-  errors: Formik['errors'];
-  handleBlur: Formik['handleBlur'];
-  handleChange: Formik['handleChange'];
+  touched: Formik["touched"];
+  errors: Formik["errors"];
+  handleBlur: Formik["handleBlur"];
+  handleChange: Formik["handleChange"];
 };
 
 const LocalizedEnumAttributes: FC<Props> = ({
@@ -66,7 +66,7 @@ const LocalizedEnumAttributes: FC<Props> = ({
                 label={intl.formatMessage(messages.addLabel)}
                 onClick={() =>
                   push({
-                    value: '',
+                    value: "",
                     label:
                       LocalizedTextInput.createLocalizedString(
                         projectLanguages
@@ -166,6 +166,6 @@ const LocalizedEnumAttributes: FC<Props> = ({
     </div>
   );
 };
-LocalizedEnumAttributes.displayName = 'LocalizedEnumAttributes';
+LocalizedEnumAttributes.displayName = "LocalizedEnumAttributes";
 
 export default LocalizedEnumAttributes;

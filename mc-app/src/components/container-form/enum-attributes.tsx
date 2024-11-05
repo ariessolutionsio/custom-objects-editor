@@ -1,29 +1,29 @@
-import React, { FC } from 'react';
-import get from 'lodash/get';
-import { FormattedMessage, useIntl } from 'react-intl';
-import { FieldArray } from 'formik';
-import SecondaryIconButton from '@commercetools-uikit/secondary-icon-button';
-import SecondaryButton from '@commercetools-uikit/secondary-button';
-import Constraints from '@commercetools-uikit/constraints';
-import { customProperties } from '@commercetools-uikit/design-system';
-import { ErrorMessage } from '@commercetools-uikit/messages';
-import FieldLabel from '@commercetools-uikit/field-label';
-import Grid from '@commercetools-uikit/grid';
-import { BinLinearIcon, PlusBoldIcon } from '@commercetools-uikit/icons';
-import TextInput from '@commercetools-uikit/text-input';
-import Spacings from '@commercetools-uikit/spacings';
-import messages from './messages';
-import nestedStyles from './nested-attributes.module.css';
-import styles from './enum-attributes.module.css';
-import { TFormValue, Formik } from './localized-enum-attributes';
+import React, { FC } from "react";
+import get from "lodash/get";
+import { FormattedMessage, useIntl } from "react-intl";
+import { FieldArray } from "formik";
+import SecondaryIconButton from "@commercetools-uikit/secondary-icon-button";
+import SecondaryButton from "@commercetools-uikit/secondary-button";
+import Constraints from "@commercetools-uikit/constraints";
+import { customProperties } from "@commercetools-uikit/design-system";
+import { ErrorMessage } from "@commercetools-uikit/messages";
+import FieldLabel from "@commercetools-uikit/field-label";
+import Grid from "@commercetools-uikit/grid";
+import { BinLinearIcon, PlusBoldIcon } from "@commercetools-uikit/icons";
+import TextInput from "@commercetools-uikit/text-input";
+import Spacings from "@commercetools-uikit/spacings";
+import messages from "./messages";
+import nestedStyles from "./nested-attributes.module.css";
+import styles from "./enum-attributes.module.css";
+import { TFormValue, Formik } from "./localized-enum-attributes";
 
 type Props = {
   name: string;
   value: Array<TFormValue>;
-  touched: Formik['touched'];
-  errors: Formik['errors'];
-  handleBlur: Formik['handleBlur'];
-  handleChange: Formik['handleChange'];
+  touched: Formik["touched"];
+  errors: Formik["errors"];
+  handleBlur: Formik["handleBlur"];
+  handleChange: Formik["handleChange"];
 };
 
 const EnumAttributes: FC<Props> = ({
@@ -49,7 +49,7 @@ const EnumAttributes: FC<Props> = ({
                 data-testid="add-enum-option"
                 iconLeft={<PlusBoldIcon />}
                 label={intl.formatMessage(messages.addLabel)}
-                onClick={() => push({ value: '', label: '' })}
+                onClick={() => push({ value: "", label: "" })}
               />
             </Constraints.Horizontal>
             <Grid
@@ -131,6 +131,6 @@ const EnumAttributes: FC<Props> = ({
     </div>
   );
 };
-EnumAttributes.displayName = 'EnumAttributes';
+EnumAttributes.displayName = "EnumAttributes";
 
 export default EnumAttributes;

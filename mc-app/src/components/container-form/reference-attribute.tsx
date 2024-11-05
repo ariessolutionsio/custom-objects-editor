@@ -1,13 +1,13 @@
-import React, { FC } from 'react';
-import map from 'lodash/map';
-import { FormattedMessage } from 'react-intl';
-import SelectField from '@commercetools-uikit/select-field';
-import Spacings from '@commercetools-uikit/spacings';
-import Text from '@commercetools-uikit/text';
-import { useFormik } from 'formik';
-import { REFERENCE_BY, REFERENCE_TYPES } from '../../constants';
-import messages from './messages';
-import styles from './nested-attributes.module.css';
+import React, { FC } from "react";
+import map from "lodash/map";
+import { FormattedMessage } from "react-intl";
+import SelectField from "@commercetools-uikit/select-field";
+import Spacings from "@commercetools-uikit/spacings";
+import Text from "@commercetools-uikit/text";
+import { useFormik } from "formik";
+import { REFERENCE_BY, REFERENCE_TYPES } from "../../constants";
+import messages from "./messages";
+import styles from "./nested-attributes.module.css";
 
 const mapOptions = (options: any) =>
   map(options, (option) => ({
@@ -25,10 +25,10 @@ type Formik = ReturnType<typeof useFormik<TFormValue>>;
 type Props = {
   name: string;
   value: TFormValue;
-  touched: Formik['touched'];
-  errors: Formik['errors'];
-  handleBlur: Formik['handleBlur'];
-  handleChange: Formik['handleChange'];
+  touched: Formik["touched"];
+  errors: Formik["errors"];
+  handleBlur: Formik["handleBlur"];
+  handleChange: Formik["handleChange"];
 };
 
 const ReferenceAttribute: FC<Props> = ({
@@ -75,6 +75,6 @@ const ReferenceAttribute: FC<Props> = ({
     </div>
   );
 };
-ReferenceAttribute.displayName = 'ReferenceAttribute';
+ReferenceAttribute.displayName = "ReferenceAttribute";
 
 export default ReferenceAttribute;

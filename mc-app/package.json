@@ -13,6 +13,7 @@
     "test": "jest --config jest.test.config.js",
     "test:watch": "jest --config jest.test.config.js --watch",
     "lint": "jest --config jest.eslint.config.js",
+    "format": "prettier --write 'src/**/*.{js,ts,tsx}'",
     "typecheck": "tsc --noEmit",
     "versions:appkit": "manypkg upgrade @commercetools-frontend",
     "versions:uikit": "manypkg upgrade @commercetools-uikit"

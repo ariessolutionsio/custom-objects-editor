@@ -1,7 +1,7 @@
-import { sequence, fake, Generator } from '@commercetools-test-data/core';
-import { ClientLogging } from '@commercetools-test-data/commons';
-import { createRelatedDates } from '@commercetools-test-data/utils';
-import type { CustomObject } from '@commercetools/platform-sdk';
+import { sequence, fake, Generator } from "@commercetools-test-data/core";
+import { ClientLogging } from "@commercetools-test-data/commons";
+import { createRelatedDates } from "@commercetools-test-data/utils";
+import type { CustomObject } from "@commercetools/platform-sdk";
 
 const [getOlderDate, getNewerDate] = createRelatedDates();
 
@@ -15,8 +15,8 @@ const generator = Generator<CustomObject>({
     lastModifiedAt: fake(getNewerDate),
     createdBy: fake(() => ClientLogging.random()),
     lastModifiedBy: fake(() => ClientLogging.random()),
-    container: '',
-    value: '',
+    container: "",
+    value: "",
   },
 });
 

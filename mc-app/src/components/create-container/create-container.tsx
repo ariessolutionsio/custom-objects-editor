@@ -1,20 +1,20 @@
-import React, { FC } from 'react';
-import { useIntl } from 'react-intl';
+import React, { FC } from "react";
+import { useIntl } from "react-intl";
 import {
   DOMAINS,
   NOTIFICATION_KINDS_SIDE,
-} from '@commercetools-frontend/constants';
-import { useShowNotification } from '@commercetools-frontend/actions-global';
+} from "@commercetools-frontend/constants";
+import { useShowNotification } from "@commercetools-frontend/actions-global";
 import {
   CustomFormDetailPage,
   CustomFormModalPage,
   FormModalPage,
-} from '@commercetools-frontend/application-components';
-import { useIsAuthorized } from '@commercetools-frontend/permissions';
-import { CONTAINER, PERMISSIONS, emptyAttribute } from '../../constants';
-import ContainerForm from '../container-form';
-import { useCustomObjectUpdater } from '../../hooks/use-custom-object-connector/use-custom-object-connector';
-import messages from './messages';
+} from "@commercetools-frontend/application-components";
+import { useIsAuthorized } from "@commercetools-frontend/permissions";
+import { CONTAINER, PERMISSIONS, emptyAttribute } from "../../constants";
+import ContainerForm from "../container-form";
+import { useCustomObjectUpdater } from "../../hooks/use-custom-object-connector/use-custom-object-connector";
+import messages from "./messages";
 
 type Props = {
   onClose: () => void;
@@ -60,7 +60,7 @@ const CreateContainer: FC<Props> = ({ onClose }) => {
     <ContainerForm
       onSubmit={onSubmit}
       initialValues={{
-        key: '',
+        key: "",
         attributes: [emptyAttribute],
       }}
     >
@@ -94,6 +94,6 @@ const CreateContainer: FC<Props> = ({ onClose }) => {
     </ContainerForm>
   );
 };
-CreateContainer.displayName = 'CreateContainer';
+CreateContainer.displayName = "CreateContainer";
 
 export default CreateContainer;

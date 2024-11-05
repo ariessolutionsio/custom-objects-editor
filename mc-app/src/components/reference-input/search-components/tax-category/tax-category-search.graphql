@@ -1,0 +1,9 @@
+query TaxCategorySearch($where: String!, $limit: Int!, $offset: Int!) {
+  taxCategories(where: $where, limit: $limit, offset: $offset) {
+    results {
+      id
+      name
+      key
+    }
+  }
+}

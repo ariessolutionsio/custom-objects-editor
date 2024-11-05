@@ -1,32 +1,32 @@
-import React, { FC } from 'react';
-import { useIntl } from 'react-intl';
+import React, { FC } from "react";
+import { useIntl } from "react-intl";
 import {
   CustomFormDetailPage,
   CustomFormModalPage,
   FormModalPage,
   PageNotFound,
-} from '@commercetools-frontend/application-components';
+} from "@commercetools-frontend/application-components";
 import {
   NOTIFICATION_KINDS_SIDE,
   DOMAINS,
-} from '@commercetools-frontend/constants';
-import Text from '@commercetools-uikit/text';
-import { useShowNotification } from '@commercetools-frontend/actions-global';
-import { useParams } from 'react-router-dom';
-import LoadingSpinner from '@commercetools-uikit/loading-spinner';
-import { ContentNotification } from '@commercetools-uikit/notifications';
-import Spacings from '@commercetools-uikit/spacings';
-import { useIsAuthorized } from '@commercetools-frontend/permissions';
-import { CONTAINER, PERMISSIONS } from '../../constants';
+} from "@commercetools-frontend/constants";
+import Text from "@commercetools-uikit/text";
+import { useShowNotification } from "@commercetools-frontend/actions-global";
+import { useParams } from "react-router-dom";
+import LoadingSpinner from "@commercetools-uikit/loading-spinner";
+import { ContentNotification } from "@commercetools-uikit/notifications";
+import Spacings from "@commercetools-uikit/spacings";
+import { useIsAuthorized } from "@commercetools-frontend/permissions";
+import { CONTAINER, PERMISSIONS } from "../../constants";
 
-import { getErrorMessage } from '../../helpers';
-import ContainerForm from '../container-form';
+import { getErrorMessage } from "../../helpers";
+import ContainerForm from "../container-form";
 import {
   useCustomObjectDeleter,
   useCustomObjectFetcher,
   useCustomObjectUpdater,
-} from '../../hooks/use-custom-object-connector/use-custom-object-connector';
-import messages from './messages';
+} from "../../hooks/use-custom-object-connector/use-custom-object-connector";
+import messages from "./messages";
 
 type Props = {
   onClose: () => void;
@@ -161,6 +161,6 @@ const ContainerDetails: FC<Props> = ({ onClose }) => {
     </ContainerForm>
   );
 };
-ContainerDetails.displayName = 'ContainerDetails';
+ContainerDetails.displayName = "ContainerDetails";
 
 export default ContainerDetails;

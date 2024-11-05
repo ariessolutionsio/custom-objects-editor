@@ -1,0 +1,14 @@
+fragment CategoryToDisplay on Category {
+  name(locale: $locale)
+  key
+}
+
+query CategoryById($key: String, $locale: Locale) {
+  category(key: $key) {
+    ...CategoryToDisplay
+    stagedProductCount
+    ancestors {
+      ...CategoryToDisplay
+    }
+  }
+}

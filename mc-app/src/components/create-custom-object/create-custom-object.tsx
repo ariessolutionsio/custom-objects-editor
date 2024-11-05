@@ -1,21 +1,21 @@
-import React, { FC } from 'react';
-import { useIntl } from 'react-intl';
-import { useShowNotification } from '@commercetools-frontend/actions-global';
+import React, { FC } from "react";
+import { useIntl } from "react-intl";
+import { useShowNotification } from "@commercetools-frontend/actions-global";
 import {
   DOMAINS,
   NOTIFICATION_KINDS_SIDE,
-} from '@commercetools-frontend/constants';
+} from "@commercetools-frontend/constants";
 import {
   CustomFormDetailPage,
   CustomFormModalPage,
   FormModalPage,
-} from '@commercetools-frontend/application-components';
-import { useIsAuthorized } from '@commercetools-frontend/permissions';
-import { PERMISSIONS } from '../../constants';
-import CustomObjectForm from '../custom-object-form';
+} from "@commercetools-frontend/application-components";
+import { useIsAuthorized } from "@commercetools-frontend/permissions";
+import { PERMISSIONS } from "../../constants";
+import CustomObjectForm from "../custom-object-form";
 
-import { useCustomObjectUpdater } from '../../hooks/use-custom-object-connector/use-custom-object-connector';
-import messages from './messages';
+import { useCustomObjectUpdater } from "../../hooks/use-custom-object-connector/use-custom-object-connector";
+import messages from "./messages";
 
 type Props = {
   onClose: () => void;
@@ -53,8 +53,8 @@ const CreateCustomObject: FC<Props> = ({ onClose }) => {
   return (
     <CustomObjectForm
       initialValues={{
-        container: '',
-        key: '',
+        container: "",
+        key: "",
         value: {},
         attributes: [],
       }}
@@ -90,6 +90,6 @@ const CreateCustomObject: FC<Props> = ({ onClose }) => {
     </CustomObjectForm>
   );
 };
-CreateCustomObject.displayName = 'CreateCustomObject';
+CreateCustomObject.displayName = "CreateCustomObject";
 
 export default CreateCustomObject;

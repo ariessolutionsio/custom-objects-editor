@@ -1,0 +1,23 @@
+query PaymentSearch($where:String!, $limit: Int!, $offset: Int!, $locale: Locale!) {
+  payments(where:$where,limit: $limit, offset: $offset) {
+    results {
+      id
+      key
+      amountPlanned {
+        centAmount
+        currencyCode
+      }
+      customer {
+        email
+      }
+      paymentMethodInfo {
+        name(locale: $locale)
+      }
+      paymentStatus {
+        state {
+          key
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+query CustomerSearch($where:String!, $limit: Int!, $offset: Int!) {
+  customers (where: $where, limit: $limit
+    offset: $offset) {
+    results {
+      email,
+      firstName,
+      lastName,
+      id,
+      key,
+    }
+  }
+}

@@ -1,0 +1,7 @@
+query KeyValueDocumentById($id:String!) {
+  customObject(id: $id) {
+      id
+      key
+      container
+  }
+}

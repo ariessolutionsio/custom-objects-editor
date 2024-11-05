@@ -1,0 +1,11 @@
+query CartDiscountById($id: String!, $locale: Locale) {
+  cartDiscount(id: $id) {
+    id
+    name(locale: $locale)
+    key
+    isActive
+    value {
+      type
+    }
+  }
+}

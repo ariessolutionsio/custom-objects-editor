@@ -1,0 +1,10 @@
+query TypeSearch($where: String!, $limit: Int!, $offset: Int!, $locale: Locale!) {
+  typeDefinitions(where: $where, limit: $limit, offset: $offset) {
+    results {
+        id
+        name(locale:$locale)
+        key
+        resourceTypeIds
+    }
+  }
+}

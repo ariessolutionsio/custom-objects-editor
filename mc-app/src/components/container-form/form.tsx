@@ -1,19 +1,19 @@
-import React, { FC } from 'react';
-import get from 'lodash/get';
-import { FormattedMessage, useIntl } from 'react-intl';
-import { FieldArray, useFormik } from 'formik';
-import Card from '@commercetools-uikit/card';
-import CollapsiblePanel from '@commercetools-uikit/collapsible-panel';
-import Constraints from '@commercetools-uikit/constraints';
-import SecondaryButton from '@commercetools-uikit/secondary-button';
-import FieldLabel from '@commercetools-uikit/field-label';
-import TextField from '@commercetools-uikit/text-field';
-import { PlusBoldIcon } from '@commercetools-uikit/icons';
-import Spacings from '@commercetools-uikit/spacings';
-import { AttributeValue, emptyAttribute } from '../../constants';
-import AttributeGroup from './attribute-group';
-import messages from './messages';
-import styles from './form.module.css';
+import React, { FC } from "react";
+import get from "lodash/get";
+import { FormattedMessage, useIntl } from "react-intl";
+import { FieldArray, useFormik } from "formik";
+import Card from "@commercetools-uikit/card";
+import CollapsiblePanel from "@commercetools-uikit/collapsible-panel";
+import Constraints from "@commercetools-uikit/constraints";
+import SecondaryButton from "@commercetools-uikit/secondary-button";
+import FieldLabel from "@commercetools-uikit/field-label";
+import TextField from "@commercetools-uikit/text-field";
+import { PlusBoldIcon } from "@commercetools-uikit/icons";
+import Spacings from "@commercetools-uikit/spacings";
+import { AttributeValue, emptyAttribute } from "../../constants";
+import AttributeGroup from "./attribute-group";
+import messages from "./messages";
+import styles from "./form.module.css";
 
 type Formik = ReturnType<typeof useFormik<TFormValues>>;
 
@@ -24,10 +24,10 @@ type TFormValues = {
 
 type Props = {
   values: TFormValues;
-  touched: Formik['touched'];
-  errors: Formik['errors'];
-  handleBlur: Formik['handleBlur'];
-  handleChange: Formik['handleChange'];
+  touched: Formik["touched"];
+  errors: Formik["errors"];
+  handleBlur: Formik["handleBlur"];
+  handleChange: Formik["handleChange"];
 };
 
 const Form: FC<Props> = ({
@@ -49,7 +49,7 @@ const Form: FC<Props> = ({
         className={styles.panel}
       >
         <div className={styles.form}>
-          <Card type="flat" className={styles['field-card']}>
+          <Card type="flat" className={styles["field-card"]}>
             <TextField
               name="key"
               value={values.key}
@@ -117,6 +117,6 @@ const Form: FC<Props> = ({
     </Spacings.Stack>
   );
 };
-Form.displayName = 'Form';
+Form.displayName = "Form";
 
 export default Form;

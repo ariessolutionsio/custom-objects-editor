@@ -1,36 +1,36 @@
-import React, { lazy, ReactNode } from 'react';
-import { Link, Switch, useHistory, useRouteMatch } from 'react-router-dom';
-import { SuspendedRoute } from '@commercetools-frontend/application-shell';
-import { FormattedMessage, useIntl } from 'react-intl';
-import SecondaryButton from '@commercetools-uikit/secondary-button';
-import Card from '@commercetools-uikit/card';
-import Constraints from '@commercetools-uikit/constraints';
-import { customProperties } from '@commercetools-uikit/design-system';
-import { PlusBoldIcon } from '@commercetools-uikit/icons';
-import SelectInput from '@commercetools-uikit/select-input';
-import Grid from '@commercetools-uikit/grid';
-import Spacings from '@commercetools-uikit/spacings';
-import Text from '@commercetools-uikit/text';
+import React, { lazy, ReactNode } from "react";
+import { Link, Switch, useHistory, useRouteMatch } from "react-router-dom";
+import { SuspendedRoute } from "@commercetools-frontend/application-shell";
+import { FormattedMessage, useIntl } from "react-intl";
+import SecondaryButton from "@commercetools-uikit/secondary-button";
+import Card from "@commercetools-uikit/card";
+import Constraints from "@commercetools-uikit/constraints";
+import { customProperties } from "@commercetools-uikit/design-system";
+import { PlusBoldIcon } from "@commercetools-uikit/icons";
+import SelectInput from "@commercetools-uikit/select-input";
+import Grid from "@commercetools-uikit/grid";
+import Spacings from "@commercetools-uikit/spacings";
+import Text from "@commercetools-uikit/text";
 import {
   InfoMainPage,
   PageNotFound,
-} from '@commercetools-frontend/application-components';
-import { Pagination } from '@commercetools-uikit/pagination';
+} from "@commercetools-frontend/application-components";
+import { Pagination } from "@commercetools-uikit/pagination";
 import {
   useDataTableSortingState,
   usePaginationState,
-} from '@commercetools-uikit/hooks';
-import { ContentNotification } from '@commercetools-uikit/notifications';
-import LoadingSpinner from '@commercetools-uikit/loading-spinner';
-import { CONTAINER, SORT_OPTIONS } from '../../constants';
-import { getErrorMessage } from '../../helpers';
-import { useCustomObjectsFetcher } from '../../hooks/use-custom-object-connector/use-custom-object-connector';
-import { FIELDS } from './constants';
-import messages from './messages';
+} from "@commercetools-uikit/hooks";
+import { ContentNotification } from "@commercetools-uikit/notifications";
+import LoadingSpinner from "@commercetools-uikit/loading-spinner";
+import { CONTAINER, SORT_OPTIONS } from "../../constants";
+import { getErrorMessage } from "../../helpers";
+import { useCustomObjectsFetcher } from "../../hooks/use-custom-object-connector/use-custom-object-connector";
+import { FIELDS } from "./constants";
+import messages from "./messages";
 
-const CreateContainer = lazy(() => import('../create-container'));
+const CreateContainer = lazy(() => import("../create-container"));
 
-const ContainerDetails = lazy(() => import('../container-details'));
+const ContainerDetails = lazy(() => import("../container-details"));
 
 const sortOptions: Array<{ label: ReactNode; value: string }> = [
   {
@@ -63,7 +63,7 @@ const ContainerList = () => {
 
   const tableSorting = useDataTableSortingState({
     key: FIELDS.KEY,
-    order: 'asc',
+    order: "asc",
   });
 
   const { customObjectsPaginatedResult, loading, error, refetch } =
@@ -76,7 +76,7 @@ const ContainerList = () => {
 
   const handleSortChange = (event: any) => {
     const { value } = event.target;
-    const sorting = value.split(' ');
+    const sorting = value.split(" ");
     tableSorting.onChange(sorting[0], sorting[1]);
   };
 
@@ -133,7 +133,7 @@ const ContainerList = () => {
           <Spacings.Inline justifyContent="flex-end">
             <Constraints.Horizontal max={6}>
               <SelectInput
-                value={tableSorting.value.key + ' ' + tableSorting.value.order}
+                value={tableSorting.value.key + " " + tableSorting.value.order}
                 onChange={handleSortChange}
                 options={sortOptions}
               />
@@ -206,6 +206,6 @@ const ContainerList = () => {
     </InfoMainPage>
   );
 };
-ContainerList.displayName = 'ContainerList';
+ContainerList.displayName = "ContainerList";
 
 export default ContainerList;

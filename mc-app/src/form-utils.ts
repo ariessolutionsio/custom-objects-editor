@@ -1,8 +1,6 @@
-import { IntlShape, MessageDescriptor } from 'react-intl';
-import {
-  AttributeValue,
-} from './constants';
-import { getInitialValueByType, getValidationSpecification } from './helpers';
+import { IntlShape, MessageDescriptor } from "react-intl";
+import { AttributeValue } from "./constants";
+import { getInitialValueByType, getValidationSpecification } from "./helpers";
 
 export const getAttributeValues = (
   attributes: Array<AttributeValue>,
@@ -26,7 +24,7 @@ export const getAttributeValues = (
     {}
   );
 };
-  
+
 export const getAttributeValidation = (
   attributes: Array<AttributeValue>,
   languages: Array<string>,

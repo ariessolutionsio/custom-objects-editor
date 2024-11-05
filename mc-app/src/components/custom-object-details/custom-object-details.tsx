@@ -1,39 +1,39 @@
-import React, { FC } from 'react';
-import { useIntl } from 'react-intl';
+import React, { FC } from "react";
+import { useIntl } from "react-intl";
 import {
   CustomFormDetailPage,
   CustomFormModalPage,
   FormModalPage,
   PageNotFound,
-} from '@commercetools-frontend/application-components';
+} from "@commercetools-frontend/application-components";
 import {
   NOTIFICATION_KINDS_SIDE,
   DOMAINS,
-} from '@commercetools-frontend/constants';
-import Text from '@commercetools-uikit/text';
-import { useShowNotification } from '@commercetools-frontend/actions-global';
-import { useParams } from 'react-router-dom';
-import LoadingSpinner from '@commercetools-uikit/loading-spinner';
-import { ContentNotification } from '@commercetools-uikit/notifications';
-import Spacings from '@commercetools-uikit/spacings';
-import { reduce, isPlainObject, get } from 'lodash';
-import { useApplicationContext } from '@commercetools-frontend/application-shell-connectors';
-import { useIsAuthorized } from '@commercetools-frontend/permissions';
-import { PERMISSIONS, AttributeValue } from '../../constants';
-import { TCustomObject } from '../../types/generated/ctp';
-import { getErrorMessage } from '../../helpers';
+} from "@commercetools-frontend/constants";
+import Text from "@commercetools-uikit/text";
+import { useShowNotification } from "@commercetools-frontend/actions-global";
+import { useParams } from "react-router-dom";
+import LoadingSpinner from "@commercetools-uikit/loading-spinner";
+import { ContentNotification } from "@commercetools-uikit/notifications";
+import Spacings from "@commercetools-uikit/spacings";
+import { reduce, isPlainObject, get } from "lodash";
+import { useApplicationContext } from "@commercetools-frontend/application-shell-connectors";
+import { useIsAuthorized } from "@commercetools-frontend/permissions";
+import { PERMISSIONS, AttributeValue } from "../../constants";
+import { TCustomObject } from "../../types/generated/ctp";
+import { getErrorMessage } from "../../helpers";
 import CustomObjectForm, {
   Items,
-} from '../custom-object-form/custom-object-form';
-import { getAttributeValues } from '../../form-utils';
-import { useContainerContext } from '../../context/container-context';
-import { Value } from '../custom-object-form/constants';
+} from "../custom-object-form/custom-object-form";
+import { getAttributeValues } from "../../form-utils";
+import { useContainerContext } from "../../context/container-context";
+import { Value } from "../custom-object-form/constants";
 import {
   useCustomObjectDeleter,
   useCustomObjectFetcher,
   useCustomObjectUpdater,
-} from '../../hooks/use-custom-object-connector/use-custom-object-connector';
-import messages from './messages';
+} from "../../hooks/use-custom-object-connector/use-custom-object-connector";
+import messages from "./messages";
 
 type Props = {
   onClose: () => void;
@@ -164,7 +164,7 @@ const CustomObjectDetails: FC<Props> = ({ onClose }) => {
         showNotification({
           kind: NOTIFICATION_KINDS_SIDE.error,
           domain: DOMAINS.SIDE,
-          text: message
+          text: message,
         });
       },
     });
@@ -176,7 +176,7 @@ const CustomObjectDetails: FC<Props> = ({ onClose }) => {
       {(formProps) => {
         return (
           <CustomFormModalPage
-            title={key || ''}
+            title={key || ""}
             onClose={onClose}
             isOpen
             formControls={
@@ -206,6 +206,6 @@ const CustomObjectDetails: FC<Props> = ({ onClose }) => {
     </CustomObjectForm>
   );
 };
-CustomObjectDetails.displayName = 'ContainerDetails';
+CustomObjectDetails.displayName = "ContainerDetails";
 
 export default CustomObjectDetails;

@@ -1,0 +1,7 @@
+query ProductTypeByKey($key: String!) {
+  productType(key: $key) {
+    id
+    name
+    key
+  }
+}

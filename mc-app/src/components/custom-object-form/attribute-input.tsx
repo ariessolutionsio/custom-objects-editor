@@ -1,22 +1,22 @@
-import React, { FC } from 'react';
-import get from 'lodash/get';
-import map from 'lodash/map';
-import { useApplicationContext } from '@commercetools-frontend/application-shell-connectors';
-
-import CheckboxInput from '@commercetools-uikit/checkbox-input';
-import DateInput from '@commercetools-uikit/date-input';
-import TimeInput from '@commercetools-uikit/time-input';
-import DateTimeInput from '@commercetools-uikit/date-time-input';
-import LocalizedTextInput from '@commercetools-uikit/localized-text-input';
-import MoneyInput from '@commercetools-uikit/money-input';
-import NumberInput from '@commercetools-uikit/number-input';
-import TextInput from '@commercetools-uikit/text-input';
-import SelectInput from '@commercetools-uikit/select-input';
-import { ErrorMessage } from '@commercetools-uikit/messages';
-import Spacings from '@commercetools-uikit/spacings';
-import { TYPES } from '../../constants';
-import nestedStyles from '../container-form/nested-attributes.module.css';
-import AttributeField from './attribute-field'; // eslint-disable-line import/no-cycle
+import React, { FC } from "react";
+import get from "lodash/get";
+import map from "lodash/map";
+import { useApplicationContext } from "@commercetools-frontend/application-shell-connectors";
+import CheckboxInput from "@commercetools-uikit/checkbox-input";
+import DateInput from "@commercetools-uikit/date-input";
+import TimeInput from "@commercetools-uikit/time-input";
+import DateTimeInput from "@commercetools-uikit/date-time-input";
+import LocalizedTextInput from "@commercetools-uikit/localized-text-input";
+import MoneyInput from "@commercetools-uikit/money-input";
+import NumberInput from "@commercetools-uikit/number-input";
+import TextInput from "@commercetools-uikit/text-input";
+import SelectInput from "@commercetools-uikit/select-input";
+import { ErrorMessage } from "@commercetools-uikit/messages";
+import Spacings from "@commercetools-uikit/spacings";
+import { TYPES } from "../../constants";
+import nestedStyles from "../container-form/nested-attributes.module.css";
+import AttributeField from "./attribute-field"; // eslint-disable-line import/no-cycle
+import ReferenceInput from "../reference-input";
 
 type Props = {
   type: string;
@@ -60,8 +60,8 @@ const AttributeInput: FC<Props> = ({
   const { currencies, dataLocale, timeZone } = useApplicationContext(
     (context) => ({
       currencies: context.project?.currencies ?? [],
-      dataLocale: context.dataLocale ?? '',
-      timeZone: context.user?.timeZone ?? '',
+      dataLocale: context.dataLocale ?? "",
+      timeZone: context.user?.timeZone ?? "",
     })
   );
 
@@ -96,7 +96,9 @@ const AttributeInput: FC<Props> = ({
             onBlur={onBlur}
           />
           {LocalizedTextInput.isTouched(touched) && errors?.defaultMessage && (
-            <ErrorMessage data-testid="field-error">{errors.defaultMessage}</ErrorMessage>
+            <ErrorMessage data-testid="field-error">
+              {errors.defaultMessage}
+            </ErrorMessage>
           )}
         </Spacings.Stack>
       );
@@ -151,7 +153,7 @@ const AttributeInput: FC<Props> = ({
           />
           {touched && errors && (
             <ErrorMessage data-testid="field-error">
-              {get(errors, 'amount')}
+              {get(errors, "amount")}
             </ErrorMessage>
           )}
         </Spacings.Stack>
@@ -231,20 +233,21 @@ const AttributeInput: FC<Props> = ({
     }
 
     case TYPES.Reference: {
-      const referenceBy: any = get(reference, 'by');
-      const refValue = get(value, referenceBy, '');
+      const referenceBy: any = get(reference, "by");
+      // const refValue = get(value, referenceBy, "");
       const refTouched = get(touched, referenceBy);
       const refErrors = get(errors, referenceBy);
       const hasError = !!(refTouched && refErrors);
       return (
         <Spacings.Stack scale="xs">
-          <TextInput
+          <ReferenceInput
             data-testid="field-type-reference"
-            name={`${name}.${referenceBy}`}
-            value={refValue}
-            hasError={hasError}
+            name={name}
+            value={value}
             onChange={onChange}
             onBlur={onBlur}
+            hasError={hasError}
+            reference={reference}
           />
           {hasError && (
             <ErrorMessage data-testid="field-error">{refErrors}</ErrorMessage>
@@ -288,6 +291,6 @@ const AttributeInput: FC<Props> = ({
       return null;
   }
 };
-AttributeInput.displayName = 'AttributeInput';
+AttributeInput.displayName = "AttributeInput";
 
 export default AttributeInput;

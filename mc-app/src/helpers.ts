@@ -1,28 +1,23 @@
 import {
   transformLocalizedStringToLocalizedField,
   transformLocalizedFieldToLocalizedString,
-} from '@commercetools-frontend/l10n';
-import { ApolloError, type ServerError } from '@apollo/client';
-import get from 'lodash/get';
-import isNil from 'lodash/isNil';
-import reduce from 'lodash/reduce';
-import LocalizedTextInput from '@commercetools-uikit/localized-text-input';
-import { IntlShape, MessageDescriptor } from 'react-intl';
-import { addMethod, array, object, string, number, date, boolean } from 'yup';
-import type { TChannel } from './types/generated/ctp';
-import {
-  AttributeValue,
-  Reference,
-  TYPES,
-  TYPES_ENUM,
-} from './constants';
-import { getAttributeValues, getAttributeValidation } from './form-utils';
+} from "@commercetools-frontend/l10n";
+import { ApolloError, type ServerError } from "@apollo/client";
+import get from "lodash/get";
+import isNil from "lodash/isNil";
+import reduce from "lodash/reduce";
+import LocalizedTextInput from "@commercetools-uikit/localized-text-input";
+import { IntlShape, MessageDescriptor } from "react-intl";
+import { addMethod, array, object, string, number, date, boolean } from "yup";
+import type { TChannel } from "./types/generated/ctp";
+import { AttributeValue, Reference, TYPES, TYPES_ENUM } from "./constants";
+import { getAttributeValues, getAttributeValidation } from "./form-utils";
 
 export const getErrorMessage = (error: ApolloError) =>
-  error.graphQLErrors?.map((e) => e.message).join('\n') || error.message;
+  error.graphQLErrors?.map((e) => e.message).join("\n") || error.message;
 
 const isServerError = (
-  error: ApolloError['networkError']
+  error: ApolloError["networkError"]
 ): error is ServerError => {
   return Boolean((error as ServerError)?.result);
 };
@@ -58,7 +53,7 @@ const convertAction = (action: any): any => {
   const { action: actionName, ...actionPayload } = action;
   return {
     [actionName]:
-      actionName === 'changeName' && isChangeNameActionPayload(actionPayload)
+      actionName === "changeName" && isChangeNameActionPayload(actionPayload)
         ? getNameFromPayload(actionPayload)
         : actionPayload,
   };
@@ -78,7 +73,6 @@ export const convertToActionData = (draft: Partial<TChannel>) => ({
   name: transformLocalizedFieldToLocalizedString(draft.nameAllLocales || []),
 });
 
-
 export const getValueByType = (
   type: TYPES_ENUM,
   attributes: Array<AttributeValue> | undefined,
@@ -94,7 +88,7 @@ export const getValueByType = (
     case TYPES.DateTime:
     case TYPES.Enum:
     case TYPES.LocalizedEnum:
-      return '';
+      return "";
 
     case TYPES.LocalizedString:
       return LocalizedTextInput.createLocalizedString(languages);
@@ -104,7 +98,7 @@ export const getValueByType = (
 
     case TYPES.Money:
       return {
-        amount: '',
+        amount: "",
         currencyCode: currencies[0],
       };
 
@@ -112,7 +106,7 @@ export const getValueByType = (
       return (
         reference && {
           typeId: reference.type,
-          [reference.by]: '',
+          [reference.by]: "",
         }
       );
 
@@ -146,16 +140,16 @@ export const getValidation = (
 ) => {
   let validation: any;
   switch (method) {
-    case 'string':
+    case "string":
       validation = string();
       break;
-    case 'number':
+    case "number":
       validation = number();
       break;
-    case 'date':
+    case "date":
       validation = date();
       break;
-    case 'boolean':
+    case "boolean":
       validation = boolean();
       break;
     default:
@@ -174,9 +168,9 @@ export const getLocalizedStringValidation = (
   required: boolean,
   messages: { [key: string]: MessageDescriptor }
 ) => {
-  addMethod(object, 'atLeastOneOf', function (list) {
+  addMethod(object, "atLeastOneOf", function (list) {
     return this.test({
-      name: 'atLeastOneOf',
+      name: "atLeastOneOf",
       message: messages.required as any, //<FormattedMessage {...messages.required} />,
       exclusive: true,
       test: (value) =>
@@ -205,31 +199,31 @@ export const getValidationByType = (
     case TYPES.Enum:
     case TYPES.LocalizedEnum:
     case TYPES.Time:
-      return getValidation('string', required, messages, intl);
+      return getValidation("string", required, messages, intl);
 
     case TYPES.LocalizedString:
       return getLocalizedStringValidation(languages, required, messages);
 
     case TYPES.Number:
-      return getValidation('number', required, messages, intl);
+      return getValidation("number", required, messages, intl);
 
     case TYPES.Boolean:
-      return getValidation('boolean', required, messages, intl);
+      return getValidation("boolean", required, messages, intl);
 
     case TYPES.Money:
       return object({
-        amount: getValidation('string', required, messages, intl),
+        amount: getValidation("string", required, messages, intl),
         currencyCode: string(),
       });
 
     case TYPES.Date:
     case TYPES.DateTime:
-      return getValidation('date', required, messages, intl);
+      return getValidation("date", required, messages, intl);
 
     case TYPES.Reference:
       return object({
         typeId: string(),
-        [reference.by]: getValidation('string', required, messages, intl),
+        [reference.by]: getValidation("string", required, messages, intl),
       });
 
     case TYPES.Object:

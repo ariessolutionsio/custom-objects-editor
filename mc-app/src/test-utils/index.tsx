@@ -1,21 +1,25 @@
-import type { ReactElement } from 'react';
-import { createApolloClient } from '@commercetools-frontend/application-shell';
+import type { ReactElement } from "react";
+import { createApolloClient } from "@commercetools-frontend/application-shell";
 import {
   renderApp,
   renderAppWithRedux,
   type TRenderAppOptions,
   type TRenderAppWithReduxOptions,
-} from '@commercetools-frontend/application-shell/test-utils';
-import kebabCase from 'lodash/kebabCase';
-import map from 'lodash/map';
-import reduce from 'lodash/reduce';
-import times from 'lodash/times';
-import faker from 'faker';
-import { entryPointUriPath, CONTAINER, REFERENCE_BY,
+} from "@commercetools-frontend/application-shell/test-utils";
+import kebabCase from "lodash/kebabCase";
+import map from "lodash/map";
+import reduce from "lodash/reduce";
+import times from "lodash/times";
+import faker from "faker";
+import {
+  entryPointUriPath,
+  CONTAINER,
+  REFERENCE_BY,
   REFERENCE_TYPES,
-  TYPES, } from '../constants';
-import ApplicationRoutes from '../routes';
-import { getAttributeValues } from '../form-utils';
+  TYPES,
+} from "../constants";
+import ApplicationRoutes from "../routes";
+import { getAttributeValues } from "../form-utils";
 
 const mergeWithDefaultOptions = (
   options: Partial<TRenderAppOptions> | Partial<TRenderAppWithReduxOptions> = {}
@@ -130,7 +134,7 @@ export const generateContainerContext = (
     hasContainers: true,
     containers,
     where: `container in (${map(containers, ({ key }) => `"${key}"`).join(
-      ','
+      ","
     )})`,
   };
 };
@@ -159,5 +163,5 @@ export {
   renderApplicationWithRoutesAndRedux,
 };
 
-export { default as random } from './builder';
-export * from './types';
+export { default as random } from "./builder";
+export * from "./types";

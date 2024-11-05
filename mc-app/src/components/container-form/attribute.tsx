@@ -1,18 +1,18 @@
-import React, { FC } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
-import SecondaryIconButton from '@commercetools-uikit/secondary-icon-button';
-import SelectField from '@commercetools-uikit/select-field';
-import IconButton from '@commercetools-uikit/icon-button';
-import { BinLinearIcon, InformationIcon } from '@commercetools-uikit/icons';
-import CheckboxInput from '@commercetools-uikit/checkbox-input';
-import TextField from '@commercetools-uikit/text-field';
-import Spacings from '@commercetools-uikit/spacings';
-import Text from '@commercetools-uikit/text';
-import Tooltip from '@commercetools-uikit/tooltip';
-import { useFormik } from 'formik';
-import { ATTRIBUTES, AttributeValue, TYPES } from '../../constants';
-import messages from './messages';
-import styles from './attribute.mod.css';
+import React, { FC } from "react";
+import { FormattedMessage, useIntl } from "react-intl";
+import SecondaryIconButton from "@commercetools-uikit/secondary-icon-button";
+import SelectField from "@commercetools-uikit/select-field";
+import IconButton from "@commercetools-uikit/icon-button";
+import { BinLinearIcon, InformationIcon } from "@commercetools-uikit/icons";
+import CheckboxInput from "@commercetools-uikit/checkbox-input";
+import TextField from "@commercetools-uikit/text-field";
+import Spacings from "@commercetools-uikit/spacings";
+import Text from "@commercetools-uikit/text";
+import Tooltip from "@commercetools-uikit/tooltip";
+import { useFormik } from "formik";
+import { ATTRIBUTES, AttributeValue, TYPES } from "../../constants";
+import messages from "./messages";
+import styles from "./attribute.mod.css";
 
 type Formik = ReturnType<typeof useFormik<AttributeValue>>;
 
@@ -70,10 +70,10 @@ const typeOptions = [
 type Props = {
   name: string;
   value: AttributeValue;
-  touched: Formik['touched'];
+  touched: Formik["touched"];
   errors?: any;
-  handleChange: Formik['handleChange'];
-  handleBlur: Formik['handleBlur'];
+  handleChange: Formik["handleChange"];
+  handleBlur: Formik["handleBlur"];
   remove: () => void;
   removeDisabled?: boolean;
   isDisplayed?: boolean;
@@ -101,7 +101,6 @@ const Attribute: FC<Props> = ({
   //     });
   //   }
   // }, [value.type]);
-
 
   return (
     <Spacings.Inline alignItems="center" justifyContent="space-between">
@@ -182,6 +181,6 @@ const Attribute: FC<Props> = ({
     </Spacings.Inline>
   );
 };
-Attribute.displayName = 'Attribute';
+Attribute.displayName = "Attribute";
 
 export default Attribute;

@@ -1,20 +1,20 @@
-import { FC } from 'react';
-import get from 'lodash/get';
-import { useIntl } from 'react-intl';
-import { FieldArray } from 'formik';
-import { useApplicationContext } from '@commercetools-frontend/application-shell-connectors';
-import SecondaryButton from '@commercetools-uikit/secondary-button';
-import SecondaryIconButton from '@commercetools-uikit/secondary-icon-button';
-import Card from '@commercetools-uikit/card';
-import Constraints from '@commercetools-uikit/constraints';
-import { BinLinearIcon, PlusBoldIcon } from '@commercetools-uikit/icons';
-import Spacings from '@commercetools-uikit/spacings';
-import { TYPES } from '../../constants';
-import { getValueByType } from '../../helpers';
-import AttributeLabel from './attribute-label';
-import AttributeInput from './attribute-input';
-import messages from './messages';
-import styles from './attribute-field.module.css';
+import { FC } from "react";
+import get from "lodash/get";
+import { useIntl } from "react-intl";
+import { FieldArray } from "formik";
+import { useApplicationContext } from "@commercetools-frontend/application-shell-connectors";
+import SecondaryButton from "@commercetools-uikit/secondary-button";
+import SecondaryIconButton from "@commercetools-uikit/secondary-icon-button";
+import Card from "@commercetools-uikit/card";
+import Constraints from "@commercetools-uikit/constraints";
+import { BinLinearIcon, PlusBoldIcon } from "@commercetools-uikit/icons";
+import Spacings from "@commercetools-uikit/spacings";
+import { TYPES } from "../../constants";
+import { getValueByType } from "../../helpers";
+import AttributeLabel from "./attribute-label";
+import AttributeInput from "./attribute-input";
+import messages from "./messages";
+import styles from "./attribute-field.module.css";
 
 type Props = {
   type: any;
@@ -54,7 +54,7 @@ const AttributeField: FC<Props> = ({
     (context) => ({
       languages: context.project?.languages ?? [],
       currencies: context.project?.currencies ?? [],
-      dataLocale: context.dataLocale ?? '',
+      dataLocale: context.dataLocale ?? "",
     })
   );
   const emptyValue = getValueByType(
@@ -67,11 +67,11 @@ const AttributeField: FC<Props> = ({
   const selectOptions =
     type === TYPES.LocalizedEnum
       ? options?.map((option) => {
-        return {
-          value: option.value,
-          label: option.label[dataLocale],
-        };
-      })
+          return {
+            value: option.value,
+            label: option.label[dataLocale],
+          };
+        })
       : options;
 
   return (
@@ -99,7 +99,7 @@ const AttributeField: FC<Props> = ({
               {value.map((val: any, index: number) => (
                 <Card
                   key={index}
-                  theme={isNestedSet ? 'light' : 'dark'}
+                  theme={isNestedSet ? "light" : "dark"}
                   type="flat"
                 >
                   <Spacings.Inline alignItems="center">
@@ -165,6 +165,6 @@ const AttributeField: FC<Props> = ({
     </>
   );
 };
-AttributeField.displayName = 'AttributeField';
+AttributeField.displayName = "AttributeField";
 
 export default AttributeField;

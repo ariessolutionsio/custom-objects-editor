@@ -1,0 +1,8 @@
+query ChannelById($id: String!, $locale: Locale!) {
+  channel(id: $id) {
+    id
+    name(locale: $locale)
+    key
+    roles
+  }
+}

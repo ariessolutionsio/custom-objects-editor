@@ -1,0 +1,11 @@
+query ShoppingListById($id: String!, $locale: Locale!) {
+  shoppingList(id: $id) {
+    id
+    name(locale: $locale)
+    key
+    slug(locale: $locale)
+    customer {
+      email
+    }
+  }
+}

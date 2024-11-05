@@ -1,13 +1,13 @@
-import React from 'react';
-import { shallow } from 'enzyme';
-import faker from 'faker';
-import camelCase from 'lodash/camelCase';
-import kebabCase from 'lodash/kebabCase';
-import times from 'lodash/times';
-import { Formik } from 'formik';
-import * as AppContext from '@commercetools-frontend/application-shell-connectors';
-import { TYPES } from '../../constants';
-import CustomObjectForm from './custom-object-form';
+import React from "react";
+import { shallow } from "enzyme";
+import faker from "faker";
+import camelCase from "lodash/camelCase";
+import kebabCase from "lodash/kebabCase";
+import times from "lodash/times";
+import { Formik } from "formik";
+import * as AppContext from "@commercetools-frontend/application-shell-connectors";
+import { TYPES } from "../../constants";
+import CustomObjectForm from "./custom-object-form";
 
 const project = {
   currencies: times(2, () => faker.finance.currencyCode()),
@@ -70,33 +70,33 @@ const mocks = {
 const loadCustomObjectForm = (customObject) =>
   shallow(<CustomObjectForm {...mocks} customObject={customObject} />);
 
-describe('custom object form', () => {
+describe("custom object form", () => {
   beforeAll(() => {
-    jest.spyOn(AppContext, 'useApplicationContext').mockImplementation(() => ({
+    jest.spyOn(AppContext, "useApplicationContext").mockImplementation(() => ({
       project,
     }));
   });
 
-  it('when no custom object given, should initialize form with empty values', () => {
+  it("when no custom object given, should initialize form with empty values", () => {
     const wrapper = loadCustomObjectForm();
-    expect(wrapper.find(Formik).prop('initialValues')).toEqual({
-      container: '',
-      key: '',
+    expect(wrapper.find(Formik).prop("initialValues")).toEqual({
+      container: "",
+      key: "",
       value: {},
     });
   });
 
-  it('when custom object value matches container schema, should initialize form with custom object', () => {
+  it("when custom object value matches container schema, should initialize form with custom object", () => {
     const customObject = {
       container: container.key,
       key: kebabCase(faker.random.words()),
       value,
     };
     const wrapper = loadCustomObjectForm(customObject);
-    expect(wrapper.find(Formik).prop('initialValues').value).toEqual(value);
+    expect(wrapper.find(Formik).prop("initialValues").value).toEqual(value);
   });
 
-  it('when custom object value does not match container schema with missing attribute, should initialize form with missing attribute', () => {
+  it("when custom object value does not match container schema with missing attribute, should initialize form with missing attribute", () => {
     const stringValue = faker.random.words();
     const customObject = {
       container: container.key,
@@ -106,15 +106,15 @@ describe('custom object form', () => {
       },
     };
     const wrapper = loadCustomObjectForm(customObject);
-    expect(wrapper.find(Formik).prop('initialValues').value).toEqual({
+    expect(wrapper.find(Formik).prop("initialValues").value).toEqual({
       [camelCase(ATTRIBUTES.String)]: stringValue,
       [camelCase(ATTRIBUTES.Object)]: {
-        [camelCase(ATTRIBUTES.Nested)]: '',
+        [camelCase(ATTRIBUTES.Nested)]: "",
       },
     });
   });
 
-  it('when custom object value does not match container schema with extra attribute, should initialize form without extra attribute', () => {
+  it("when custom object value does not match container schema with extra attribute, should initialize form without extra attribute", () => {
     const customObject = {
       container: container.key,
       key: kebabCase(faker.random.words()),
@@ -127,10 +127,10 @@ describe('custom object form', () => {
       },
     };
     const wrapper = loadCustomObjectForm(customObject);
-    expect(wrapper.find(Formik).prop('initialValues').value).toEqual(value);
+    expect(wrapper.find(Formik).prop("initialValues").value).toEqual(value);
   });
 
-  it('when form submitted, should invoke submit callback with submitted custom object value', () => {
+  it("when form submitted, should invoke submit callback with submitted custom object value", () => {
     const customObject = {
       container: JSON.stringify(container),
       key: kebabCase(faker.random.words()),

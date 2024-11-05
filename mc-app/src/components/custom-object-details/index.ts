@@ -1,1 +1,1 @@
-export { default } from './custom-object-details';
+export { default } from "./custom-object-details";

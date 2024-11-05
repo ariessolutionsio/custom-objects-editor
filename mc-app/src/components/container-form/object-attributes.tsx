@@ -1,16 +1,16 @@
-import React, { FC } from 'react';
-import get from 'lodash/get';
-import { FormattedMessage, useIntl } from 'react-intl';
-import { FieldArray, useFormik } from 'formik';
-import Constraints from '@commercetools-uikit/constraints';
-import SecondaryButton from '@commercetools-uikit/secondary-button';
-import FieldLabel from '@commercetools-uikit/field-label';
-import { PlusBoldIcon } from '@commercetools-uikit/icons';
-import Spacings from '@commercetools-uikit/spacings';
-import AttributeGroup from './attribute-group';
-import messages from './messages';
-import styles from './nested-attributes.module.css';
-import { TFormValue as Reference } from './reference-attribute';
+import React, { FC } from "react";
+import get from "lodash/get";
+import { FormattedMessage, useIntl } from "react-intl";
+import { FieldArray, useFormik } from "formik";
+import Constraints from "@commercetools-uikit/constraints";
+import SecondaryButton from "@commercetools-uikit/secondary-button";
+import FieldLabel from "@commercetools-uikit/field-label";
+import { PlusBoldIcon } from "@commercetools-uikit/icons";
+import Spacings from "@commercetools-uikit/spacings";
+import AttributeGroup from "./attribute-group";
+import messages from "./messages";
+import styles from "./nested-attributes.module.css";
+import { TFormValue as Reference } from "./reference-attribute";
 
 type TFormValue = {
   name?: string;
@@ -28,10 +28,10 @@ type Props = {
   isDisplayed?: boolean;
   name: string;
   value: Array<TFormValue>;
-  touched: Formik['touched'];
-  errors: Formik['errors'];
-  handleBlur: Formik['handleBlur'];
-  handleChange: Formik['handleChange'];
+  touched: Formik["touched"];
+  errors: Formik["errors"];
+  handleBlur: Formik["handleBlur"];
+  handleChange: Formik["handleChange"];
 };
 
 const ObjectAttributes: FC<Props> = ({
@@ -66,8 +66,8 @@ const ObjectAttributes: FC<Props> = ({
                 iconLeft={<PlusBoldIcon />}
                 onClick={() =>
                   push({
-                    name: '',
-                    type: '',
+                    name: "",
+                    type: "",
                     set: false,
                     required: false,
                   })
@@ -95,6 +95,6 @@ const ObjectAttributes: FC<Props> = ({
     </div>
   );
 };
-ObjectAttributes.displayName = 'ObjectAttributes';
+ObjectAttributes.displayName = "ObjectAttributes";
 
 export default ObjectAttributes;

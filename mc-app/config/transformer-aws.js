@@ -1,5 +1,5 @@
-import fs from 'fs';
-import path from 'path';
+import fs from "fs";
+import path from "path";
 
 const generateLambda = (headers) =>
   `exports.handler = (event, context, callback) => {
@@ -8,7 +8,7 @@ const generateLambda = (headers) =>
   const { headers } = response;
   const rewrite = uri.includes('login') || uri.includes('logout');
 
-  ${headers.join('\n\t')};
+  ${headers.join("\n\t")};
 
   const rewriteResponse = {
     status: '200',
@@ -37,17 +37,17 @@ To do so, you need to first register the custom application in Merchant Center >
 module.exports = ({ headers }) => {
   const setHeaders = Object.entries({
     ...headers,
-    'Cache-Control': 'no-cache',
+    "Cache-Control": "no-cache",
   }).map(
     ([key, value]) =>
       `headers["${key.toLowerCase()}"] = [{key: "${key}", value: "${value}"}];`
   );
 
   fs.writeFileSync(
-    path.join(__dirname, '../lambda.js'),
+    path.join(__dirname, "../lambda.js"),
     generateLambda(setHeaders),
     {
-      encoding: 'utf8',
+      encoding: "utf8",
     }
   );
 };

@@ -1,7 +1,3 @@
-<center>
-<img alt="Aries Labs" width="300" src="docs/assets/Labs-For-Dk_BG.svg">
-</center>
-
 
 # Custom Object Editor
 
@@ -15,6 +11,19 @@ This project is a commercetools custom application that allows the end user to c
 
 ## Getting Started
 
+### Prerequisites
+.env file
+```
+ENABLE_NEW_JSX_TRANSFORM="true"
+FAST_REFRESH="true"
+CLOUD_IDENTIFIER="gcp-us"
+CUSTOM_APPLICATION_ID=
+APPLICATION_URL="https://todo.com"
+INITIAL_PROJECT_KEY=todo
+ENTRY_POINT_URI_PATH="custom-object-editor"
+CUSTOM_OBJECT_ENDPOINT= // Only required if you want to use a custom endpoint. URL to your validation app endpoint
+USE_CUSTOM_OBJECT_ENTPOINT="false"
+```
 
 
 ## Contributing

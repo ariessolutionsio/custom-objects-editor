@@ -1,0 +1,10 @@
+query StateByKey($key: String!, $locale: Locale!) {
+  state(key: $key) {
+    id
+    name(locale: $locale)
+    key
+    description(locale: $locale)
+    roles
+    type
+  }
+}

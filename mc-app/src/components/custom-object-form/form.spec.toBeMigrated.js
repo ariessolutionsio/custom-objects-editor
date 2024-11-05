@@ -1,12 +1,12 @@
-import React from 'react';
-import { shallow } from 'enzyme';
-import faker from 'faker';
-import times from 'lodash/times';
-import * as ApplicationContext from '@commercetools-frontend/application-shell-connectors';
-import useEffectMock from '../../test-utils/use-effect-mock';
-import { generateContainers } from '../../test-utils';
-import { getAttributeValues } from '../../form-utils';
-import Form from './form';
+import React from "react";
+import { shallow } from "enzyme";
+import faker from "faker";
+import times from "lodash/times";
+import * as ApplicationContext from "@commercetools-frontend/application-shell-connectors";
+import useEffectMock from "../../test-utils/use-effect-mock";
+import { generateContainers } from "../../test-utils";
+import { getAttributeValues } from "../../form-utils";
+import Form from "./form";
 
 const project = {
   currencies: times(2, () => faker.finance.currencyCode()),
@@ -15,8 +15,8 @@ const project = {
 
 const containers = generateContainers(2);
 const emptyValues = {
-  container: '',
-  key: '',
+  container: "",
+  key: "",
   value: {},
 };
 
@@ -40,11 +40,11 @@ const mocks = {
 const loadForm = (initialValues = emptyValues, values = emptyValues) =>
   shallow(<Form {...mocks} initialValues={initialValues} values={values} />);
 
-describe('form', () => {
+describe("form", () => {
   beforeAll(() => {
-    jest.spyOn(React, 'useEffect').mockImplementation(useEffectMock);
+    jest.spyOn(React, "useEffect").mockImplementation(useEffectMock);
     jest
-      .spyOn(ApplicationContext, 'useApplicationContext')
+      .spyOn(ApplicationContext, "useApplicationContext")
       .mockImplementation(() => ({ project }));
   });
 
@@ -52,21 +52,21 @@ describe('form', () => {
     mocks.setFieldValue.mockClear();
   });
 
-  describe('when container not selected', () => {
+  describe("when container not selected", () => {
     beforeEach(() => {
       loadForm();
     });
 
-    it('should not set attributes form value', () => {
-      expect(mocks.setFieldValue).not.toHaveBeenCalledWith('attributes');
+    it("should not set attributes form value", () => {
+      expect(mocks.setFieldValue).not.toHaveBeenCalledWith("attributes");
     });
 
-    it('should not set custom object value form value', () => {
-      expect(mocks.setFieldValue).not.toHaveBeenCalledWith('value');
+    it("should not set custom object value form value", () => {
+      expect(mocks.setFieldValue).not.toHaveBeenCalledWith("value");
     });
   });
 
-  describe('when container selected with empty initial values (create)', () => {
+  describe("when container selected with empty initial values (create)", () => {
     const container = mocks.containers[0];
     const { attributes } = container.value;
 
@@ -77,26 +77,26 @@ describe('form', () => {
       });
     });
 
-    it('should reset attribute form values', () => {
-      expect(mocks.setFieldValue).toHaveBeenCalledWith('attributes', null);
+    it("should reset attribute form values", () => {
+      expect(mocks.setFieldValue).toHaveBeenCalledWith("attributes", null);
     });
 
-    it('should set attributes form value based on selected container', () => {
+    it("should set attributes form value based on selected container", () => {
       expect(mocks.setFieldValue).toHaveBeenCalledWith(
-        'attributes',
+        "attributes",
         attributes
       );
     });
 
-    it('should set custom object value form value based on selected container', () => {
+    it("should set custom object value form value based on selected container", () => {
       expect(mocks.setFieldValue).toHaveBeenCalledWith(
-        'value',
+        "value",
         getAttributeValues(attributes, project.currencies, project.languages)
       );
     });
   });
 
-  describe('when different container selected with initial values (edit)', () => {
+  describe("when different container selected with initial values (edit)", () => {
     const initialContainer = mocks.containers[0];
     const selectedContainer = mocks.containers[1];
     const { attributes } = selectedContainer.value;
@@ -114,26 +114,26 @@ describe('form', () => {
       });
     });
 
-    it('should reset attribute form values', () => {
-      expect(mocks.setFieldValue).toHaveBeenCalledWith('attributes', null);
+    it("should reset attribute form values", () => {
+      expect(mocks.setFieldValue).toHaveBeenCalledWith("attributes", null);
     });
 
-    it('should set attributes form value based on selected container', () => {
+    it("should set attributes form value based on selected container", () => {
       expect(mocks.setFieldValue).toHaveBeenCalledWith(
-        'attributes',
+        "attributes",
         attributes
       );
     });
 
-    it('should set custom object value form value based on selected container', () => {
+    it("should set custom object value form value based on selected container", () => {
       expect(mocks.setFieldValue).toHaveBeenCalledWith(
-        'value',
+        "value",
         getAttributeValues(attributes, project.currencies, project.languages)
       );
     });
   });
 
-  describe('when same container selected with initial values (edit)', () => {
+  describe("when same container selected with initial values (edit)", () => {
     const initialContainer = mocks.containers[0];
     const { attributes } = initialContainer.value;
     const initialValues = {
@@ -151,20 +151,20 @@ describe('form', () => {
       });
     });
 
-    it('should reset attribute form values', () => {
-      expect(mocks.setFieldValue).toHaveBeenCalledWith('attributes', null);
+    it("should reset attribute form values", () => {
+      expect(mocks.setFieldValue).toHaveBeenCalledWith("attributes", null);
     });
 
-    it('should set attributes form value based on selected container', () => {
+    it("should set attributes form value based on selected container", () => {
       expect(mocks.setFieldValue).toHaveBeenCalledWith(
-        'attributes',
+        "attributes",
         attributes
       );
     });
 
-    it('should set custom object value form value to initial custom object value', () => {
+    it("should set custom object value form value to initial custom object value", () => {
       expect(mocks.setFieldValue).toHaveBeenCalledWith(
-        'value',
+        "value",
         initialValues.value
       );
     });

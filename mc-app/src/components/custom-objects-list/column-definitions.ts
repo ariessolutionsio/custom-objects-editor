@@ -1,12 +1,12 @@
-import { TColumn } from '@commercetools-uikit/data-table';
-import { IntlShape } from 'react-intl';
-import messages from './messages';
+import { TColumn } from "@commercetools-uikit/data-table";
+import { IntlShape } from "react-intl";
+import messages from "./messages";
 
 export const COLUMN_KEYS = {
-  CONTAINER: 'container',
-  KEY: 'key',
-  VALUE: 'value',
-  MODIFIED: 'lastModifiedAt',
+  CONTAINER: "container",
+  KEY: "key",
+  VALUE: "value",
+  MODIFIED: "lastModifiedAt",
 };
 
 export const columnDefinitions = (intl: IntlShape): Array<TColumn> => [

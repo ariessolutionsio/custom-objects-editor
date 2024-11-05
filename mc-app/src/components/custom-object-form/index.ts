@@ -1,1 +1,1 @@
-export { default } from './custom-object-form';
+export { default } from "./custom-object-form";

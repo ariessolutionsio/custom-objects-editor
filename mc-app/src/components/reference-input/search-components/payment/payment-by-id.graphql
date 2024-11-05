@@ -1,0 +1,21 @@
+query PaymentGatewayById($id: String!, $locale: Locale!) {
+  payment(id: $id) {
+    id
+    key
+    amountPlanned {
+      centAmount
+      currencyCode
+    }
+    customer {
+      email
+    }
+    paymentMethodInfo {
+      name(locale: $locale)
+    }
+    paymentStatus {
+      state {
+        key
+      }
+    }
+  }
+}

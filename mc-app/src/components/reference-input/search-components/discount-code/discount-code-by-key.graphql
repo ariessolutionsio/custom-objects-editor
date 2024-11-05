@@ -1,0 +1,7 @@
+query DiscountCodeByKey($key: String!, $locale: Locale!) {
+  discountCode(key: $key) {
+    id
+    name(locale: $locale)
+    key
+  }
+}

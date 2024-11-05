@@ -1,4 +1,4 @@
-declare module '@commercetools/sync-actions' {
+declare module "@commercetools/sync-actions" {
   export type SyncAction = { action: string; [x: string]: unknown };
   function buildActions<NextDraft, OriginalDraft>(
     nextDraft: NextDraft,

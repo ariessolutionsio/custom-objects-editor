@@ -1,22 +1,18 @@
-import React from 'react';
-import { shallow } from 'enzyme';
-import faker from 'faker';
-import camelCase from 'lodash/camelCase';
-import times from 'lodash/times';
-import { FormattedMessage } from 'react-intl';
-import moment from 'moment';
-import momentTZ from 'moment-timezone';
-import * as ApplicationContext from '@commercetools-frontend/application-shell-connectors';
-import {
-  REFERENCE_BY,
-  REFERENCE_TYPES,
-  TYPES,
-} from '../../constants';
-import { generateContainer } from '../../test-utils';
-import { getValueByType } from '../../helpers';
-import AttributeInput from './attribute-input';
-import messages from './messages';
-import AttributeField from './attribute-field';
+import React from "react";
+import { shallow } from "enzyme";
+import faker from "faker";
+import camelCase from "lodash/camelCase";
+import times from "lodash/times";
+import { FormattedMessage } from "react-intl";
+import moment from "moment";
+import momentTZ from "moment-timezone";
+import * as ApplicationContext from "@commercetools-frontend/application-shell-connectors";
+import { REFERENCE_BY, REFERENCE_TYPES, TYPES } from "../../constants";
+import { generateContainer } from "../../test-utils";
+import { getValueByType } from "../../helpers";
+import AttributeInput from "./attribute-input";
+import messages from "./messages";
+import AttributeField from "./attribute-field";
 
 const dataLocale = faker.random.locale();
 const project = {
@@ -62,39 +58,39 @@ const loadAttributeInput = ({
     />
   );
 
-describe('attribute input', () => {
+describe("attribute input", () => {
   beforeAll(() => {
     jest
-      .spyOn(ApplicationContext, 'useApplicationContext')
+      .spyOn(ApplicationContext, "useApplicationContext")
       .mockImplementation(() => ({ dataLocale, project, user }));
   });
 
-  describe('string type', () => {
+  describe("string type", () => {
     const type = TYPES.String;
     const input = '[data-testid="field-type-string"]';
     const value = faker.random.word();
 
-    it('should display text input', () => {
+    it("should display text input", () => {
       const wrapper = loadAttributeInput({ type, value });
       expect(wrapper.find(input).exists()).toEqual(true);
     });
 
-    describe('when input touched without error', () => {
+    describe("when input touched without error", () => {
       let wrapper;
       beforeEach(() => {
         wrapper = loadAttributeInput({ type, value, touched: true });
       });
 
-      it('input should not have error', () => {
-        expect(wrapper.find(input).prop('hasError')).toEqual(false);
+      it("input should not have error", () => {
+        expect(wrapper.find(input).prop("hasError")).toEqual(false);
       });
 
-      it('should not display error', () => {
+      it("should not display error", () => {
         expect(wrapper.find(fieldErrors).exists()).toEqual(false);
       });
     });
 
-    describe('when input not touched with error', () => {
+    describe("when input not touched with error", () => {
       let wrapper;
       beforeEach(() => {
         wrapper = loadAttributeInput({
@@ -105,16 +101,16 @@ describe('attribute input', () => {
         });
       });
 
-      it('input should not have error', () => {
-        expect(wrapper.find(input).prop('hasError')).toEqual(false);
+      it("input should not have error", () => {
+        expect(wrapper.find(input).prop("hasError")).toEqual(false);
       });
 
-      it('should not display error', () => {
+      it("should not display error", () => {
         expect(wrapper.find(fieldErrors).exists()).toEqual(false);
       });
     });
 
-    describe('when input touched with error', () => {
+    describe("when input touched with error", () => {
       let wrapper;
       beforeEach(() => {
         wrapper = loadAttributeInput({
@@ -125,27 +121,27 @@ describe('attribute input', () => {
         });
       });
 
-      it('input should have error', () => {
-        expect(wrapper.find(input).prop('hasError')).toEqual(true);
+      it("input should have error", () => {
+        expect(wrapper.find(input).prop("hasError")).toEqual(true);
       });
 
-      it('should display error', () => {
+      it("should display error", () => {
         expect(wrapper.find(fieldErrors).exists()).toEqual(true);
       });
     });
   });
 
-  describe('localized string type', () => {
+  describe("localized string type", () => {
     const type = TYPES.LocalizedString;
     const input = '[data-testid="field-type-i18n-string"]';
-    const value = { [dataLocale]: '' };
+    const value = { [dataLocale]: "" };
 
-    it('should display localized text input', () => {
+    it("should display localized text input", () => {
       const wrapper = loadAttributeInput({ type, value });
       expect(wrapper.find(input).exists()).toEqual(true);
     });
 
-    describe('when input touched without error', () => {
+    describe("when input touched without error", () => {
       let wrapper;
       beforeEach(() => {
         wrapper = loadAttributeInput({
@@ -155,16 +151,16 @@ describe('attribute input', () => {
         });
       });
 
-      it('input should not have error', () => {
-        expect(wrapper.find(input).prop('hasError')).toEqual(false);
+      it("input should not have error", () => {
+        expect(wrapper.find(input).prop("hasError")).toEqual(false);
       });
 
-      it('should not display error', () => {
+      it("should not display error", () => {
         expect(wrapper.find(fieldErrors).exists()).toEqual(false);
       });
     });
 
-    describe('when input not touched with error', () => {
+    describe("when input not touched with error", () => {
       let wrapper;
       beforeEach(() => {
         wrapper = loadAttributeInput({
@@ -175,16 +171,16 @@ describe('attribute input', () => {
         });
       });
 
-      it('input should not have error', () => {
-        expect(wrapper.find(input).prop('hasError')).toEqual(false);
+      it("input should not have error", () => {
+        expect(wrapper.find(input).prop("hasError")).toEqual(false);
       });
 
-      it('should not display error', () => {
+      it("should not display error", () => {
         expect(wrapper.find(fieldErrors).exists()).toEqual(false);
       });
     });
 
-    describe('when input touched with error', () => {
+    describe("when input touched with error", () => {
       let wrapper;
       beforeEach(() => {
         wrapper = loadAttributeInput({
@@ -195,42 +191,42 @@ describe('attribute input', () => {
         });
       });
 
-      it('input should have error', () => {
-        expect(wrapper.find(input).prop('hasError')).toEqual(true);
+      it("input should have error", () => {
+        expect(wrapper.find(input).prop("hasError")).toEqual(true);
       });
 
-      it('should display error', () => {
+      it("should display error", () => {
         expect(wrapper.find(fieldErrors).exists()).toEqual(true);
       });
     });
   });
 
-  describe('number type', () => {
+  describe("number type", () => {
     const type = TYPES.Number;
     const input = '[data-testid="field-type-number"]';
     const value = faker.random.number({ min: 1, max: 10 });
 
-    it('should display number input', () => {
+    it("should display number input", () => {
       const wrapper = loadAttributeInput({ type, value });
       expect(wrapper.find(input).exists()).toEqual(true);
     });
 
-    describe('when input touched without error', () => {
+    describe("when input touched without error", () => {
       let wrapper;
       beforeEach(() => {
         wrapper = loadAttributeInput({ type, value, touched: true });
       });
 
-      it('input should not have error', () => {
-        expect(wrapper.find(input).prop('hasError')).toEqual(false);
+      it("input should not have error", () => {
+        expect(wrapper.find(input).prop("hasError")).toEqual(false);
       });
 
-      it('should not display error', () => {
+      it("should not display error", () => {
         expect(wrapper.find(fieldErrors).exists()).toEqual(false);
       });
     });
 
-    describe('when input not touched with error', () => {
+    describe("when input not touched with error", () => {
       let wrapper;
       beforeEach(() => {
         wrapper = loadAttributeInput({
@@ -241,16 +237,16 @@ describe('attribute input', () => {
         });
       });
 
-      it('input should not have error', () => {
-        expect(wrapper.find(input).prop('hasError')).toEqual(false);
+      it("input should not have error", () => {
+        expect(wrapper.find(input).prop("hasError")).toEqual(false);
       });
 
-      it('should not display error', () => {
+      it("should not display error", () => {
         expect(wrapper.find(fieldErrors).exists()).toEqual(false);
       });
     });
 
-    describe('when input touched with error', () => {
+    describe("when input touched with error", () => {
       let wrapper;
       beforeEach(() => {
         wrapper = loadAttributeInput({
@@ -261,42 +257,42 @@ describe('attribute input', () => {
         });
       });
 
-      it('input should have error', () => {
-        expect(wrapper.find(input).prop('hasError')).toEqual(true);
+      it("input should have error", () => {
+        expect(wrapper.find(input).prop("hasError")).toEqual(true);
       });
 
-      it('should display error', () => {
+      it("should display error", () => {
         expect(wrapper.find(fieldErrors).exists()).toEqual(true);
       });
     });
   });
 
-  describe('boolean type', () => {
+  describe("boolean type", () => {
     const type = TYPES.Boolean;
     const input = '[data-testid="field-type-boolean"]';
     const value = faker.random.boolean();
 
-    it('should display checkbox input', () => {
+    it("should display checkbox input", () => {
       const wrapper = loadAttributeInput({ type, value });
       expect(wrapper.find(input).exists()).toEqual(true);
     });
 
-    describe('when input touched without error', () => {
+    describe("when input touched without error", () => {
       let wrapper;
       beforeEach(() => {
         wrapper = loadAttributeInput({ type, value, touched: true });
       });
 
-      it('input should not have error', () => {
-        expect(wrapper.find(input).prop('hasError')).toEqual(false);
+      it("input should not have error", () => {
+        expect(wrapper.find(input).prop("hasError")).toEqual(false);
       });
 
-      it('should not display error', () => {
+      it("should not display error", () => {
         expect(wrapper.find(fieldErrors).exists()).toEqual(false);
       });
     });
 
-    describe('when input not touched with error', () => {
+    describe("when input not touched with error", () => {
       let wrapper;
       beforeEach(() => {
         wrapper = loadAttributeInput({
@@ -307,16 +303,16 @@ describe('attribute input', () => {
         });
       });
 
-      it('input should not have error', () => {
-        expect(wrapper.find(input).prop('hasError')).toEqual(false);
+      it("input should not have error", () => {
+        expect(wrapper.find(input).prop("hasError")).toEqual(false);
       });
 
-      it('should not display error', () => {
+      it("should not display error", () => {
         expect(wrapper.find(fieldErrors).exists()).toEqual(false);
       });
     });
 
-    describe('when input touched with error', () => {
+    describe("when input touched with error", () => {
       let wrapper;
       beforeEach(() => {
         wrapper = loadAttributeInput({
@@ -327,17 +323,17 @@ describe('attribute input', () => {
         });
       });
 
-      it('input should have error', () => {
-        expect(wrapper.find(input).prop('hasError')).toEqual(true);
+      it("input should have error", () => {
+        expect(wrapper.find(input).prop("hasError")).toEqual(true);
       });
 
-      it('should display error', () => {
+      it("should display error", () => {
         expect(wrapper.find(fieldErrors).exists()).toEqual(true);
       });
     });
   });
 
-  describe('money type', () => {
+  describe("money type", () => {
     const type = TYPES.Money;
     const input = '[data-testid="field-type-money"]';
     const value = {
@@ -345,12 +341,12 @@ describe('attribute input', () => {
       currencyCode: faker.random.arrayElement(project.currencies),
     };
 
-    it('should display money input', () => {
+    it("should display money input", () => {
       const wrapper = loadAttributeInput({ type, value });
       expect(wrapper.find(input).exists()).toEqual(true);
     });
 
-    describe('when currency input touched without error', () => {
+    describe("when currency input touched without error", () => {
       let wrapper;
       beforeEach(() => {
         wrapper = loadAttributeInput({
@@ -362,16 +358,16 @@ describe('attribute input', () => {
         });
       });
 
-      it('input should not have error', () => {
-        expect(wrapper.find(input).prop('hasError')).toEqual(false);
+      it("input should not have error", () => {
+        expect(wrapper.find(input).prop("hasError")).toEqual(false);
       });
 
-      it('should not display error', () => {
+      it("should not display error", () => {
         expect(wrapper.find(fieldErrors).exists()).toEqual(false);
       });
     });
 
-    describe('when amount input touched without error', () => {
+    describe("when amount input touched without error", () => {
       let wrapper;
       beforeEach(() => {
         wrapper = loadAttributeInput({
@@ -381,16 +377,16 @@ describe('attribute input', () => {
         });
       });
 
-      it('input should not have error', () => {
-        expect(wrapper.find(input).prop('hasError')).toEqual(false);
+      it("input should not have error", () => {
+        expect(wrapper.find(input).prop("hasError")).toEqual(false);
       });
 
-      it('should not display error', () => {
+      it("should not display error", () => {
         expect(wrapper.find(fieldErrors).exists()).toEqual(false);
       });
     });
 
-    describe('when input not touched with error', () => {
+    describe("when input not touched with error", () => {
       let wrapper;
       beforeEach(() => {
         wrapper = loadAttributeInput({
@@ -402,16 +398,16 @@ describe('attribute input', () => {
         });
       });
 
-      it('input should not have error', () => {
-        expect(wrapper.find(input).prop('hasError')).toEqual(false);
+      it("input should not have error", () => {
+        expect(wrapper.find(input).prop("hasError")).toEqual(false);
       });
 
-      it('should not display error', () => {
+      it("should not display error", () => {
         expect(wrapper.find(fieldErrors).exists()).toEqual(false);
       });
     });
 
-    describe('when amount input touched with error', () => {
+    describe("when amount input touched with error", () => {
       let wrapper;
       beforeEach(() => {
         wrapper = loadAttributeInput({
@@ -424,42 +420,42 @@ describe('attribute input', () => {
         });
       });
 
-      it('input should have error', () => {
-        expect(wrapper.find(input).prop('hasError')).toEqual(true);
+      it("input should have error", () => {
+        expect(wrapper.find(input).prop("hasError")).toEqual(true);
       });
 
-      it('should display error', () => {
+      it("should display error", () => {
         expect(wrapper.find(fieldErrors).exists()).toEqual(true);
       });
     });
   });
 
-  describe('date type', () => {
+  describe("date type", () => {
     const type = TYPES.Date;
     const input = '[data-testid="field-type-date"]';
-    const value = moment(faker.date.recent()).format('YYYY-MM-DD');
+    const value = moment(faker.date.recent()).format("YYYY-MM-DD");
 
-    it('should display date input', () => {
+    it("should display date input", () => {
       const wrapper = loadAttributeInput({ type, value });
       expect(wrapper.find(input).exists()).toEqual(true);
     });
 
-    describe('when input touched without error', () => {
+    describe("when input touched without error", () => {
       let wrapper;
       beforeEach(() => {
         wrapper = loadAttributeInput({ type, value, touched: true });
       });
 
-      it('input should not have error', () => {
-        expect(wrapper.find(input).prop('hasError')).toEqual(false);
+      it("input should not have error", () => {
+        expect(wrapper.find(input).prop("hasError")).toEqual(false);
       });
 
-      it('should not display error', () => {
+      it("should not display error", () => {
         expect(wrapper.find(fieldErrors).exists()).toEqual(false);
       });
     });
 
-    describe('when input not touched with error', () => {
+    describe("when input not touched with error", () => {
       let wrapper;
       beforeEach(() => {
         wrapper = loadAttributeInput({
@@ -470,16 +466,16 @@ describe('attribute input', () => {
         });
       });
 
-      it('input should not have error', () => {
-        expect(wrapper.find(input).prop('hasError')).toEqual(false);
+      it("input should not have error", () => {
+        expect(wrapper.find(input).prop("hasError")).toEqual(false);
       });
 
-      it('should not display error', () => {
+      it("should not display error", () => {
         expect(wrapper.find(fieldErrors).exists()).toEqual(false);
       });
     });
 
-    describe('when input touched with error', () => {
+    describe("when input touched with error", () => {
       let wrapper;
       beforeEach(() => {
         wrapper = loadAttributeInput({
@@ -490,42 +486,42 @@ describe('attribute input', () => {
         });
       });
 
-      it('input should have error', () => {
-        expect(wrapper.find(input).prop('hasError')).toEqual(true);
+      it("input should have error", () => {
+        expect(wrapper.find(input).prop("hasError")).toEqual(true);
       });
 
-      it('should display error', () => {
+      it("should display error", () => {
         expect(wrapper.find(fieldErrors).exists()).toEqual(true);
       });
     });
   });
 
-  describe('time type', () => {
+  describe("time type", () => {
     const type = TYPES.Time;
     const input = '[data-testid="field-type-time"]';
-    const value = moment(faker.date.recent()).format('h:mm A');
+    const value = moment(faker.date.recent()).format("h:mm A");
 
-    it('should display time input', () => {
+    it("should display time input", () => {
       const wrapper = loadAttributeInput({ type, value });
       expect(wrapper.find(input).exists()).toEqual(true);
     });
 
-    describe('when input touched without error', () => {
+    describe("when input touched without error", () => {
       let wrapper;
       beforeEach(() => {
         wrapper = loadAttributeInput({ type, value, touched: true });
       });
 
-      it('input should not have error', () => {
-        expect(wrapper.find(input).prop('hasError')).toEqual(false);
+      it("input should not have error", () => {
+        expect(wrapper.find(input).prop("hasError")).toEqual(false);
       });
 
-      it('should not display error', () => {
+      it("should not display error", () => {
         expect(wrapper.find(fieldErrors).exists()).toEqual(false);
       });
     });
 
-    describe('when input not touched with error', () => {
+    describe("when input not touched with error", () => {
       let wrapper;
       beforeEach(() => {
         wrapper = loadAttributeInput({
@@ -536,16 +532,16 @@ describe('attribute input', () => {
         });
       });
 
-      it('input should not have error', () => {
-        expect(wrapper.find(input).prop('hasError')).toEqual(false);
+      it("input should not have error", () => {
+        expect(wrapper.find(input).prop("hasError")).toEqual(false);
       });
 
-      it('should not display error', () => {
+      it("should not display error", () => {
         expect(wrapper.find(fieldErrors).exists()).toEqual(false);
       });
     });
 
-    describe('when input touched with error', () => {
+    describe("when input touched with error", () => {
       let wrapper;
       beforeEach(() => {
         wrapper = loadAttributeInput({
@@ -556,42 +552,42 @@ describe('attribute input', () => {
         });
       });
 
-      it('input should have error', () => {
-        expect(wrapper.find(input).prop('hasError')).toEqual(true);
+      it("input should have error", () => {
+        expect(wrapper.find(input).prop("hasError")).toEqual(true);
       });
 
-      it('should display error', () => {
+      it("should display error", () => {
         expect(wrapper.find(fieldErrors).exists()).toEqual(true);
       });
     });
   });
 
-  describe('datetime type', () => {
+  describe("datetime type", () => {
     const type = TYPES.DateTime;
     const input = '[data-testid="field-type-datetime"]';
     const value = faker.date.recent().toISOString();
 
-    it('should display datetime input', () => {
+    it("should display datetime input", () => {
       const wrapper = loadAttributeInput({ type, value });
       expect(wrapper.find(input).exists()).toEqual(true);
     });
 
-    describe('when input touched without error', () => {
+    describe("when input touched without error", () => {
       let wrapper;
       beforeEach(() => {
         wrapper = loadAttributeInput({ type, value, touched: true });
       });
 
-      it('input should not have error', () => {
-        expect(wrapper.find(input).prop('hasError')).toEqual(false);
+      it("input should not have error", () => {
+        expect(wrapper.find(input).prop("hasError")).toEqual(false);
       });
 
-      it('should not display error', () => {
+      it("should not display error", () => {
         expect(wrapper.find(fieldErrors).exists()).toEqual(false);
       });
     });
 
-    describe('when input not touched with error', () => {
+    describe("when input not touched with error", () => {
       let wrapper;
       beforeEach(() => {
         wrapper = loadAttributeInput({
@@ -602,16 +598,16 @@ describe('attribute input', () => {
         });
       });
 
-      it('input should not have error', () => {
-        expect(wrapper.find(input).prop('hasError')).toEqual(false);
+      it("input should not have error", () => {
+        expect(wrapper.find(input).prop("hasError")).toEqual(false);
       });
 
-      it('should not display error', () => {
+      it("should not display error", () => {
         expect(wrapper.find(fieldErrors).exists()).toEqual(false);
       });
     });
 
-    describe('when input touched with error', () => {
+    describe("when input touched with error", () => {
       let wrapper;
       beforeEach(() => {
         wrapper = loadAttributeInput({
@@ -622,82 +618,82 @@ describe('attribute input', () => {
         });
       });
 
-      it('input should have error', () => {
-        expect(wrapper.find(input).prop('hasError')).toEqual(true);
+      it("input should have error", () => {
+        expect(wrapper.find(input).prop("hasError")).toEqual(true);
       });
 
-      it('should display error', () => {
+      it("should display error", () => {
         expect(wrapper.find(fieldErrors).exists()).toEqual(true);
       });
     });
   });
 
-  describe('enum type', () => {
+  describe("enum type", () => {
     const type = TYPES.Enum;
     const input = '[data-testid="field-type-enum"]';
     const value = faker.random.word();
 
-    it('should display enum input', () => {
+    it("should display enum input", () => {
       const wrapper = loadAttributeInput({ type, value });
       expect(wrapper.find(input).exists()).toEqual(true);
     });
 
-    it('when input is not required and not in a set, should be clearable', () => {
+    it("when input is not required and not in a set, should be clearable", () => {
       const wrapper = loadAttributeInput({
         type,
         value,
         isRequired: false,
         isSet: false,
       });
-      expect(wrapper.find(input).prop('isClearable')).toEqual(true);
+      expect(wrapper.find(input).prop("isClearable")).toEqual(true);
     });
 
-    it('when input is not required and in a set, should not be clearable', () => {
+    it("when input is not required and in a set, should not be clearable", () => {
       const wrapper = loadAttributeInput({
         type,
         value,
         isRequired: false,
         isSet: true,
       });
-      expect(wrapper.find(input).prop('isClearable')).toEqual(false);
+      expect(wrapper.find(input).prop("isClearable")).toEqual(false);
     });
 
-    it('when input is required and in a set, should not be clearable', () => {
+    it("when input is required and in a set, should not be clearable", () => {
       const wrapper = loadAttributeInput({
         type,
         value,
         isRequired: true,
         isSet: true,
       });
-      expect(wrapper.find(input).prop('isClearable')).toEqual(false);
+      expect(wrapper.find(input).prop("isClearable")).toEqual(false);
     });
 
-    it('when input is required and not in a set, should not be clearable', () => {
+    it("when input is required and not in a set, should not be clearable", () => {
       const wrapper = loadAttributeInput({
         type,
         value,
         isRequired: true,
         isSet: false,
       });
-      expect(wrapper.find(input).prop('isClearable')).toEqual(false);
+      expect(wrapper.find(input).prop("isClearable")).toEqual(false);
     });
 
-    describe('when input touched without error', () => {
+    describe("when input touched without error", () => {
       let wrapper;
       beforeEach(() => {
         wrapper = loadAttributeInput({ type, value, touched: true });
       });
 
-      it('input should not have error', () => {
-        expect(wrapper.find(input).prop('hasError')).toEqual(false);
+      it("input should not have error", () => {
+        expect(wrapper.find(input).prop("hasError")).toEqual(false);
       });
 
-      it('should not display error', () => {
+      it("should not display error", () => {
         expect(wrapper.find(fieldErrors).exists()).toEqual(false);
       });
     });
 
-    describe('when input not touched with error', () => {
+    describe("when input not touched with error", () => {
       let wrapper;
       beforeEach(() => {
         wrapper = loadAttributeInput({
@@ -707,16 +703,16 @@ describe('attribute input', () => {
         });
       });
 
-      it('input should not have error', () => {
-        expect(wrapper.find(input).prop('hasError')).toEqual(false);
+      it("input should not have error", () => {
+        expect(wrapper.find(input).prop("hasError")).toEqual(false);
       });
 
-      it('should not display error', () => {
+      it("should not display error", () => {
         expect(wrapper.find(fieldErrors).exists()).toEqual(false);
       });
     });
 
-    describe('when input touched with error', () => {
+    describe("when input touched with error", () => {
       let wrapper;
       beforeEach(() => {
         wrapper = loadAttributeInput({
@@ -727,17 +723,17 @@ describe('attribute input', () => {
         });
       });
 
-      it('input should have error', () => {
-        expect(wrapper.find(input).prop('hasError')).toEqual(true);
+      it("input should have error", () => {
+        expect(wrapper.find(input).prop("hasError")).toEqual(true);
       });
 
-      it('should display error', () => {
+      it("should display error", () => {
         expect(wrapper.find(fieldErrors).exists()).toEqual(true);
       });
     });
   });
 
-  describe('reference type', () => {
+  describe("reference type", () => {
     const type = TYPES.Reference;
     const input = '[data-testid="field-type-reference"]';
     const reference = {
@@ -749,12 +745,12 @@ describe('attribute input', () => {
       [reference.by]: faker.random.uuid(),
     };
 
-    it('should display reference input', () => {
+    it("should display reference input", () => {
       const wrapper = loadAttributeInput({ type, reference, value });
       expect(wrapper.find(input).exists()).toEqual(true);
     });
 
-    describe('when input touched without error', () => {
+    describe("when input touched without error", () => {
       let wrapper;
       beforeEach(() => {
         wrapper = loadAttributeInput({
@@ -765,16 +761,16 @@ describe('attribute input', () => {
         });
       });
 
-      it('input should not have error', () => {
-        expect(wrapper.find(input).prop('hasError')).toEqual(false);
+      it("input should not have error", () => {
+        expect(wrapper.find(input).prop("hasError")).toEqual(false);
       });
 
-      it('should not display error', () => {
+      it("should not display error", () => {
         expect(wrapper.find(fieldErrors).exists()).toEqual(false);
       });
     });
 
-    describe('when input not touched with error', () => {
+    describe("when input not touched with error", () => {
       let wrapper;
       beforeEach(() => {
         wrapper = loadAttributeInput({
@@ -789,16 +785,16 @@ describe('attribute input', () => {
         });
       });
 
-      it('input should not have error', () => {
-        expect(wrapper.find(input).prop('hasError')).toEqual(false);
+      it("input should not have error", () => {
+        expect(wrapper.find(input).prop("hasError")).toEqual(false);
       });
 
-      it('should not display error', () => {
+      it("should not display error", () => {
         expect(wrapper.find(fieldErrors).exists()).toEqual(false);
       });
     });
 
-    describe('when input touched with error', () => {
+    describe("when input touched with error", () => {
       let wrapper;
       beforeEach(() => {
         wrapper = loadAttributeInput({
@@ -814,17 +810,17 @@ describe('attribute input', () => {
         });
       });
 
-      it('input should have error', () => {
-        expect(wrapper.find(input).prop('hasError')).toEqual(true);
+      it("input should have error", () => {
+        expect(wrapper.find(input).prop("hasError")).toEqual(true);
       });
 
-      it('should display error', () => {
+      it("should display error", () => {
         expect(wrapper.find(fieldErrors).exists()).toEqual(true);
       });
     });
   });
 
-  describe('object type', () => {
+  describe("object type", () => {
     const type = TYPES.Object;
     const container = generateContainer();
     const { attributes } = container.value;
@@ -839,7 +835,7 @@ describe('attribute input', () => {
     const attributeField = (index) =>
       `[data-testid="field-type-object-${index}"]`;
 
-    it('should display attribute fields', () => {
+    it("should display attribute fields", () => {
       const wrapper = loadAttributeInput({
         type,
         value,
@@ -848,7 +844,7 @@ describe('attribute input', () => {
       expect(wrapper.find(AttributeField).length).toEqual(attributes.length);
     });
 
-    it('when within a nested set, should pass nested set prop as false to attribute fields', () => {
+    it("when within a nested set, should pass nested set prop as false to attribute fields", () => {
       const index = 0;
       const wrapper = loadAttributeInput({
         type,
@@ -856,12 +852,12 @@ describe('attribute input', () => {
         attributes,
         isNestedSet: true,
       });
-      expect(wrapper.find(attributeField(index)).prop('isNestedSet')).toEqual(
+      expect(wrapper.find(attributeField(index)).prop("isNestedSet")).toEqual(
         false
       );
     });
 
-    it('when not within a nested set, should pass nested set prop as is set value to attribute fields', () => {
+    it("when not within a nested set, should pass nested set prop as is set value to attribute fields", () => {
       const index = 0;
       const isSet = faker.random.boolean();
       const wrapper = loadAttributeInput({
@@ -871,14 +867,14 @@ describe('attribute input', () => {
         isSet,
         isNestedSet: false,
       });
-      expect(wrapper.find(attributeField(index)).prop('isNestedSet')).toEqual(
+      expect(wrapper.find(attributeField(index)).prop("isNestedSet")).toEqual(
         isSet
       );
     });
   });
 
-  it('unknown type, should display nothing', () => {
-    const wrapper = loadAttributeInput({ type: 'banana' });
+  it("unknown type, should display nothing", () => {
+    const wrapper = loadAttributeInput({ type: "banana" });
     expect(wrapper).toEqual({});
   });
 });

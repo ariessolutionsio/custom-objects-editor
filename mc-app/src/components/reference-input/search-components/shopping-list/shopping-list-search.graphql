@@ -1,0 +1,13 @@
+query ShoppingListSearch($limit: Int!, $offset: Int!, $locale: Locale!, $where: String!) {
+  shoppingLists(limit: $limit, offset: $offset, where: $where) {
+    results {
+      id
+      name(locale: $locale)
+      key
+      slug(locale: $locale)
+      customer {
+        email
+      }
+    }
+  }
+}

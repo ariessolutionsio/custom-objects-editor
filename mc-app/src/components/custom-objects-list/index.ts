@@ -1,1 +1,1 @@
-export { default } from './custom-objects-list';
+export { default } from "./custom-objects-list";

@@ -1,12 +1,12 @@
-import React, { FC, ReactElement, useState } from 'react';
-import { useIntl } from 'react-intl';
-import { useFormik, FormikProvider } from 'formik';
-import { useApplicationContext } from '@commercetools-frontend/application-shell-connectors';
-import { object, string } from 'yup';
-import { AttributeValue } from '../../constants';
-import messages from './messages';
-import { Value } from './constants';
-import Form from './form';
+import React, { FC, ReactElement, useState } from "react";
+import { useIntl } from "react-intl";
+import { useFormik, FormikProvider } from "formik";
+import { useApplicationContext } from "@commercetools-frontend/application-shell-connectors";
+import { object, string } from "yup";
+import { AttributeValue } from "../../constants";
+import messages from "./messages";
+import { Value } from "./constants";
+import Form from "./form";
 
 type Formik = ReturnType<typeof useFormik>;
 
@@ -19,11 +19,11 @@ export type Items = {
 
 type FormProps = {
   formElements: ReactElement;
-  values: Formik['values'];
-  isDirty: Formik['dirty'];
-  isSubmitting: Formik['isSubmitting'];
-  submitForm: Formik['handleSubmit'];
-  handleReset: Formik['handleReset'];
+  values: Formik["values"];
+  isDirty: Formik["dirty"];
+  isSubmitting: Formik["isSubmitting"];
+  submitForm: Formik["handleSubmit"];
+  handleReset: Formik["handleReset"];
 };
 
 type Props = {
@@ -96,6 +96,6 @@ const CustomObjectForm: FC<Props> = ({ onSubmit, initialValues, children }) => {
     </FormikProvider>
   );
 };
-CustomObjectForm.displayName = 'CustomObjectForm';
+CustomObjectForm.displayName = "CustomObjectForm";
 
 export default CustomObjectForm;
