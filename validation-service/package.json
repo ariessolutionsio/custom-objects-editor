@@ -9,7 +9,7 @@
     "start": "node build/index.js",
     "gcp-build": "tsc",
     "start:dev": "concurrently -k \"tsc --watch\" \"nodemon -q build/index.js\"",
-    "build": "rimraf ./build && tsc",
+    "build": "yarn --cwd ../shared-code install && yarn --cwd ../shared-code run build && rimraf ./build && tsc",
     "lint": "eslint . --ext .ts",
     "format": "prettier --write '**/*.{js,ts}'",
     "test": "jest --config jest.config.cjs",

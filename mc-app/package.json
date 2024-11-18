@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "preinstall": "yarn --cwd ../shared-code install && yarn --cwd ../shared-code run build",
-    "build": "mc-scripts build",
+    "build": "yarn --cwd ../shared-code install && yarn --cwd ../shared-code run build && mc-scripts build",
     "start": "mc-scripts start",
     "compile-html": "mc-scripts compile-html",
     "compile-html:local": "MC_APP_ENV=development mc-scripts compile-html --transformer @commercetools-frontend/mc-dev-authentication/transformer-local.js",
