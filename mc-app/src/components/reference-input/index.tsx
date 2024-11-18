@@ -5,6 +5,7 @@ import TextInput from '@commercetools-uikit/text-input';
 import get from 'lodash/get';
 import React, { Suspense, lazy } from 'react';
 import { Link } from 'react-router-dom';
+import { referenceTypeToSingleValueMap } from 'shared-code';
 import { ReferenceInputProps } from './search-input/types';
 
 const referenceTypeToComponentMap: Record<string, any> = {
@@ -62,19 +63,6 @@ const restrictedReferenceTypesToReferenceBy = [
   },
 ];
 
-const referenceTypeToSingleValueMap: Record<string, string> = {
-  'cart-discount': 'cartDiscount',
-  'product-discount': 'productDiscount',
-  'customer-group': 'customerGroup',
-  'discount-code': 'discountCode',
-  'key-value-document': 'customObject',
-  'product-type': 'productType',
-  'tax-category': 'taxCategory',
-  'shopping-list': 'shoppingList',
-  'shipping-method': 'shippingMethod',
-  type: 'typeDefinition',
-  'product-price': 'standalonePrice',
-};
 
 const LoadingFallback: React.FC = () => <div className="p-4">Loading...</div>;
 

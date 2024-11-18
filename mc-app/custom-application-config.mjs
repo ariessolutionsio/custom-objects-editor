@@ -16,12 +16,6 @@ const config = {
       initialProjectKey: '${env:INITIAL_PROJECT_KEY}',
     },
   },
-  headers: {
-    csp: {
-      'connect-src': ['${env:CUSTOM_OBJECT_ENDPOINT}'],
-      'script-src': ['${env:CUSTOM_OBJECT_ENDPOINT}'],
-    },
-  },
   oAuthScopes: {
     view: [
       'view_products',

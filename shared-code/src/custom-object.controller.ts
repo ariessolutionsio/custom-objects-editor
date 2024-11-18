@@ -3,6 +3,9 @@ import { AttributeSchema, CustomObject, Schema } from './types/validator';
 import Create from './queries/create-custom-object';
 import Get from './queries/get-custom-object';
 import { GraphQLClient } from './types/graphql';
+import { referenceTypeToSingleValueMap } from './constants/map-types';
+import { getEntityById } from './queries/get-entity-by-id';
+import { getEntityByKey } from './queries/get-entity-by-key';
 
 const SCHEMA_CONTAINER = 'mc-custom-object-schema';
 export class CustomObjectController {
@@ -318,6 +321,7 @@ export class CustomObjectController {
           `Invalid reference type for attribute: ${schema.name}. Expected ${schema.reference?.type}, got ${typeId}`
         );
       }
+      await this.validateReferenceValue(typeId, id, key);
     }
   }
 
@@ -466,5 +470,35 @@ export class CustomObjectController {
         );
       }
     }
+  }
+
+  private async validateReferenceValue(
+    typeId: string,
+    id?: string,
+    key?: string
+  ): Promise<void> {
+    if (!id && !key){
+      return;
+    }
+    const singleValueQueryDataObject = referenceTypeToSingleValueMap[typeId]
+      ? referenceTypeToSingleValueMap[typeId]
+      : typeId;
+
+    const query = id
+      ? getEntityById(singleValueQueryDataObject)
+      : getEntityByKey(singleValueQueryDataObject);
+
+    await this.apolloClient
+      ?.query({
+        query: query,
+        variables: id ? { id } : { key },
+        ...(this.context && { context: this.context }),
+      }).then((res) => {
+        if (!(res.data as any)[singleValueQueryDataObject]) {
+          throw new Error(
+            `Invalid reference value for attribute: ${typeId}. The expected ${typeId} was not found`
+          );
+        }
+      });
   }
 }
