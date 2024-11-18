@@ -1,47 +1,47 @@
-import { lazy, useState } from "react";
-import { FormattedDate, FormattedMessage, useIntl } from "react-intl";
-import includes from "lodash/includes";
-import isEmpty from "lodash/isEmpty";
-import isPlainObject from "lodash/isPlainObject";
-import isString from "lodash/isString";
-import map from "lodash/map";
-import startCase from "lodash/startCase";
-import LoadingSpinner from "@commercetools-uikit/loading-spinner";
-import { ContentNotification } from "@commercetools-uikit/notifications";
-import SpacingsStack from "@commercetools-uikit/spacings-stack";
-import { NO_VALUE_FALLBACK } from "@commercetools-frontend/constants";
-import Card from "@commercetools-uikit/card";
-import Constraints from "@commercetools-uikit/constraints";
-import { PlusBoldIcon } from "@commercetools-uikit/icons";
-import Spacings from "@commercetools-uikit/spacings";
-import Text from "@commercetools-uikit/text";
-import { SuspendedRoute } from "@commercetools-frontend/application-shell";
-import SecondaryButton from "@commercetools-uikit/secondary-button";
-import SelectInput from "@commercetools-uikit/select-input";
-import { Link, Switch, useHistory, useRouteMatch } from "react-router-dom";
-import DataTable, { TColumn } from "@commercetools-uikit/data-table";
+import { lazy, useState } from 'react';
+import { FormattedDate, FormattedMessage, useIntl } from 'react-intl';
+import includes from 'lodash/includes';
+import isEmpty from 'lodash/isEmpty';
+import isPlainObject from 'lodash/isPlainObject';
+import isString from 'lodash/isString';
+import map from 'lodash/map';
+import startCase from 'lodash/startCase';
+import LoadingSpinner from '@commercetools-uikit/loading-spinner';
+import { ContentNotification } from '@commercetools-uikit/notifications';
+import SpacingsStack from '@commercetools-uikit/spacings-stack';
+import { NO_VALUE_FALLBACK } from '@commercetools-frontend/constants';
+import Card from '@commercetools-uikit/card';
+import Constraints from '@commercetools-uikit/constraints';
+import { PlusBoldIcon } from '@commercetools-uikit/icons';
+import Spacings from '@commercetools-uikit/spacings';
+import Text from '@commercetools-uikit/text';
+import { SuspendedRoute } from '@commercetools-frontend/application-shell';
+import SecondaryButton from '@commercetools-uikit/secondary-button';
+import SelectInput from '@commercetools-uikit/select-input';
+import { Link, Switch, useHistory, useRouteMatch } from 'react-router-dom';
+import DataTable, { TColumn } from '@commercetools-uikit/data-table';
 import {
   usePaginationState,
   useDataTableSortingState,
-} from "@commercetools-uikit/hooks";
-import { Pagination } from "@commercetools-uikit/pagination";
+} from '@commercetools-uikit/hooks';
+import { Pagination } from '@commercetools-uikit/pagination';
 import {
   InfoMainPage,
   PageNotFound,
-} from "@commercetools-frontend/application-components";
-import { useContainerContext } from "../../context/container-context";
-import { TCustomObject, TQuery } from "../../types/generated/ctp";
-import { getErrorMessage } from "../../helpers";
-import { AttributeValue } from "../../constants";
+} from '@commercetools-frontend/application-components';
+import { useContainerContext } from '../../context/container-context';
+import { TCustomObject, TQuery } from '../../types/generated/ctp';
+import { getErrorMessage } from '../../helpers';
+import { AttributeValue } from '../../constants';
 
-import { useCustomObjectsFetcher } from "../../hooks/use-custom-object-connector/use-custom-object-connector";
-import { columnDefinitions, COLUMN_KEYS } from "./column-definitions";
-import messages from "./messages";
-import styles from "./custom-objects-list.module.css";
-import TextFilter from "./text-filter";
+import { useCustomObjectsFetcher } from '../../hooks/use-custom-object-connector/use-custom-object-connector';
+import { columnDefinitions, COLUMN_KEYS } from './column-definitions';
+import messages from './messages';
+import styles from './custom-objects-list.module.css';
+import TextFilter from './text-filter';
 
-const CreateCustomObject = lazy(() => import("../create-custom-object"));
-const CustomObjectDetails = lazy(() => import("../custom-object-details"));
+const CreateCustomObject = lazy(() => import('../create-custom-object'));
+const CustomObjectDetails = lazy(() => import('../custom-object-details'));
 
 const CustomObjectsList = () => {
   const intl = useIntl();
@@ -49,12 +49,12 @@ const CustomObjectsList = () => {
   const { push } = useHistory();
   const { hasContainers, containers } = useContainerContext();
 
-  const [key, setKey] = useState("");
+  const [key, setKey] = useState('');
   const { page, perPage } = usePaginationState();
 
-  const tableSorting = useDataTableSortingState({ key: "key", order: "asc" });
+  const tableSorting = useDataTableSortingState({ key: 'key', order: 'asc' });
   const [container, setContainer] = useState(
-    containers.map((item) => item.key)[0] || ""
+    containers.map((item) => item.key)[0] || ''
   );
 
   const { customObjectsPaginatedResult, loading, error, refetch } =
@@ -63,7 +63,7 @@ const CustomObjectsList = () => {
       offset: (page.value - 1) * perPage.value,
       sort: [`${tableSorting.value.key} ${tableSorting.value.order}`],
       container: container,
-      where: key && key !== "" ? `key="${key}"` : undefined,
+      where: key && key !== '' ? `key="${key}"` : undefined,
     });
 
   if (error) {
@@ -114,23 +114,23 @@ const CustomObjectsList = () => {
 
     const dateRegex = /\d{4}-\d{2}-\d{2}/;
     if (isString(value) && value.match(dateRegex)) {
-      return value.indexOf("T") >= 0 ? (
+      return value.indexOf('T') >= 0 ? (
         <FormattedDate
           value={value}
-          year={"numeric"}
-          month={"numeric"}
-          day={"numeric"}
-          hour={"numeric"}
-          minute={"numeric"}
+          year={'numeric'}
+          month={'numeric'}
+          day={'numeric'}
+          hour={'numeric'}
+          minute={'numeric'}
           hour12={true}
-          timeZoneName={"short"}
+          timeZoneName={'short'}
         />
       ) : (
         <FormattedDate
           value={value}
-          year={"numeric"}
-          month={"numeric"}
-          day={"numeric"}
+          year={'numeric'}
+          month={'numeric'}
+          day={'numeric'}
         />
       );
     }
@@ -279,7 +279,7 @@ const CustomObjectsList = () => {
           <Card theme="dark" type="flat">
             <Spacings.Inline scale="m" alignItems="center">
               <Text.Body intlMessage={messages.filter} />
-              <Constraints.Horizontal max={"scale"}>
+              <Constraints.Horizontal max={'scale'}>
                 <SelectInput
                   data-testid="container-filter"
                   name="container"
@@ -289,7 +289,7 @@ const CustomObjectsList = () => {
                   onChange={filterByContainer}
                 />
               </Constraints.Horizontal>
-              <Constraints.Horizontal max={"scale"}>
+              <Constraints.Horizontal max={'scale'}>
                 <TextFilter
                   placeholder={intl.formatMessage(messages.key)}
                   value={key}
@@ -313,7 +313,7 @@ const CustomObjectsList = () => {
         )}
         {count > 0 ? (
           <div data-testid="custom-objects-list">
-            <DataTable<NonNullable<TQuery["customObjects"]["results"]>[0]>
+            <DataTable<NonNullable<TQuery['customObjects']['results']>[0]>
               isCondensed
               columns={columnDefinitions(intl)}
               rows={results}
@@ -361,6 +361,6 @@ const CustomObjectsList = () => {
     </InfoMainPage>
   );
 };
-CustomObjectsList.displayName = "CustomObjectsList";
+CustomObjectsList.displayName = 'CustomObjectsList';
 
 export default CustomObjectsList;

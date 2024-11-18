@@ -15,19 +15,22 @@ const localizePath = (productdiscount: ProductDiscount) => {
 };
 
 const ProductDiscountSearchInput: FC<
-  React.HTMLAttributes<HTMLDivElement> & GenericSearchInputProps<ProductDiscount>
+  React.HTMLAttributes<HTMLDivElement> &
+    GenericSearchInputProps<ProductDiscount>
 > = (props) => {
   const { dataLocale } = useApplicationContext((context) => ({
     dataLocale: context.dataLocale ?? '',
   }));
   const optionMapper = (data: Result<ProductDiscount>) =>
-    data.productDiscounts.results.map((productDiscount: ProductDiscount): TEntity => {
-      return {
-        id: productDiscount.id,
-        name: productDiscount.name,
-        key: productDiscount.key,
-      };
-    });
+    data.productDiscounts.results.map(
+      (productDiscount: ProductDiscount): TEntity => {
+        return {
+          id: productDiscount.id,
+          name: productDiscount.name,
+          key: productDiscount.key,
+        };
+      }
+    );
 
   const variableBuilder = (text: string) => ({
     where: `name(${dataLocale} = "${text}") or description(${dataLocale} = "${text}") or key = "${text}"`,

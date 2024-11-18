@@ -1,9 +1,9 @@
-// valication-service/src/controllers/custom-object.controller.reference.spec.ts
+// valication-service/src/controllers/custom-object.controller.date-time.spec.ts
 
-import { CustomObjectController } from './custom-object.controller';
+import { CustomObjectController } from '../custom-object.controller';
 import { AttributeSchema } from '../types/validator';
 
-describe('CustomObjectController - validateReference', () => {
+describe('CustomObjectController - validateDateTime', () => {
   let controller: CustomObjectController;
 
   beforeEach(() => {
@@ -15,32 +15,19 @@ describe('CustomObjectController - validateReference', () => {
     {
       schema: {
         name: 'test',
-        type: 'Reference',
+        type: 'DateTime',
         set: false,
         required: false,
-        reference: { type: 'product' },
       },
-      value: { typeId: 'product', id: '123' },
+      value: '2022-01-01T12:34:56.999Z',
       shouldThrowError: false,
     },
     {
       schema: {
         name: 'test',
-        type: 'Reference',
+        type: 'DateTime',
         set: false,
         required: false,
-        reference: { type: 'product' },
-      },
-      value: { typeId: 'product', key: '123' },
-      shouldThrowError: false,
-    },
-    {
-      schema: {
-        name: 'test',
-        type: 'Reference',
-        set: false,
-        required: false,
-        reference: { type: 'product' },
       },
       value: null,
       shouldThrowError: false,
@@ -48,10 +35,9 @@ describe('CustomObjectController - validateReference', () => {
     {
       schema: {
         name: 'test',
-        type: 'Reference',
+        type: 'DateTime',
         set: false,
         required: false,
-        reference: { type: 'product' },
       },
       value: undefined,
       shouldThrowError: false,
@@ -59,34 +45,21 @@ describe('CustomObjectController - validateReference', () => {
     {
       schema: {
         name: 'test',
-        type: 'Reference',
+        type: 'DateTime',
         set: false,
         required: false,
-        reference: { type: 'product' },
       },
-      value: { typeId: 'category', id: '123' },
+      value: '2022-01-01T12:34:56Z',
       shouldThrowError: true,
     },
     {
       schema: {
         name: 'test',
-        type: 'Reference',
+        type: 'DateTime',
         set: false,
         required: false,
-        reference: { type: 'product' },
       },
-      value: { typeId: 'product', productId: '123' },
-      shouldThrowError: true,
-    },
-    {
-      schema: {
-        name: 'test',
-        type: 'Reference',
-        set: false,
-        required: false,
-        reference: { type: 'product' },
-      },
-      value: [{ typeId: 'product', id: '123' }],
+      value: 'random string',
       shouldThrowError: true,
     },
 
@@ -94,43 +67,19 @@ describe('CustomObjectController - validateReference', () => {
     {
       schema: {
         name: 'test',
-        type: 'Reference',
+        type: 'DateTime',
         set: false,
         required: true,
-        reference: { type: 'product' },
       },
-      value: { typeId: 'product', id: '123' },
+      value: '2022-01-01T12:34:56.000Z',
       shouldThrowError: false,
     },
     {
       schema: {
         name: 'test',
-        type: 'Reference',
+        type: 'DateTime',
         set: false,
         required: true,
-        reference: { type: 'product' },
-      },
-      value: { typeId: 'product', key: '123' },
-      shouldThrowError: false,
-    },
-    {
-      schema: {
-        name: 'test',
-        type: 'Reference',
-        set: false,
-        required: true,
-        reference: { type: 'product' },
-      },
-      value: { typeId: 'product', productId: '123' },
-      shouldThrowError: true,
-    },
-    {
-      schema: {
-        name: 'test',
-        type: 'Reference',
-        set: false,
-        required: true,
-        reference: { type: 'product' },
       },
       value: null,
       shouldThrowError: true,
@@ -138,12 +87,21 @@ describe('CustomObjectController - validateReference', () => {
     {
       schema: {
         name: 'test',
-        type: 'Reference',
+        type: 'DateTime',
         set: false,
         required: true,
-        reference: { type: 'product' },
       },
       value: undefined,
+      shouldThrowError: true,
+    },
+    {
+      schema: {
+        name: 'test',
+        type: 'DateTime',
+        set: false,
+        required: true,
+      },
+      value: 'invalid date format',
       shouldThrowError: true,
     },
 
@@ -151,32 +109,19 @@ describe('CustomObjectController - validateReference', () => {
     {
       schema: {
         name: 'test',
-        type: 'Reference',
+        type: 'DateTime',
         set: true,
         required: false,
-        reference: { type: 'product' },
       },
-      value: [{ typeId: 'product', id: '123' }],
+      value: ['2022-01-01T12:34:56.000Z'],
       shouldThrowError: false,
     },
     {
       schema: {
         name: 'test',
-        type: 'Reference',
+        type: 'DateTime',
         set: true,
         required: false,
-        reference: { type: 'product' },
-      },
-      value: [{ typeId: 'product', key: '123' }],
-      shouldThrowError: false,
-    },
-    {
-      schema: {
-        name: 'test',
-        type: 'Reference',
-        set: true,
-        required: false,
-        reference: { type: 'product' },
       },
       value: [],
       shouldThrowError: false,
@@ -184,10 +129,9 @@ describe('CustomObjectController - validateReference', () => {
     {
       schema: {
         name: 'test',
-        type: 'Reference',
+        type: 'DateTime',
         set: true,
         required: false,
-        reference: { type: 'product' },
       },
       value: undefined,
       shouldThrowError: false,
@@ -195,12 +139,11 @@ describe('CustomObjectController - validateReference', () => {
     {
       schema: {
         name: 'test',
-        type: 'Reference',
+        type: 'DateTime',
         set: true,
         required: false,
-        reference: { type: 'product' },
       },
-      value: [{ typeId: 'category', id: '123' }],
+      value: ['invalid date format'],
       shouldThrowError: true,
     },
 
@@ -208,21 +151,19 @@ describe('CustomObjectController - validateReference', () => {
     {
       schema: {
         name: 'test',
-        type: 'Reference',
+        type: 'DateTime',
         set: true,
         required: true,
-        reference: { type: 'product' },
       },
-      value: [{ typeId: 'product', id: '123' }],
+      value: ['2022-01-01T12:34:56.333Z'],
       shouldThrowError: false,
     },
     {
       schema: {
         name: 'test',
-        type: 'Reference',
+        type: 'DateTime',
         set: true,
         required: true,
-        reference: { type: 'product' },
       },
       value: [],
       shouldThrowError: true,
@@ -230,17 +171,36 @@ describe('CustomObjectController - validateReference', () => {
     {
       schema: {
         name: 'test',
-        type: 'Reference',
+        type: 'DateTime',
         set: true,
         required: true,
-        reference: { type: 'product' },
+      },
+      value: ['invalid date'],
+      shouldThrowError: true,
+    },
+    {
+      schema: {
+        name: 'test',
+        type: 'DateTime',
+        set: true,
+        required: true,
       },
       value: undefined,
       shouldThrowError: true,
     },
+    {
+      schema: {
+        name: 'test',
+        type: 'DateTime',
+        set: true,
+        required: true,
+      },
+      value: [''],
+      shouldThrowError: true,
+    },
   ];
   testCases.forEach(({ schema, value, shouldThrowError }) => {
-    it(`should ${shouldThrowError ? 'pass' : 'fail'} validation for ${schema.set ? 'set' : 'non-set'}, required ${schema.required ? 'true' : 'false'} and value: ${value} attribute`, async () => {
+    it(`should ${shouldThrowError ? 'pass' : 'fail'} validation for ${schema.set ? 'set' : 'non-set'}, required ${schema.required ? 'true' : 'false'} and value: ${typeof value === 'object' ? JSON.stringify(value) : value} attribute`, async () => {
       try {
         await controller.validateAttribute(schema as AttributeSchema, value);
         expect(shouldThrowError).toBe(false);

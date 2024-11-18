@@ -1,38 +1,60 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-import { createApiRoot } from '../client/create.client';
+import { ApolloClient, ApolloContextValue } from '@apollo/client';
 import {
   AttributeSchema,
   CustomObject,
   CustomObjectDraft,
   Schema,
-} from '../types/validator';
+} from './types/validator';
+import Create from './queries/create-custom-object';
+import Get from './queries/get-custom-object';
+import { GraphQLClient } from './types/graphql';
 
 const SCHEMA_CONTAINER = 'mc-custom-object-schema';
 export class CustomObjectController {
+  private apolloClient?: GraphQLClient;
+  private context?: ApolloContextValue;
+
+  constructor(
+    apolloClient?: GraphQLClient,
+    context?: ApolloContextValue & { target: string }
+  ) {
+    this.apolloClient = apolloClient;
+    this.context = context;
+  }
+
   async fetchCustomObject(
     container: string,
     key: string
-  ): Promise<CustomObject | null> {
+  ): Promise<CustomObject | undefined> {
     try {
-      const response = await createApiRoot()
-        .customObjects()
-        .withContainerAndKey({ container, key })
-        .get()
-        .execute();
-      return response.body;
+      const response = await this.apolloClient
+        ?.query({
+          query: Get,
+          variables: { container, key },
+          ...(this.context && { context: this.context }),
+        })
+        .then((res) => {
+          return res.data as { customObject: CustomObject };
+        });
+      return response?.customObject;
     } catch (error) {
       console.error('Error fetching custom object:', error);
-      return null;
+      return undefined;
     }
   }
 
   async createOrUpdateCustomObject(
     container: string,
     key: string,
-    value: Record<string, any>,
+    value: string,
     schemaType: string
-  ): Promise<CustomObject> {
-    await this.validateObjectBySchemaType(value, schemaType);
+  ): Promise<CustomObject | undefined> {
+    try {
+      const jsonValue = JSON.parse(value);
+      await this.validateObjectBySchemaType(jsonValue, schemaType);
+    } catch (error) {
+      throw error;
+    }
 
     const draft: CustomObjectDraft = {
       container,
@@ -40,14 +62,22 @@ export class CustomObjectController {
       value,
     };
 
-    const response = await createApiRoot()
-      .customObjects()
-      .post({
-        body: draft,
+    const response = await this.apolloClient
+      ?.query({
+        query: Create,
+        variables: {
+          draft: {
+            container,
+            key,
+            value,
+          },
+        },
       })
-      .execute();
+      .then((res) => {
+        return res.data as CustomObject;
+      });
 
-    return response.body;
+    return response;
   }
 
   private async validateObjectBySchemaType(
@@ -61,6 +91,7 @@ export class CustomObjectController {
       SCHEMA_CONTAINER,
       schemaType
     );
+
     if (!schemaObject) {
       throw new Error(`Schema not found for type: ${schemaType}`);
     }
@@ -139,7 +170,9 @@ export class CustomObjectController {
       return;
     } else if (!Array.isArray(value)) {
       throw new Error(
-        `Invalid type for set attribute: ${schema.name}. Expected Array, got ${typeof value}`
+        `Invalid type for set attribute: ${
+          schema.name
+        }. Expected Array, got ${typeof value}`
       );
     }
     for (const item of value) {
@@ -165,7 +198,9 @@ export class CustomObjectController {
     } else {
       if (schema.required && typeof value !== 'boolean') {
         throw new Error(
-          `Invalid type for attribute: ${schema.name}. Expected Boolean, got ${typeof value}`
+          `Invalid type for attribute: ${
+            schema.name
+          }. Expected Boolean, got ${typeof value}`
         );
       }
     }
@@ -180,7 +215,9 @@ export class CustomObjectController {
     } else {
       if (schema.required && typeof value !== 'string') {
         throw new Error(
-          `Invalid type for attribute: ${schema.name}. Expected String, got ${typeof value}`
+          `Invalid type for attribute: ${
+            schema.name
+          }. Expected String, got ${typeof value}`
         );
       }
     }
@@ -195,7 +232,9 @@ export class CustomObjectController {
     } else {
       if (schema.required && typeof value !== 'number') {
         throw new Error(
-          `Invalid type for attribute: ${schema.name}. Expected Number, got ${typeof value}`
+          `Invalid type for attribute: ${
+            schema.name
+          }. Expected Number, got ${typeof value}`
         );
       }
     }
@@ -220,7 +259,9 @@ export class CustomObjectController {
 
       if (schema.required && typeof value !== 'string') {
         throw new Error(
-          `Invalid type for enum attribute: ${schema.name}. Expected String, got ${typeof value}`
+          `Invalid type for enum attribute: ${
+            schema.name
+          }. Expected String, got ${typeof value}`
         );
       }
     }
@@ -244,7 +285,9 @@ export class CustomObjectController {
 
       if (schema.required && typeof value !== 'string') {
         throw new Error(
-          `Invalid type for enum attribute: ${schema.name}. Expected String, got ${typeof value}`
+          `Invalid type for enum attribute: ${
+            schema.name
+          }. Expected String, got ${typeof value}`
         );
       }
     }
@@ -262,7 +305,9 @@ export class CustomObjectController {
       }
       if (typeof value !== 'object' || !value) {
         throw new Error(
-          `Invalid type for reference attribute: ${schema.name}. Expected object, got ${typeof value}`
+          `Invalid type for reference attribute: ${
+            schema.name
+          }. Expected object, got ${typeof value}`
         );
       }
 
@@ -305,12 +350,16 @@ export class CustomObjectController {
         typeof value.currencyCode !== 'string'
       ) {
         throw new Error(
-          `Invalid type for attribute: ${schema.name}. Expected Money, got ${typeof value}`
+          `Invalid type for attribute: ${
+            schema.name
+          }. Expected Money, got ${typeof value}`
         );
       }
       if (isNaN(parseInt(value.amount))) {
         throw new Error(
-          `Invalid type for attribute: ${schema.name}. Expected amount, got ${typeof value.amount}`
+          `Invalid type for attribute: ${
+            schema.name
+          }. Expected amount, got ${typeof value.amount}`
         );
       }
     }
@@ -383,7 +432,9 @@ export class CustomObjectController {
       }
       if (typeof value !== 'object' || value === null) {
         throw new Error(
-          `Invalid type for attribute: ${schema.name}. Expected LocalizedString, got ${typeof value}`
+          `Invalid type for attribute: ${
+            schema.name
+          }. Expected LocalizedString, got ${typeof value}`
         );
       }
       if (Object.keys(value).length === 0) {
@@ -415,7 +466,9 @@ export class CustomObjectController {
       }
       if (typeof value !== 'object' || !value) {
         throw new Error(
-          `Invalid type for attribute: ${schema.name}. Expected Object, got ${typeof value}`
+          `Invalid type for attribute: ${
+            schema.name
+          }. Expected Object, got ${typeof value}`
         );
       }
       if (schema.attributes?.length) {

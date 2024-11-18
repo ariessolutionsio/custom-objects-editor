@@ -1,5 +1,5 @@
 import { AttributeSchema } from '../types/validator';
-import { CustomObjectController } from './custom-object.controller';
+import { CustomObjectController } from '../custom-object.controller';
 
 describe('CustomObjectController', () => {
   let controller: CustomObjectController;

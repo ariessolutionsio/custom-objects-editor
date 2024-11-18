@@ -1,31 +1,31 @@
-import React, { FC } from "react";
-import get from "lodash/get";
-import map from "lodash/map";
-import { FormattedMessage, useIntl } from "react-intl";
-import { useApplicationContext } from "@commercetools-frontend/application-shell-connectors";
-import Card from "@commercetools-uikit/card";
-import CollapsiblePanel from "@commercetools-uikit/collapsible-panel";
-import SelectField from "@commercetools-uikit/select-field";
-import TextField from "@commercetools-uikit/text-field";
-import Spacings from "@commercetools-uikit/spacings";
-import { useFormik } from "formik";
-import { useContainerContext } from "../../context/container-context";
-import { getAttributeValidation, getAttributeValues } from "../../form-utils";
-import AttributeField from "./attribute-field";
-import messages from "./messages";
-import styles from "./form.module.css";
-import { Items } from "./custom-object-form";
+import React, { FC } from 'react';
+import get from 'lodash/get';
+import map from 'lodash/map';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { useApplicationContext } from '@commercetools-frontend/application-shell-connectors';
+import Card from '@commercetools-uikit/card';
+import CollapsiblePanel from '@commercetools-uikit/collapsible-panel';
+import SelectField from '@commercetools-uikit/select-field';
+import TextField from '@commercetools-uikit/text-field';
+import Spacings from '@commercetools-uikit/spacings';
+import { useFormik } from 'formik';
+import { useContainerContext } from '../../context/container-context';
+import { getAttributeValidation, getAttributeValues } from '../../form-utils';
+import AttributeField from './attribute-field';
+import messages from './messages';
+import styles from './form.module.css';
+import { Items } from './custom-object-form';
 
 type Formik = ReturnType<typeof useFormik<Items>>;
 
 type Props = {
   initialValues: Items;
   values: Items;
-  touched: Formik["touched"];
-  errors: Formik["errors"];
-  handleBlur: Formik["handleBlur"];
-  handleChange: Formik["handleChange"];
-  setFieldValue: Formik["setFieldValue"];
+  touched: Formik['touched'];
+  errors: Formik['errors'];
+  handleBlur: Formik['handleBlur'];
+  handleChange: Formik['handleChange'];
+  setFieldValue: Formik['setFieldValue'];
   updateSchemaValidation: (valueSchema: any) => void;
 };
 
@@ -72,13 +72,13 @@ const Form: FC<Props> = ({
     if (values.container) {
       const container = JSON.parse(values.container);
       const attributes = container.value.attributes;
-      setFieldValue("attributes", null);
+      setFieldValue('attributes', null);
       const value =
         values.container !== initialValues.container
           ? getAttributeValues(attributes, currencies, languages)
           : initialValues.value;
-      setFieldValue("value", value);
-      setFieldValue("attributes", attributes);
+      setFieldValue('value', value);
+      setFieldValue('attributes', attributes);
     }
   }, [
     currencies,
@@ -102,7 +102,7 @@ const Form: FC<Props> = ({
           </CollapsiblePanel.Header>
         }
       >
-        <Card type="flat" className={styles["field-card"]} insetScale="s">
+        <Card type="flat" className={styles['field-card']} insetScale="s">
           <SelectField
             name="container"
             title={<FormattedMessage {...messages.containerTitle} />}
@@ -116,10 +116,10 @@ const Form: FC<Props> = ({
             // renderError={(key, error) => error}
           />
         </Card>
-        <Card type="flat" className={styles["field-card"]} insetScale="s">
+        <Card type="flat" className={styles['field-card']} insetScale="s">
           <TextField
             name="key"
-            value={values.key || ""}
+            value={values.key || ''}
             title={<FormattedMessage {...messages.keyTitle} />}
             isRequired
             //errors={errors.key}
@@ -145,7 +145,7 @@ const Form: FC<Props> = ({
                 key={index}
                 type="flat"
                 insetScale="s"
-                className={styles["field-card"]}
+                className={styles['field-card']}
               >
                 <AttributeField
                   key={index}
@@ -171,6 +171,6 @@ const Form: FC<Props> = ({
     </Spacings.Stack>
   );
 };
-Form.displayName = "Form";
+Form.displayName = 'Form';
 
 export default Form;

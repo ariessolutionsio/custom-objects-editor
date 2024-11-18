@@ -1,1 +1,1 @@
-export { default } from "./create-custom-object";
+export { default } from './create-custom-object';

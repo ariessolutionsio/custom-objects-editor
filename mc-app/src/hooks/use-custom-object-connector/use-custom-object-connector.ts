@@ -1,16 +1,17 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import { createApolloClient } from '@commercetools-frontend/application-shell';
+
 import { ApolloError, ApolloQueryResult } from '@apollo/client';
 import {
   useMcMutation,
   useMcQuery,
 } from '@commercetools-frontend/application-shell';
-import { useApplicationContext } from '@commercetools-frontend/application-shell-connectors';
 import { GRAPHQL_TARGETS } from '@commercetools-frontend/constants';
-import axios from 'axios';
+import { CustomObjectController } from 'shared-code';
 import { extractErrorFromGraphQlResponse } from '../../helpers';
 import {
   TCustomObjectDraft,
   TMutation,
-  TMutation_CreateOrUpdateCustomObjectArgs,
   TMutation_DeleteCustomObjectArgs,
   TQuery,
   TQuery_CustomObjectArgs,
@@ -19,7 +20,6 @@ import {
 import DeleteCustomObject from './delete-custom-object.rest.graphql';
 import GetCustomObject from './get-custom-object.rest.graphql';
 import GetCustomObjects from './get-custom-objects.ctp.graphql';
-import UpdateCustomObject from './update-custom-object.rest.graphql';
 
 type TUseCustomObjectsFetcher = (variables: TQuery_CustomObjectsArgs) => {
   customObjectsPaginatedResult?: TQuery['customObjects'];
@@ -27,6 +27,8 @@ type TUseCustomObjectsFetcher = (variables: TQuery_CustomObjectsArgs) => {
   loading: boolean;
   refetch(): Promise<ApolloQueryResult<TQuery>>;
 };
+
+const client = createApolloClient();
 
 export const useCustomObjectsFetcher: TUseCustomObjectsFetcher = (
   variables: TQuery_CustomObjectsArgs
@@ -78,21 +80,7 @@ export const useCustomObjectFetcher: TUseCustomObjectFetcher = (
 };
 
 export const useCustomObjectUpdater = () => {
-  const [updateCustomObject] = useMcMutation<
-    TMutation,
-    TMutation_CreateOrUpdateCustomObjectArgs
-  >(UpdateCustomObject);
-
-  const { customObjectEndpoint, useCustomObjectEndpoint } =
-    useApplicationContext<
-      {
-        customObjectEndpoint: string;
-        useCustomObjectEndpoint: string;
-      },
-      any
-    >((context) => context.environment);
-
-  const updateWithCustomObjectEndpoint = async ({
+  const execute = async ({
     draft,
     onCompleted,
     onError,
@@ -101,68 +89,30 @@ export const useCustomObjectUpdater = () => {
     onCompleted?: () => void;
     onError?: (message?: string) => void;
   }) => {
+    const controller = new CustomObjectController(client, {
+      target: GRAPHQL_TARGETS.COMMERCETOOLS_PLATFORM,
+    });
     try {
-      await axios
-        .post(
-          customObjectEndpoint,
-          {
-            container: draft.container,
-            key: draft.key,
-            value: draft.value,
-            schemaType: draft.container,
-          },
-          {
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          }
+      await controller
+        .createOrUpdateCustomObject(
+          draft.container,
+          draft.key,
+          draft.value,
+          draft.container
         )
-        .then(async (res) => {
-          if (res?.status === 200) {
-            return res.data;
-          }
-          throw res.status;
-        });
-
-      onCompleted && onCompleted();
-    } catch (error) {
-      onError && onError(error.message);
-    }
-  };
-
-  const updateWithGraphQL = async ({
-    draft,
-    onCompleted,
-    onError,
-  }: {
-    draft: NonNullable<TCustomObjectDraft>;
-    onCompleted?: () => void;
-    onError?: (message?: string) => void;
-  }) => {
-    try {
-      return await updateCustomObject({
-        context: {
-          target: GRAPHQL_TARGETS.COMMERCETOOLS_PLATFORM,
-        },
-        variables: {
-          draft: draft,
-        },
-        onCompleted() {
+        .then(() => {
           onCompleted && onCompleted();
-        },
-        onError({ message }) {
-          onError && onError(message);
-        },
-      });
+        })
+        .catch((error) => {
+          onError && onError(error.message);
+        });
     } catch (graphQlResponse) {
       throw extractErrorFromGraphQlResponse(graphQlResponse);
     }
   };
 
   return {
-    execute: useCustomObjectEndpoint
-      ? updateWithCustomObjectEndpoint
-      : updateWithGraphQL,
+    execute,
   };
 };
 

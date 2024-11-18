@@ -1,6 +1,6 @@
-import React, { PropsWithChildren, useContext } from "react";
-import map from "lodash/map";
-import { TCustomObject } from "../types/generated/ctp";
+import React, { PropsWithChildren, useContext } from 'react';
+import map from 'lodash/map';
+import { TCustomObject } from '../types/generated/ctp';
 
 interface ContainerContext {
   hasContainers: boolean;
@@ -11,14 +11,14 @@ interface ContainerContext {
 const containerContext = React.createContext<ContainerContext>({
   containers: [],
   hasContainers: false,
-  where: "",
+  where: '',
 });
 
 const useContainerContext = (): ContainerContext => {
   const context = useContext(containerContext);
   if (context === undefined) {
     throw new Error(
-      "useContainerContext must be used within a ContainerContextProvider"
+      'useContainerContext must be used within a ContainerContextProvider'
     );
   }
   return context;
@@ -30,7 +30,7 @@ const ContainerProvider: React.FC<Props> = ({ results, children }) => {
   const containerContextValue: ContainerContext = {
     hasContainers: (results && results.length > 0) || false,
     containers: results || [],
-    where: `container in (${map(results, ({ key }) => `"${key}"`).join(",")})`,
+    where: `container in (${map(results, ({ key }) => `"${key}"`).join(',')})`,
   };
 
   return (

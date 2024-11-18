@@ -1,1 +1,1 @@
-export { default } from "./entry-point";
+export { default } from './entry-point';

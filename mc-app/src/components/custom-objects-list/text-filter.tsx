@@ -1,12 +1,12 @@
-import React, { FC, useState } from "react";
-import { useIntl } from "react-intl";
-import SecondaryIconButton from "@commercetools-uikit/secondary-icon-button";
-import { CloseIcon, SearchIcon } from "@commercetools-uikit/icons";
-import TextInput from "@commercetools-uikit/text-input";
-import styles from "./text-filter.module.css";
-import messages from "./messages";
+import React, { FC, useState } from 'react';
+import { useIntl } from 'react-intl';
+import SecondaryIconButton from '@commercetools-uikit/secondary-icon-button';
+import { CloseIcon, SearchIcon } from '@commercetools-uikit/icons';
+import TextInput from '@commercetools-uikit/text-input';
+import styles from './text-filter.module.css';
+import messages from './messages';
 
-export const ENTER = "Enter";
+export const ENTER = 'Enter';
 
 type Props = {
   value: string;
@@ -20,8 +20,8 @@ const TextFilter: FC<Props> = ({ value, onChange, onSubmit, placeholder }) => {
   const [filterPerformed, setFilterPerformed] = useState(false);
 
   function clear() {
-    onChange("");
-    onSubmit("");
+    onChange('');
+    onSubmit('');
     setFilterPerformed(false);
   }
 
@@ -75,6 +75,6 @@ const TextFilter: FC<Props> = ({ value, onChange, onSubmit, placeholder }) => {
     </div>
   );
 };
-TextFilter.displayName = "TextFilter";
+TextFilter.displayName = 'TextFilter';
 
 export default TextFilter;

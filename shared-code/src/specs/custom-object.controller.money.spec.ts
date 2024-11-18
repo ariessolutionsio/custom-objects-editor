@@ -1,9 +1,9 @@
-// valication-service/src/controllers/custom-object.controller.date-time.spec.ts
+// valication-service/src/controllers/custom-object.controller.money.spec.ts
 
-import { CustomObjectController } from './custom-object.controller';
+import { CustomObjectController } from '../custom-object.controller';
 import { AttributeSchema } from '../types/validator';
 
-describe('CustomObjectController - validateDateTime', () => {
+describe('CustomObjectController - validateMoney', () => {
   let controller: CustomObjectController;
 
   beforeEach(() => {
@@ -15,17 +15,27 @@ describe('CustomObjectController - validateDateTime', () => {
     {
       schema: {
         name: 'test',
-        type: 'DateTime',
+        type: 'Money',
         set: false,
         required: false,
       },
-      value: '2022-01-01T12:34:56.999Z',
+      value: { amount: '1000', currencyCode: 'USD' },
       shouldThrowError: false,
     },
     {
       schema: {
         name: 'test',
-        type: 'DateTime',
+        type: 'Money',
+        set: false,
+        required: false,
+      },
+      value: { amount: 1000, currencyCode: 'USD' },
+      shouldThrowError: true,
+    },
+    {
+      schema: {
+        name: 'test',
+        type: 'Money',
         set: false,
         required: false,
       },
@@ -35,7 +45,7 @@ describe('CustomObjectController - validateDateTime', () => {
     {
       schema: {
         name: 'test',
-        type: 'DateTime',
+        type: 'Money',
         set: false,
         required: false,
       },
@@ -45,21 +55,31 @@ describe('CustomObjectController - validateDateTime', () => {
     {
       schema: {
         name: 'test',
-        type: 'DateTime',
+        type: 'Money',
         set: false,
         required: false,
       },
-      value: '2022-01-01T12:34:56Z',
+      value: { amount: 'invalid', currencyCode: 'USD' },
       shouldThrowError: true,
     },
     {
       schema: {
         name: 'test',
-        type: 'DateTime',
+        type: 'Money',
         set: false,
         required: false,
       },
-      value: 'random string',
+      value: { amount: '1000' },
+      shouldThrowError: true,
+    },
+    {
+      schema: {
+        name: 'test',
+        type: 'Money',
+        set: false,
+        required: false,
+      },
+      value: { currencyCode: 'USD' },
       shouldThrowError: true,
     },
 
@@ -67,17 +87,17 @@ describe('CustomObjectController - validateDateTime', () => {
     {
       schema: {
         name: 'test',
-        type: 'DateTime',
+        type: 'Money',
         set: false,
         required: true,
       },
-      value: '2022-01-01T12:34:56.000Z',
+      value: { amount: '1000', currencyCode: 'EUR' },
       shouldThrowError: false,
     },
     {
       schema: {
         name: 'test',
-        type: 'DateTime',
+        type: 'Money',
         set: false,
         required: true,
       },
@@ -87,7 +107,7 @@ describe('CustomObjectController - validateDateTime', () => {
     {
       schema: {
         name: 'test',
-        type: 'DateTime',
+        type: 'Money',
         set: false,
         required: true,
       },
@@ -97,11 +117,31 @@ describe('CustomObjectController - validateDateTime', () => {
     {
       schema: {
         name: 'test',
-        type: 'DateTime',
+        type: 'Money',
         set: false,
         required: true,
       },
-      value: 'invalid date format',
+      value: { amount: 'invalid', currencyCode: 'USD' },
+      shouldThrowError: true,
+    },
+    {
+      schema: {
+        name: 'test',
+        type: 'Money',
+        set: false,
+        required: true,
+      },
+      value: { amount: '1000' },
+      shouldThrowError: true,
+    },
+    {
+      schema: {
+        name: 'test',
+        type: 'Money',
+        set: false,
+        required: true,
+      },
+      value: { currencyCode: 'USD' },
       shouldThrowError: true,
     },
 
@@ -109,17 +149,20 @@ describe('CustomObjectController - validateDateTime', () => {
     {
       schema: {
         name: 'test',
-        type: 'DateTime',
+        type: 'Money',
         set: true,
         required: false,
       },
-      value: ['2022-01-01T12:34:56.000Z'],
+      value: [
+        { amount: '1000', currencyCode: 'USD' },
+        { amount: '2000', currencyCode: 'EUR' },
+      ],
       shouldThrowError: false,
     },
     {
       schema: {
         name: 'test',
-        type: 'DateTime',
+        type: 'Money',
         set: true,
         required: false,
       },
@@ -129,7 +172,7 @@ describe('CustomObjectController - validateDateTime', () => {
     {
       schema: {
         name: 'test',
-        type: 'DateTime',
+        type: 'Money',
         set: true,
         required: false,
       },
@@ -139,11 +182,31 @@ describe('CustomObjectController - validateDateTime', () => {
     {
       schema: {
         name: 'test',
-        type: 'DateTime',
+        type: 'Money',
         set: true,
         required: false,
       },
-      value: ['invalid date format'],
+      value: [{ amount: 'invalid', currencyCode: 'USD' }],
+      shouldThrowError: true,
+    },
+    {
+      schema: {
+        name: 'test',
+        type: 'Money',
+        set: true,
+        required: false,
+      },
+      value: [{ amount: '1000' }],
+      shouldThrowError: true,
+    },
+    {
+      schema: {
+        name: 'test',
+        type: 'Money',
+        set: true,
+        required: false,
+      },
+      value: [{ currencyCode: 'USD' }],
       shouldThrowError: true,
     },
 
@@ -151,17 +214,20 @@ describe('CustomObjectController - validateDateTime', () => {
     {
       schema: {
         name: 'test',
-        type: 'DateTime',
+        type: 'Money',
         set: true,
         required: true,
       },
-      value: ['2022-01-01T12:34:56.333Z'],
+      value: [
+        { amount: '1000', currencyCode: 'USD' },
+        { amount: '2000', currencyCode: 'EUR' },
+      ],
       shouldThrowError: false,
     },
     {
       schema: {
         name: 'test',
-        type: 'DateTime',
+        type: 'Money',
         set: true,
         required: true,
       },
@@ -171,17 +237,7 @@ describe('CustomObjectController - validateDateTime', () => {
     {
       schema: {
         name: 'test',
-        type: 'DateTime',
-        set: true,
-        required: true,
-      },
-      value: ['invalid date'],
-      shouldThrowError: true,
-    },
-    {
-      schema: {
-        name: 'test',
-        type: 'DateTime',
+        type: 'Money',
         set: true,
         required: true,
       },
@@ -191,16 +247,26 @@ describe('CustomObjectController - validateDateTime', () => {
     {
       schema: {
         name: 'test',
-        type: 'DateTime',
+        type: 'Money',
         set: true,
         required: true,
       },
-      value: [''],
+      value: [{ amount: 'invalid', currencyCode: 'USD' }],
+      shouldThrowError: true,
+    },
+    {
+      schema: {
+        name: 'test',
+        type: 'Money',
+        set: true,
+        required: true,
+      },
+      value: [{ amount: '1000' }],
       shouldThrowError: true,
     },
   ];
   testCases.forEach(({ schema, value, shouldThrowError }) => {
-    it(`should ${shouldThrowError ? 'pass' : 'fail'} validation for ${schema.set ? 'set' : 'non-set'}, required ${schema.required ? 'true' : 'false'} and value: ${typeof value === 'object' ? JSON.stringify(value) : value} attribute`, async () => {
+    it(`should ${shouldThrowError ? 'pass' : 'fail'} validation for ${schema.set ? 'set' : 'non-set'}, required ${schema.required ? 'true' : 'false'} and value: ${JSON.stringify(value)} attribute`, async () => {
       try {
         await controller.validateAttribute(schema as AttributeSchema, value);
         expect(shouldThrowError).toBe(false);

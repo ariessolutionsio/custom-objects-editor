@@ -5,12 +5,13 @@
   "main": "index.js",
   "private": true,
   "scripts": {
+    "preinstall": "yarn --cwd ../shared-code install && yarn --cwd ../shared-code run build",
     "start": "node build/index.js",
     "gcp-build": "tsc",
     "start:dev": "concurrently -k \"tsc --watch\" \"nodemon -q build/index.js\"",
     "build": "rimraf ./build && tsc",
     "lint": "eslint . --ext .ts",
-    "prettier": "prettier --write '**/*.{js,ts}'",
+    "format": "prettier --write '**/*.{js,ts}'",
     "test": "jest --config jest.config.cjs",
     "test:watch": "jest --watch",
     "connector:post-deploy": "node build/connector/post-deploy.js",
@@ -38,6 +39,7 @@
     "typescript": "^5.1.6"
   },
   "dependencies": {
+    "@apollo/client": "^3.11.10",
     "@commercetools-backend/loggers": "^21.19.0",
     "@commercetools/platform-sdk": "^4.0.0",
     "@commercetools/sdk-client-v2": "^2.0.0",
@@ -45,6 +47,10 @@
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "graphql": "^16.9.0",
+    "graphql-request": "^7.1.2",
+    "shared-code": "link:../shared-code",
     "validator": "^13.11.0"
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610"
 }

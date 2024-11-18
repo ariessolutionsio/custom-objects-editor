@@ -1,21 +1,21 @@
-import React, { FC } from "react";
-import includes from "lodash/includes";
-import { useApplicationContext } from "@commercetools-frontend/application-shell-connectors";
-import LocalizedTextInput from "@commercetools-uikit/localized-text-input";
-import Spacings from "@commercetools-uikit/spacings";
-import { useFormik } from "formik";
-import { get } from "lodash";
+import React, { FC } from 'react';
+import includes from 'lodash/includes';
+import { useApplicationContext } from '@commercetools-frontend/application-shell-connectors';
+import LocalizedTextInput from '@commercetools-uikit/localized-text-input';
+import Spacings from '@commercetools-uikit/spacings';
+import { useFormik } from 'formik';
+import { get } from 'lodash';
 import {
   ATTRIBUTES,
   AttributeValue,
   REFERENCE_BY,
   TYPES,
-} from "../../constants";
-import Attribute from "./attribute";
-import EnumAttributes from "./enum-attributes";
-import LocalizedEnumAttributes from "./localized-enum-attributes";
-import ObjectAttributes from "./object-attributes";
-import ReferenceAttribute from "./reference-attribute";
+} from '../../constants';
+import Attribute from './attribute';
+import EnumAttributes from './enum-attributes';
+import LocalizedEnumAttributes from './localized-enum-attributes';
+import ObjectAttributes from './object-attributes';
+import ReferenceAttribute from './reference-attribute';
 
 type TFormValues = {
   name?: string;
@@ -36,8 +36,8 @@ type Props = {
   value: AttributeValue;
   touched: any;
   errors: any;
-  handleBlur: Formik["handleBlur"];
-  handleChange: Formik["handleChange"];
+  handleBlur: Formik['handleBlur'];
+  handleChange: Formik['handleChange'];
   remove: () => void;
   removeDisabled?: boolean;
   isDisplayed?: boolean;
@@ -67,8 +67,8 @@ const AttributeGroup: FC<Props> = ({
             name: `${name}.${ATTRIBUTES.Attributes}`,
             value: [
               {
-                name: "",
-                type: "",
+                name: '',
+                type: '',
                 set: false,
                 required: false,
               },
@@ -81,7 +81,7 @@ const AttributeGroup: FC<Props> = ({
             name: `${name}.${ATTRIBUTES.Reference}`,
             value: {
               by: REFERENCE_BY.Id,
-              type: "",
+              type: '',
             },
           },
         });
@@ -89,7 +89,7 @@ const AttributeGroup: FC<Props> = ({
         handleChange({
           target: {
             name: `${name}.${ATTRIBUTES.Enum}`,
-            value: [{ value: "", label: "" }],
+            value: [{ value: '', label: '' }],
           },
         });
       } else if (eventValue === TYPES.LocalizedEnum) {
@@ -98,7 +98,7 @@ const AttributeGroup: FC<Props> = ({
             name: `${name}.${ATTRIBUTES.LocalizedEnum}`,
             value: [
               {
-                value: "",
+                value: '',
                 label:
                   LocalizedTextInput.createLocalizedString(projectLanguages),
               },
@@ -169,6 +169,6 @@ const AttributeGroup: FC<Props> = ({
     </Spacings.Stack>
   );
 };
-AttributeGroup.displayName = "AttributeGroup";
+AttributeGroup.displayName = 'AttributeGroup';
 
 export default AttributeGroup;

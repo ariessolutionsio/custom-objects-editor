@@ -11,9 +11,7 @@ import StoreSearch from './store-search.graphql';
 import { Store } from './types';
 
 const localizePath = (store: Store) => {
-  return `${store.name} - key: ${
-    store.key
-  }`;
+  return `${store.name} - key: ${store.key}`;
 };
 const StoreSearchInput: FC<
   React.HTMLAttributes<HTMLDivElement> & GenericSearchInputProps<Store>

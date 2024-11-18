@@ -1,6 +1,6 @@
 // valication-service/src/controllers/custom-object.controller.date.spec.ts
 
-import { CustomObjectController } from './custom-object.controller';
+import { CustomObjectController } from '../custom-object.controller';
 import { AttributeSchema } from '../types/validator';
 
 describe('CustomObjectController - validateDate', () => {

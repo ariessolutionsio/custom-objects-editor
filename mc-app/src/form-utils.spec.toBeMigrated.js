@@ -1,21 +1,21 @@
-import React from "react";
-import faker from "faker";
-import camelCase from "lodash/camelCase";
-import reduce from "lodash/reduce";
-import times from "lodash/times";
-import * as yup from "yup";
-import { FormattedMessage } from "react-intl";
-import LocalizedTextInput from "@commercetools-uikit/localized-text-input";
-import { REFERENCE_BY, REFERENCE_TYPES, TYPES } from "./constants";
-import { getAttributeValues, getAttributeValidation } from "./form-utils";
-import messages from "./components/custom-object-form/messages";
+import React from 'react';
+import faker from 'faker';
+import camelCase from 'lodash/camelCase';
+import reduce from 'lodash/reduce';
+import times from 'lodash/times';
+import * as yup from 'yup';
+import { FormattedMessage } from 'react-intl';
+import LocalizedTextInput from '@commercetools-uikit/localized-text-input';
+import { REFERENCE_BY, REFERENCE_TYPES, TYPES } from './constants';
+import { getAttributeValues, getAttributeValidation } from './form-utils';
+import messages from './components/custom-object-form/messages';
 
 const currencies = times(2, () => faker.finance.currencyCode());
 const languages = times(2, () => faker.random.locale());
 
-describe("attribute utilities", () => {
-  describe("attribute values", () => {
-    it("when attribute is a string type, should return empty string as initial value", () => {
+describe('attribute utilities', () => {
+  describe('attribute values', () => {
+    it('when attribute is a string type, should return empty string as initial value', () => {
       const name = faker.random.words();
       const attributes = [
         {
@@ -23,11 +23,11 @@ describe("attribute utilities", () => {
           type: TYPES.String,
         },
       ];
-      const values = { [camelCase(name)]: "" };
+      const values = { [camelCase(name)]: '' };
       expect(getAttributeValues(attributes)).toEqual(values);
     });
 
-    it("when attribute is a localized string type, should return empty localized text input value as initial value", () => {
+    it('when attribute is a localized string type, should return empty localized text input value as initial value', () => {
       const name = faker.random.words();
       const attributes = [
         {
@@ -43,7 +43,7 @@ describe("attribute utilities", () => {
       );
     });
 
-    it("when attribute is a number type, should return empty string as initial value", () => {
+    it('when attribute is a number type, should return empty string as initial value', () => {
       const name = faker.random.words();
       const attributes = [
         {
@@ -51,11 +51,11 @@ describe("attribute utilities", () => {
           type: TYPES.Number,
         },
       ];
-      const values = { [camelCase(name)]: "" };
+      const values = { [camelCase(name)]: '' };
       expect(getAttributeValues(attributes)).toEqual(values);
     });
 
-    it("when attribute is a boolean type, should return false as initial value", () => {
+    it('when attribute is a boolean type, should return false as initial value', () => {
       const name = faker.random.words();
       const attributes = [
         {
@@ -67,7 +67,7 @@ describe("attribute utilities", () => {
       expect(getAttributeValues(attributes)).toEqual(values);
     });
 
-    it("when attribute is an enum type, should return empty string as initial value", () => {
+    it('when attribute is an enum type, should return empty string as initial value', () => {
       const name = faker.random.words();
       const attributes = [
         {
@@ -75,11 +75,11 @@ describe("attribute utilities", () => {
           type: TYPES.Enum,
         },
       ];
-      const values = { [camelCase(name)]: "" };
+      const values = { [camelCase(name)]: '' };
       expect(getAttributeValues(attributes)).toEqual(values);
     });
 
-    it("when attribute is a localized enum type, should return empty string as initial value", () => {
+    it('when attribute is a localized enum type, should return empty string as initial value', () => {
       const name = faker.random.words();
       const attributes = [
         {
@@ -87,11 +87,11 @@ describe("attribute utilities", () => {
           type: TYPES.LocalizedEnum,
         },
       ];
-      const values = { [camelCase(name)]: "" };
+      const values = { [camelCase(name)]: '' };
       expect(getAttributeValues(attributes)).toEqual(values);
     });
 
-    it("when attribute is a money type, should return empty amount and first currency code as initial value", () => {
+    it('when attribute is a money type, should return empty amount and first currency code as initial value', () => {
       const name = faker.random.words();
       const attributes = [
         {
@@ -100,12 +100,12 @@ describe("attribute utilities", () => {
         },
       ];
       const values = {
-        [camelCase(name)]: { amount: "", currencyCode: currencies[0] },
+        [camelCase(name)]: { amount: '', currencyCode: currencies[0] },
       };
       expect(getAttributeValues(attributes, currencies)).toEqual(values);
     });
 
-    it("when attribute is a date type, should return empty string as initial value", () => {
+    it('when attribute is a date type, should return empty string as initial value', () => {
       const name = faker.random.words();
       const attributes = [
         {
@@ -113,11 +113,11 @@ describe("attribute utilities", () => {
           type: TYPES.Date,
         },
       ];
-      const values = { [camelCase(name)]: "" };
+      const values = { [camelCase(name)]: '' };
       expect(getAttributeValues(attributes)).toEqual(values);
     });
 
-    it("when attribute is a time type, should return empty string as initial value", () => {
+    it('when attribute is a time type, should return empty string as initial value', () => {
       const name = faker.random.words();
       const attributes = [
         {
@@ -125,11 +125,11 @@ describe("attribute utilities", () => {
           type: TYPES.Time,
         },
       ];
-      const values = { [camelCase(name)]: "" };
+      const values = { [camelCase(name)]: '' };
       expect(getAttributeValues(attributes)).toEqual(values);
     });
 
-    it("when attribute is a datetime type, should return empty string as initial value", () => {
+    it('when attribute is a datetime type, should return empty string as initial value', () => {
       const name = faker.random.words();
       const attributes = [
         {
@@ -137,12 +137,12 @@ describe("attribute utilities", () => {
           type: TYPES.DateTime,
         },
       ];
-      const values = { [camelCase(name)]: "" };
+      const values = { [camelCase(name)]: '' };
       expect(getAttributeValues(attributes)).toEqual(values);
     });
 
     // commercetools reference type: https://docs.commercetools.com/http-api-types#references
-    it("when attribute is a reference type, should return a reference type with reference by as an empty string as initial value", () => {
+    it('when attribute is a reference type, should return a reference type with reference by as an empty string as initial value', () => {
       const name = faker.random.words();
       const reference = {
         by: faker.random.arrayElement(Object.values(REFERENCE_BY)),
@@ -156,12 +156,12 @@ describe("attribute utilities", () => {
         },
       ];
       const values = {
-        [camelCase(name)]: { typeId: reference.type, [reference.by]: "" },
+        [camelCase(name)]: { typeId: reference.type, [reference.by]: '' },
       };
       expect(getAttributeValues(attributes)).toEqual(values);
     });
 
-    it("when attribute is an object type, should construct an object based on its attributes as initial value", () => {
+    it('when attribute is an object type, should construct an object based on its attributes as initial value', () => {
       const name = faker.random.words();
       const nestedAttributes = [
         {
@@ -176,14 +176,14 @@ describe("attribute utilities", () => {
           attributes: nestedAttributes,
         },
       ];
-      const value = { [camelCase(`${name}-nested`)]: "" };
+      const value = { [camelCase(`${name}-nested`)]: '' };
       const values = {
         [camelCase(name)]: value,
       };
       expect(getAttributeValues(attributes)).toEqual(values);
     });
 
-    it("when attribute is a set, should return an array of values as initial value", () => {
+    it('when attribute is a set, should return an array of values as initial value', () => {
       const name = faker.random.words();
       const attributes = [
         {
@@ -192,17 +192,17 @@ describe("attribute utilities", () => {
           set: true,
         },
       ];
-      const values = { [camelCase(name)]: [""] };
+      const values = { [camelCase(name)]: [''] };
       expect(getAttributeValues(attributes)).toEqual(values);
     });
   });
 
-  describe("attribute validation", () => {
+  describe('attribute validation', () => {
     const errorMessages = {
       required: messages.requiredFieldError,
     };
 
-    it("when attribute is a string type, should return yup string as validation", () => {
+    it('when attribute is a string type, should return yup string as validation', () => {
       const name = faker.random.words();
       const attributes = [
         {
@@ -216,7 +216,7 @@ describe("attribute utilities", () => {
       );
     });
 
-    it("when attribute is a localized string type, should return yup object with language keys as validation", () => {
+    it('when attribute is a localized string type, should return yup object with language keys as validation', () => {
       const name = faker.random.words();
       const attributes = [
         {
@@ -238,7 +238,7 @@ describe("attribute utilities", () => {
       ).toEqual(JSON.stringify(validation));
     });
 
-    it("when attribute is a required localized string, should return yup object with at least one language required", () => {
+    it('when attribute is a required localized string, should return yup object with at least one language required', () => {
       const name = faker.random.words();
       const attributes = [
         {
@@ -251,10 +251,10 @@ describe("attribute utilities", () => {
         JSON.stringify(
           getAttributeValidation(attributes, languages, errorMessages)
         )
-      ).toContain("atLeastOneOf");
+      ).toContain('atLeastOneOf');
     });
 
-    it("when attribute is an enum type, should return yup string as validation", () => {
+    it('when attribute is an enum type, should return yup string as validation', () => {
       const name = faker.random.words();
       const attributes = [
         {
@@ -268,7 +268,7 @@ describe("attribute utilities", () => {
       );
     });
 
-    it("when attribute is a localized enum type, should return yup string as validation", () => {
+    it('when attribute is a localized enum type, should return yup string as validation', () => {
       const name = faker.random.words();
       const attributes = [
         {
@@ -282,7 +282,7 @@ describe("attribute utilities", () => {
       );
     });
 
-    it("when attribute is a number type, should return yup number as validation", () => {
+    it('when attribute is a number type, should return yup number as validation', () => {
       const name = faker.random.words();
       const attributes = [
         {
@@ -296,7 +296,7 @@ describe("attribute utilities", () => {
       );
     });
 
-    it("when attribute is a boolean type, should return yup boolean as validation", () => {
+    it('when attribute is a boolean type, should return yup boolean as validation', () => {
       const name = faker.random.words();
       const attributes = [
         {
@@ -310,7 +310,7 @@ describe("attribute utilities", () => {
       );
     });
 
-    it("when attribute is a money type, should return yup object as validation", () => {
+    it('when attribute is a money type, should return yup object as validation', () => {
       const name = faker.random.words();
       const attributes = [
         {
@@ -329,7 +329,7 @@ describe("attribute utilities", () => {
       );
     });
 
-    it("when attribute is a date type, should return yup date as validation", () => {
+    it('when attribute is a date type, should return yup date as validation', () => {
       const name = faker.random.words();
       const attributes = [
         {
@@ -343,7 +343,7 @@ describe("attribute utilities", () => {
       );
     });
 
-    it("when attribute is a datetime type, should return yup date as validation", () => {
+    it('when attribute is a datetime type, should return yup date as validation', () => {
       const name = faker.random.words();
       const attributes = [
         {
@@ -357,7 +357,7 @@ describe("attribute utilities", () => {
       );
     });
 
-    it("when attribute is a time type, should return yup string as validation", () => {
+    it('when attribute is a time type, should return yup string as validation', () => {
       const name = faker.random.words();
       const attributes = [
         {
@@ -371,7 +371,7 @@ describe("attribute utilities", () => {
       );
     });
 
-    it("when attribute is a reference type, should return yup object as validation", () => {
+    it('when attribute is a reference type, should return yup object as validation', () => {
       const name = faker.random.words();
       const reference = {
         by: faker.random.arrayElement(Object.values(REFERENCE_BY)),
@@ -395,7 +395,7 @@ describe("attribute utilities", () => {
       );
     });
 
-    it("when attribute is an object type, should construct a yup object based on its attributes as validation", () => {
+    it('when attribute is an object type, should construct a yup object based on its attributes as validation', () => {
       const name = faker.random.words();
       const nestedAttributes = [
         {
@@ -421,12 +421,12 @@ describe("attribute utilities", () => {
       );
     });
 
-    it("when attribute is an unknown type, should return null as validation", () => {
+    it('when attribute is an unknown type, should return null as validation', () => {
       const name = faker.random.words();
       const attributes = [
         {
           name,
-          type: "banana",
+          type: 'banana',
         },
       ];
       const validation = { [camelCase(name)]: null };
@@ -435,7 +435,7 @@ describe("attribute utilities", () => {
       );
     });
 
-    it("when attribute is a set, should return an array of typed validations as validation", () => {
+    it('when attribute is a set, should return an array of typed validations as validation', () => {
       const name = faker.random.words();
       const attributes = [
         {
@@ -452,7 +452,7 @@ describe("attribute utilities", () => {
       );
     });
 
-    it("when attribute is required, should return yup validation with required message as validation", () => {
+    it('when attribute is required, should return yup validation with required message as validation', () => {
       const name = faker.random.words();
       const attributes = [
         {

@@ -1,9 +1,9 @@
-// valication-service/src/controllers/custom-object.controller.money.spec.ts
+// valication-service/src/controllers/custom-object.controller.reference.spec.ts
 
-import { CustomObjectController } from './custom-object.controller';
+import { CustomObjectController } from '../custom-object.controller';
 import { AttributeSchema } from '../types/validator';
 
-describe('CustomObjectController - validateMoney', () => {
+describe('CustomObjectController - validateReference', () => {
   let controller: CustomObjectController;
 
   beforeEach(() => {
@@ -15,29 +15,32 @@ describe('CustomObjectController - validateMoney', () => {
     {
       schema: {
         name: 'test',
-        type: 'Money',
+        type: 'Reference',
         set: false,
         required: false,
+        reference: { type: 'product' },
       },
-      value: { amount: '1000', currencyCode: 'USD' },
+      value: { typeId: 'product', id: '123' },
       shouldThrowError: false,
     },
     {
       schema: {
         name: 'test',
-        type: 'Money',
+        type: 'Reference',
         set: false,
         required: false,
+        reference: { type: 'product' },
       },
-      value: { amount: 1000, currencyCode: 'USD' },
-      shouldThrowError: true,
+      value: { typeId: 'product', key: '123' },
+      shouldThrowError: false,
     },
     {
       schema: {
         name: 'test',
-        type: 'Money',
+        type: 'Reference',
         set: false,
         required: false,
+        reference: { type: 'product' },
       },
       value: null,
       shouldThrowError: false,
@@ -45,9 +48,10 @@ describe('CustomObjectController - validateMoney', () => {
     {
       schema: {
         name: 'test',
-        type: 'Money',
+        type: 'Reference',
         set: false,
         required: false,
+        reference: { type: 'product' },
       },
       value: undefined,
       shouldThrowError: false,
@@ -55,31 +59,34 @@ describe('CustomObjectController - validateMoney', () => {
     {
       schema: {
         name: 'test',
-        type: 'Money',
+        type: 'Reference',
         set: false,
         required: false,
+        reference: { type: 'product' },
       },
-      value: { amount: 'invalid', currencyCode: 'USD' },
+      value: { typeId: 'category', id: '123' },
       shouldThrowError: true,
     },
     {
       schema: {
         name: 'test',
-        type: 'Money',
+        type: 'Reference',
         set: false,
         required: false,
+        reference: { type: 'product' },
       },
-      value: { amount: '1000' },
+      value: { typeId: 'product', productId: '123' },
       shouldThrowError: true,
     },
     {
       schema: {
         name: 'test',
-        type: 'Money',
+        type: 'Reference',
         set: false,
         required: false,
+        reference: { type: 'product' },
       },
-      value: { currencyCode: 'USD' },
+      value: [{ typeId: 'product', id: '123' }],
       shouldThrowError: true,
     },
 
@@ -87,19 +94,43 @@ describe('CustomObjectController - validateMoney', () => {
     {
       schema: {
         name: 'test',
-        type: 'Money',
+        type: 'Reference',
         set: false,
         required: true,
+        reference: { type: 'product' },
       },
-      value: { amount: '1000', currencyCode: 'EUR' },
+      value: { typeId: 'product', id: '123' },
       shouldThrowError: false,
     },
     {
       schema: {
         name: 'test',
-        type: 'Money',
+        type: 'Reference',
         set: false,
         required: true,
+        reference: { type: 'product' },
+      },
+      value: { typeId: 'product', key: '123' },
+      shouldThrowError: false,
+    },
+    {
+      schema: {
+        name: 'test',
+        type: 'Reference',
+        set: false,
+        required: true,
+        reference: { type: 'product' },
+      },
+      value: { typeId: 'product', productId: '123' },
+      shouldThrowError: true,
+    },
+    {
+      schema: {
+        name: 'test',
+        type: 'Reference',
+        set: false,
+        required: true,
+        reference: { type: 'product' },
       },
       value: null,
       shouldThrowError: true,
@@ -107,41 +138,12 @@ describe('CustomObjectController - validateMoney', () => {
     {
       schema: {
         name: 'test',
-        type: 'Money',
+        type: 'Reference',
         set: false,
         required: true,
+        reference: { type: 'product' },
       },
       value: undefined,
-      shouldThrowError: true,
-    },
-    {
-      schema: {
-        name: 'test',
-        type: 'Money',
-        set: false,
-        required: true,
-      },
-      value: { amount: 'invalid', currencyCode: 'USD' },
-      shouldThrowError: true,
-    },
-    {
-      schema: {
-        name: 'test',
-        type: 'Money',
-        set: false,
-        required: true,
-      },
-      value: { amount: '1000' },
-      shouldThrowError: true,
-    },
-    {
-      schema: {
-        name: 'test',
-        type: 'Money',
-        set: false,
-        required: true,
-      },
-      value: { currencyCode: 'USD' },
       shouldThrowError: true,
     },
 
@@ -149,22 +151,32 @@ describe('CustomObjectController - validateMoney', () => {
     {
       schema: {
         name: 'test',
-        type: 'Money',
+        type: 'Reference',
         set: true,
         required: false,
+        reference: { type: 'product' },
       },
-      value: [
-        { amount: '1000', currencyCode: 'USD' },
-        { amount: '2000', currencyCode: 'EUR' },
-      ],
+      value: [{ typeId: 'product', id: '123' }],
       shouldThrowError: false,
     },
     {
       schema: {
         name: 'test',
-        type: 'Money',
+        type: 'Reference',
         set: true,
         required: false,
+        reference: { type: 'product' },
+      },
+      value: [{ typeId: 'product', key: '123' }],
+      shouldThrowError: false,
+    },
+    {
+      schema: {
+        name: 'test',
+        type: 'Reference',
+        set: true,
+        required: false,
+        reference: { type: 'product' },
       },
       value: [],
       shouldThrowError: false,
@@ -172,9 +184,10 @@ describe('CustomObjectController - validateMoney', () => {
     {
       schema: {
         name: 'test',
-        type: 'Money',
+        type: 'Reference',
         set: true,
         required: false,
+        reference: { type: 'product' },
       },
       value: undefined,
       shouldThrowError: false,
@@ -182,31 +195,12 @@ describe('CustomObjectController - validateMoney', () => {
     {
       schema: {
         name: 'test',
-        type: 'Money',
+        type: 'Reference',
         set: true,
         required: false,
+        reference: { type: 'product' },
       },
-      value: [{ amount: 'invalid', currencyCode: 'USD' }],
-      shouldThrowError: true,
-    },
-    {
-      schema: {
-        name: 'test',
-        type: 'Money',
-        set: true,
-        required: false,
-      },
-      value: [{ amount: '1000' }],
-      shouldThrowError: true,
-    },
-    {
-      schema: {
-        name: 'test',
-        type: 'Money',
-        set: true,
-        required: false,
-      },
-      value: [{ currencyCode: 'USD' }],
+      value: [{ typeId: 'category', id: '123' }],
       shouldThrowError: true,
     },
 
@@ -214,22 +208,21 @@ describe('CustomObjectController - validateMoney', () => {
     {
       schema: {
         name: 'test',
-        type: 'Money',
+        type: 'Reference',
         set: true,
         required: true,
+        reference: { type: 'product' },
       },
-      value: [
-        { amount: '1000', currencyCode: 'USD' },
-        { amount: '2000', currencyCode: 'EUR' },
-      ],
+      value: [{ typeId: 'product', id: '123' }],
       shouldThrowError: false,
     },
     {
       schema: {
         name: 'test',
-        type: 'Money',
+        type: 'Reference',
         set: true,
         required: true,
+        reference: { type: 'product' },
       },
       value: [],
       shouldThrowError: true,
@@ -237,36 +230,17 @@ describe('CustomObjectController - validateMoney', () => {
     {
       schema: {
         name: 'test',
-        type: 'Money',
+        type: 'Reference',
         set: true,
         required: true,
+        reference: { type: 'product' },
       },
       value: undefined,
       shouldThrowError: true,
     },
-    {
-      schema: {
-        name: 'test',
-        type: 'Money',
-        set: true,
-        required: true,
-      },
-      value: [{ amount: 'invalid', currencyCode: 'USD' }],
-      shouldThrowError: true,
-    },
-    {
-      schema: {
-        name: 'test',
-        type: 'Money',
-        set: true,
-        required: true,
-      },
-      value: [{ amount: '1000' }],
-      shouldThrowError: true,
-    },
   ];
   testCases.forEach(({ schema, value, shouldThrowError }) => {
-    it(`should ${shouldThrowError ? 'pass' : 'fail'} validation for ${schema.set ? 'set' : 'non-set'}, required ${schema.required ? 'true' : 'false'} and value: ${JSON.stringify(value)} attribute`, async () => {
+    it(`should ${shouldThrowError ? 'pass' : 'fail'} validation for ${schema.set ? 'set' : 'non-set'}, required ${schema.required ? 'true' : 'false'} and value: ${value} attribute`, async () => {
       try {
         await controller.validateAttribute(schema as AttributeSchema, value);
         expect(shouldThrowError).toBe(false);

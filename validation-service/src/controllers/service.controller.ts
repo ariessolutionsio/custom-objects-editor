@@ -2,9 +2,9 @@
 import { Request, Response } from 'express';
 import { apiSuccess } from '../api/success.api';
 import CustomError from '../errors/custom.error';
-import { CustomObjectController } from './custom-object.controller';
+import { getNodeClient } from '../client/apollo.client';
+import { CustomObjectController } from 'shared-code';
 
-const customObjectController = new CustomObjectController();
 export const post = async (request: Request, response: Response) => {
   // Deserialize the action and resource from the body
   const { container, key, value, schemaType } = request.body;
@@ -13,11 +13,14 @@ export const post = async (request: Request, response: Response) => {
     throw new CustomError(400, 'Bad request - Missing body parameters.');
   }
 
+  const client = await getNodeClient();
+  const customObjectController = new CustomObjectController(client);
+
   try {
     const result = await customObjectController.createOrUpdateCustomObject(
       container,
       key,
-      JSON.parse(value),
+      value,
       schemaType
     );
     apiSuccess(200, result, response);

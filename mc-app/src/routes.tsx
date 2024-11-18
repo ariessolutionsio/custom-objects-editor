@@ -1,25 +1,25 @@
-import { Switch, Route, useRouteMatch } from "react-router-dom";
+import { Switch, Route, useRouteMatch } from 'react-router-dom';
 import {
   MaintenancePageLayout,
   PageNotFound,
-} from "@commercetools-frontend/application-components";
-import { FormattedMessage } from "react-intl";
-import { useIsAuthorized } from "@commercetools-frontend/permissions";
-import LockedDiamondSVG from "@commercetools-frontend/assets/images/locked-diamond.svg";
-import React, { ReactNode } from "react";
-import { ContentNotification } from "@commercetools-uikit/notifications";
-import LoadingSpinner from "@commercetools-uikit/loading-spinner";
-import Spacings from "@commercetools-uikit/spacings";
-import Link from "@commercetools-uikit/link";
-import Text from "@commercetools-uikit/text";
-import ariesLabsLogo from "./assets/aries-labs-logo.svg";
-import ContainerList from "./components/container-list";
-import CustomObjectsList from "./components/custom-objects-list";
-import { messages } from "./messages";
-import { CONTAINER, PERMISSIONS } from "./constants";
-import { ContainerProvider } from "./context/container-context";
-import { useCustomObjectsFetcher } from "./hooks/use-custom-object-connector/use-custom-object-connector";
-import { getErrorMessage } from "./helpers";
+} from '@commercetools-frontend/application-components';
+import { FormattedMessage } from 'react-intl';
+import { useIsAuthorized } from '@commercetools-frontend/permissions';
+import LockedDiamondSVG from '@commercetools-frontend/assets/images/locked-diamond.svg';
+import React, { ReactNode } from 'react';
+import { ContentNotification } from '@commercetools-uikit/notifications';
+import LoadingSpinner from '@commercetools-uikit/loading-spinner';
+import Spacings from '@commercetools-uikit/spacings';
+import Link from '@commercetools-uikit/link';
+import Text from '@commercetools-uikit/text';
+import ariesLabsLogo from './assets/aries-labs-logo.svg';
+import ContainerList from './components/container-list';
+import CustomObjectsList from './components/custom-objects-list';
+import { messages } from './messages';
+import { CONTAINER, PERMISSIONS } from './constants';
+import { ContainerProvider } from './context/container-context';
+import { useCustomObjectsFetcher } from './hooks/use-custom-object-connector/use-custom-object-connector';
+import { getErrorMessage } from './helpers';
 
 type ApplicationRoutesProps = {
   children?: ReactNode;
@@ -105,6 +105,6 @@ const ApplicationRoutes = (_props: ApplicationRoutesProps) => {
     </ContainerProvider>
   );
 };
-ApplicationRoutes.displayName = "ApplicationRoutes";
+ApplicationRoutes.displayName = 'ApplicationRoutes';
 
 export default ApplicationRoutes;

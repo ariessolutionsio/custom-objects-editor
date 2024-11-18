@@ -1,10 +1,10 @@
-import React from "react";
-import { shallow } from "enzyme";
-import faker from "faker";
-import camelCase from "lodash/camelCase";
-import useEffectMock from "../../test-utils/use-effect-mock";
-import { TYPES } from "../../constants";
-import Attribute from "./attribute";
+import React from 'react';
+import { shallow } from 'enzyme';
+import faker from 'faker';
+import camelCase from 'lodash/camelCase';
+import useEffectMock from '../../test-utils/use-effect-mock';
+import { TYPES } from '../../constants';
+import Attribute from './attribute';
 
 const mocks = {
   name: camelCase(faker.random.words()),
@@ -30,30 +30,30 @@ const loadAttribute = ({ value, touched = {}, errors = {} }) =>
 
 const requiredOption = '[data-testid="attribute-required"]';
 
-describe("attribute", () => {
+describe('attribute', () => {
   beforeAll(() => {
-    jest.spyOn(React, "useEffect").mockImplementation(useEffectMock);
+    jest.spyOn(React, 'useEffect').mockImplementation(useEffectMock);
   });
 
   beforeEach(() => {
     mocks.handleChange.mockClear();
   });
 
-  it("when attribute type is object, should disabled required option", () => {
+  it('when attribute type is object, should disabled required option', () => {
     const wrapper = loadAttribute({
       value: { ...mockValue, type: TYPES.Object },
     });
-    expect(wrapper.find(requiredOption).prop("isDisabled")).toEqual(true);
+    expect(wrapper.find(requiredOption).prop('isDisabled')).toEqual(true);
   });
 
-  it("when attribute type is boolean, should disabled required option", () => {
+  it('when attribute type is boolean, should disabled required option', () => {
     const wrapper = loadAttribute({
       value: { ...mockValue, type: TYPES.Boolean },
     });
-    expect(wrapper.find(requiredOption).prop("isDisabled")).toEqual(true);
+    expect(wrapper.find(requiredOption).prop('isDisabled')).toEqual(true);
   });
 
-  it("when attribute type changes to object, should set required option to false", () => {
+  it('when attribute type changes to object, should set required option to false', () => {
     const wrapper = loadAttribute({
       value: { ...mockValue, type: TYPES.String },
     });
@@ -63,7 +63,7 @@ describe("attribute", () => {
     });
   });
 
-  it("when attribute type changes to boolean, should set required option to false", () => {
+  it('when attribute type changes to boolean, should set required option to false', () => {
     const wrapper = loadAttribute({
       value: { ...mockValue, type: TYPES.String },
     });
@@ -73,7 +73,7 @@ describe("attribute", () => {
     });
   });
 
-  it("when attribute type changes to neither object nor boolean, should not set required option to false", () => {
+  it('when attribute type changes to neither object nor boolean, should not set required option to false', () => {
     const wrapper = loadAttribute({
       value: { ...mockValue, type: TYPES.String },
     });

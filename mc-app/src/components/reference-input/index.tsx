@@ -15,7 +15,9 @@ const referenceTypeToComponentMap: Record<string, any> = {
   order: lazy(() => import('./search-components/order')),
   'tax-category': lazy(() => import('./search-components/tax-category')),
   'cart-discount': lazy(() => import('./search-components/cart-discount')),
-  'product-discount': lazy(() => import('./search-components/product-discount')),
+  'product-discount': lazy(
+    () => import('./search-components/product-discount')
+  ),
   channel: lazy(() => import('./search-components/channel')),
   store: lazy(() => import('./search-components/store')),
   type: lazy(() => import('./search-components/type')),
@@ -70,7 +72,7 @@ const referenceTypeToSingleValueMap: Record<string, string> = {
   'tax-category': 'taxCategory',
   'shopping-list': 'shoppingList',
   'shipping-method': 'shippingMethod',
-  'type': 'typeDefinition',
+  type: 'typeDefinition',
   'product-price': 'standalonePrice',
 };
 
@@ -112,8 +114,12 @@ const ReferenceInput: React.FC<
     }
   );
 
-  const externalUrl = referenceBy === 'id' && referenceTypeToMCPageMap[referenceType as string] ? 
-    `/${project?.key}/${referenceTypeToMCPageMap[referenceType as string]}/${refValue}` : '';
+  const externalUrl =
+    referenceBy === 'id' && referenceTypeToMCPageMap[referenceType as string]
+      ? `/${project?.key}/${
+          referenceTypeToMCPageMap[referenceType as string]
+        }/${refValue}`
+      : '';
 
   if (referenceType && referenceTypeToComponentMap[referenceType]) {
     if (!inRestrictedList) {
@@ -133,12 +139,11 @@ const ReferenceInput: React.FC<
                 referenceType={singleValueQueryDataObject}
                 {...props}
               />
-              {!!externalUrl && !!refValue && <Link
-                to={externalUrl}
-                target="_blank"
-              >
-                <ExternalLinkIcon color='info' />
-              </Link>}
+              {!!externalUrl && !!refValue && (
+                <Link to={externalUrl} target="_blank">
+                  <ExternalLinkIcon color="info" />
+                </Link>
+              )}
             </Spacings.Inline>
           </Suspense>
         </ErrorBoundary>

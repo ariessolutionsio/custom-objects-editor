@@ -16,7 +16,6 @@ const localizePath = (customer: Customer) => {
 const CustomerSearchInput: FC<
   React.HTMLAttributes<HTMLDivElement> & GenericSearchInputProps<Customer>
 > = (props) => {
-  
   const optionMapper = (data: Result<Customer>) =>
     data.customers.results.map((customer: Customer): TEntity => {
       return {

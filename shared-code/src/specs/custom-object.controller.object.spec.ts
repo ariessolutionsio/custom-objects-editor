@@ -1,4 +1,4 @@
-import { CustomObjectController } from './custom-object.controller';
+import { CustomObjectController } from '../custom-object.controller';
 import { AttributeSchema } from '../types/validator';
 
 const objectSchema: { attributes: AttributeSchema[]; value: any }[] = [

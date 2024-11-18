@@ -1,10 +1,10 @@
-import React from "react";
-import { fireEvent, render } from "@testing-library/react";
-import { IntlProvider } from "react-intl";
-import TextFilter from "./text-filter";
+import React from 'react';
+import { fireEvent, render } from '@testing-library/react';
+import { IntlProvider } from 'react-intl';
+import TextFilter from './text-filter';
 
 const mocks = {
-  value: "",
+  value: '',
   onChange: jest.fn((value) => {
     return;
   }),
@@ -12,9 +12,9 @@ const mocks = {
 };
 
 //const filterWrapper = 'filter-wrapper';
-const filterInput = "filter-input";
-const clearButton = "clear-button";
-const filterButton = "filter-button";
+const filterInput = 'filter-input';
+const clearButton = 'clear-button';
+const filterButton = 'filter-button';
 
 const loadTextFilter = () =>
   render(
@@ -23,19 +23,19 @@ const loadTextFilter = () =>
     </IntlProvider>
   );
 
-describe("text filter", () => {
-  describe("when no value entered", () => {
-    it("should not display clear button", () => {
+describe('text filter', () => {
+  describe('when no value entered', () => {
+    it('should not display clear button', () => {
       expect(loadTextFilter().queryByTestId(clearButton)).toBeNull();
     });
 
-    it("should display filter button", () => {
+    it('should display filter button', () => {
       expect(loadTextFilter().getByTestId(filterButton)).not.toBeNull();
     });
   });
 
-  describe("when value entered", () => {
-    const newFilter = "new query";
+  describe('when value entered', () => {
+    const newFilter = 'new query';
 
     //   beforeEach(() => {
     //     wrapper = loadTextFilter();
@@ -44,7 +44,7 @@ describe("text filter", () => {
     //       .simulate('change', { target: { value: newFilter } });
     //   });
 
-    it("should update filter value", () => {
+    it('should update filter value', () => {
       const input = loadTextFilter().getByTestId(
         filterInput
       ) as HTMLInputElement;
