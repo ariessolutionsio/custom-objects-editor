@@ -1,10 +1,5 @@
-import { ApolloClient, ApolloContextValue } from '@apollo/client';
-import {
-  AttributeSchema,
-  CustomObject,
-  CustomObjectDraft,
-  Schema,
-} from './types/validator';
+import { ApolloContextValue } from '@apollo/client';
+import { AttributeSchema, CustomObject, Schema } from './types/validator';
 import Create from './queries/create-custom-object';
 import Get from './queries/get-custom-object';
 import { GraphQLClient } from './types/graphql';
@@ -49,22 +44,12 @@ export class CustomObjectController {
     value: string,
     schemaType: string
   ): Promise<CustomObject | undefined> {
-    try {
-      const jsonValue = JSON.parse(value);
-      await this.validateObjectBySchemaType(jsonValue, schemaType);
-    } catch (error) {
-      throw error;
-    }
-
-    const draft: CustomObjectDraft = {
-      container,
-      key,
-      value,
-    };
+    const jsonValue = JSON.parse(value);
+    await this.validateObjectBySchemaType(jsonValue, schemaType);
 
     const response = await this.apolloClient
-      ?.query({
-        query: Create,
+      ?.mutate({
+        mutation: Create,
         variables: {
           draft: {
             container,
@@ -72,6 +57,7 @@ export class CustomObjectController {
             value,
           },
         },
+        ...(this.context && { context: this.context }),
       })
       .then((res) => {
         return res.data as CustomObject;

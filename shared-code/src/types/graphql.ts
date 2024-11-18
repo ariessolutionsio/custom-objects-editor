@@ -6,4 +6,9 @@ export interface GraphQLClient {
     variables?: Record<string, any>;
     context?: any;
   }): Promise<{ data: T }>;
+  mutate<T>(options: {
+    mutation: DocumentNode;
+    variables?: Record<string, any>;
+    context?: any;
+  }): Promise<{ data: T }>;
 }
