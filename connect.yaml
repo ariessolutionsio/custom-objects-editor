@@ -20,13 +20,6 @@ deployAs:
           description: one of the following gcp-us, gcp-eu, aws-us, aws-eu
           required: false
           default: 'gcp-us'
-        - key: CUSTOM_OBJECT_ENDPOINT
-          description: full URL path to validation-service
-          required: false
-        - key: USE_CUSTOM_OBJECT_ENTPOINT
-          description: Use custom object endpoint or not
-          required: false
-          default: 'false'
   - name: validation-service
     applicationType: service
     endpoint: /validation

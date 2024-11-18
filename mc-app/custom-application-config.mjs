@@ -16,10 +16,6 @@ const config = {
       initialProjectKey: '${env:INITIAL_PROJECT_KEY}',
     },
   },
-  additionalEnv: {
-    customObjectEndpoint: '${env:CUSTOM_OBJECT_ENDPOINT}',
-    useCustomObjectEndpoint: '${env:USE_CUSTOM_OBJECT_ENTPOINT}',
-  },
   headers: {
     csp: {
       'connect-src': ['${env:CUSTOM_OBJECT_ENDPOINT}'],
