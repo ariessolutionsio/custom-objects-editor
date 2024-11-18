@@ -16,6 +16,7 @@ const AsyncSearchInput = <T extends TEntity, R extends Result<T>>({
   hasError,
   referenceBy,
   referenceType,
+  singleValueQueryDataObject,
   byIdQuery,
   byKeyQuery,
   searchQuery,
@@ -66,6 +67,7 @@ const AsyncSearchInput = <T extends TEntity, R extends Result<T>>({
           <SearchSingleValue<T>
             {...props}
             referenceBy={referenceBy}
+            singleValueQueryDataObject={singleValueQueryDataObject}
             referenceType={referenceType}
             byIdQuery={byIdQuery}
             byKeyQuery={byKeyQuery}

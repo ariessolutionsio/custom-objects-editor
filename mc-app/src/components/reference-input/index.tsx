@@ -117,8 +117,8 @@ const ReferenceInput: React.FC<
   const externalUrl =
     referenceBy === 'id' && referenceTypeToMCPageMap[referenceType as string]
       ? `/${project?.key}/${
-          referenceTypeToMCPageMap[referenceType as string]
-        }/${refValue}`
+        referenceTypeToMCPageMap[referenceType as string]
+      }/${refValue}`
       : '';
 
   if (referenceType && referenceTypeToComponentMap[referenceType]) {
@@ -136,7 +136,8 @@ const ReferenceInput: React.FC<
               <Component
                 value={value}
                 referenceBy={referenceBy}
-                referenceType={singleValueQueryDataObject}
+                referenceType={referenceType}
+                singleValueQueryDataObject={singleValueQueryDataObject}
                 {...props}
               />
               {!!externalUrl && !!refValue && (

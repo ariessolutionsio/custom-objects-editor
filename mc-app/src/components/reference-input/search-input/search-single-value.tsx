@@ -50,7 +50,7 @@ export const SearchSingleValue = <T extends TEntity>(
       </Spacings.Stack>
     );
   }
-  if (!data?.[props.referenceType]) {
+  if (!data?.[props.singleValueQueryDataObject]) {
     return (
       <ContentNotification type="error">
         <Text.Body>Invalid value</Text.Body>
@@ -60,7 +60,7 @@ export const SearchSingleValue = <T extends TEntity>(
 
   return (
     <AsyncSelectInput.SingleValue {...props}>
-      {props.localizePath(data[props.referenceType], true)}
+      {props.localizePath(data[props.singleValueQueryDataObject], true)}
     </AsyncSelectInput.SingleValue>
   );
 };

@@ -4,6 +4,7 @@ import { TEntity } from '../types';
 export interface SearchSingleValueProps<T> {
   referenceBy: 'key' | 'id';
   referenceType: string;
+  singleValueQueryDataObject: string;
   byKeyQuery: DocumentNode;
   byIdQuery: DocumentNode;
   localizePath: (value: T, ...args: any[]) => string | undefined;
@@ -13,6 +14,7 @@ export interface GenericSearchInputProps<T> extends ReferenceInputProps {
   value?: T | null;
   referenceBy: 'key' | 'id';
   referenceType: string;
+  singleValueQueryDataObject: string;
 }
 
 export interface AsyncSearchInputProps<T, R>
