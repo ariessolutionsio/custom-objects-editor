@@ -8,13 +8,19 @@ export const AsyncSelectOption: FC<OptionProps<any>> = (props) => {
   return (
     <AsyncSelectInput.Option
       {...props}
-      getStyles={() => ({
-        padding: '8px',
-        cursor: 'pointer',
-        '&:hover': {
-          backgroundColor: 'var(--color-primary-90)',
-        },
-      })}
+      getStyles={(_, optionProps) => {
+        return {
+          padding: '8px',
+          cursor: (optionProps as OptionProps<any>)?.data?.disabled
+            ? 'not-allowed'
+            : 'pointer',
+          '&:hover': {
+            backgroundColor: (optionProps as OptionProps<any>)?.data?.disabled
+              ? 'var(--color-neutral-60)'
+              : 'var(--color-primary-90)',
+          },
+        };
+      }}
     >
       <Spacings.Stack scale="xs">
         <Text.Detail>{props.data.name}</Text.Detail>
