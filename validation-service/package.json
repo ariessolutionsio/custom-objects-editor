@@ -5,7 +5,6 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "preinstall": "yarn --cwd ../shared-code install && yarn --cwd ../shared-code run build",
     "start": "node build/index.js",
     "gcp-build": "tsc",
     "start:dev": "concurrently -k \"tsc --watch\" \"nodemon -q build/index.js\"",
