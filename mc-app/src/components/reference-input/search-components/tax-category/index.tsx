@@ -5,6 +5,7 @@ import { TEntity } from '../../types';
 import TaxCategoryById from './tax-category-by-id.graphql';
 import TaxCategoryByKey from './tax-category-by-key.graphql';
 import TaxCategorySearch from './tax-category-search.graphql';
+import TaxCategoryAll from './tax-category-all.graphql';
 import { TaxCategory } from './types';
 
 const localizePath = (taxCategory: TaxCategory) => {
@@ -35,6 +36,7 @@ const TaxCategorySearchInput: FC<
       searchQuery={TaxCategorySearch}
       byKeyQuery={TaxCategoryByKey}
       byIdQuery={TaxCategoryById}
+      allQuery={TaxCategoryAll}
       {...props}
     />
   );

@@ -8,6 +8,7 @@ import { TEntity } from '../../types';
 import DiscountCodeById from './discount-code-by-id.graphql';
 import DiscountCodeByKey from './discount-code-by-key.graphql';
 import DiscountCodeSearch from './discount-code-search.graphql';
+import DiscountCodeAll from './discount-code-all.graphql';
 import { DiscountCode } from './types';
 
 const localizePath = (discountCode: DiscountCode) => {
@@ -41,6 +42,7 @@ const DiscountCodeSearchInput: FC<
       searchQuery={DiscountCodeSearch}
       byKeyQuery={DiscountCodeByKey}
       byIdQuery={DiscountCodeById}
+      allQuery={DiscountCodeAll}
       {...props}
     />
   );

@@ -1,0 +1,13 @@
+query ShoppingListSearch($locale: Locale!) {
+  shoppingLists(limit: 50) {
+    results {
+      id
+      name(locale: $locale)
+      key
+      slug(locale: $locale)
+      customer {
+        email
+      }
+    }
+  }
+}

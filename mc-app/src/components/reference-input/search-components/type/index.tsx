@@ -5,6 +5,7 @@ import { TEntity } from '../../types';
 import TypeById from './type-by-id.graphql';
 import TypeByKey from './type-by-key.graphql';
 import TypeSearch from './type-search.graphql';
+import TypeAll from './type-all.graphql';
 import { TType } from './types';
 
 const localizePath = (type: TType) => {
@@ -37,6 +38,7 @@ const TypeSearchInput: FC<
       searchQuery={TypeSearch}
       byKeyQuery={TypeByKey}
       byIdQuery={TypeById}
+      allQuery={TypeAll}
       {...props}
     />
   );

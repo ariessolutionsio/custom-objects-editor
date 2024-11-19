@@ -1,0 +1,21 @@
+query StandalonePriceSearch {
+  standalonePrices(limit: 50) {
+    results {
+      id
+      sku
+      key
+      customerGroup {
+        key
+      }
+      channel {
+        key
+      }
+      value {
+        centAmount
+        currencyCode
+      }
+      validFrom
+      validUntil
+    }
+  }
+}

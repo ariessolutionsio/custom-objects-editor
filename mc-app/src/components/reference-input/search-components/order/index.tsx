@@ -5,6 +5,7 @@ import { TEntity } from '../../types';
 import OrderById from './order-by-id.graphql';
 import OrderByKey from './order-by-key.graphql';
 import OrderSearch from './order-search.graphql';
+import OrderAll from './order-all.graphql';
 import { Order } from './types';
 
 const localizePath = (order: Order) => {
@@ -40,6 +41,7 @@ const OrderSearchInput: FC<
       searchQuery={OrderSearch}
       byKeyQuery={OrderByKey}
       byIdQuery={OrderById}
+      allQuery={OrderAll}
       {...props}
     />
   );

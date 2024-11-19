@@ -1,0 +1,19 @@
+query SearchOrder {
+  orders(limit: 50) {
+    results {
+      id
+      orderNumber
+      customerEmail
+      billingAddress {
+        streetName
+        city
+        state
+        country
+      }
+      totalPrice {
+        centAmount
+        currencyCode
+      }
+    }
+  }
+}

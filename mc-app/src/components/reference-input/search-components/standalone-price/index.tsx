@@ -5,6 +5,7 @@ import { TEntity } from '../../types';
 import StandalonePriceById from './standalone-price-by-id.graphql';
 import StandalonePriceByKey from './standalone-price-by-key.graphql';
 import StandalonePriceSearch from './standalone-price-search.graphql';
+import StandalonePricAll from './standalone-price-all.graphql';
 import { StandalonePrice } from './types';
 
 const localizePath = (standalonePrice: StandalonePrice) => {
@@ -53,6 +54,7 @@ const StandalonePriceSearchInput: FC<
       searchQuery={StandalonePriceSearch}
       byKeyQuery={StandalonePriceByKey}
       byIdQuery={StandalonePriceById}
+      allQuery={StandalonePricAll}
       {...props}
     />
   );

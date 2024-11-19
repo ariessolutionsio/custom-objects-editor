@@ -5,6 +5,7 @@ import { TEntity } from '../../types';
 import PaymentMethodById from './payment-by-id.graphql';
 import PaymentMethodByKey from './payment-by-key.graphql';
 import PaymentMethodSearch from './payment-search.graphql';
+import PaymentMethodAll from './payment-all.graphql';
 import { Payment } from './types';
 
 const localizePath = (payment: Payment) => {
@@ -46,6 +47,7 @@ const PaymentSearchInput: FC<
       searchQuery={PaymentMethodSearch}
       byKeyQuery={PaymentMethodByKey}
       byIdQuery={PaymentMethodById}
+      allQuery={PaymentMethodAll}
       {...props}
     />
   );

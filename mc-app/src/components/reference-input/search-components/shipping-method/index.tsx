@@ -5,6 +5,7 @@ import { TEntity } from '../../types';
 import ShippingMethodById from './shipping-method-by-id.graphql';
 import ShippingMethodByKey from './shipping-method-by-key.graphql';
 import ShippingMethodSearch from './shipping-method-search.graphql';
+import ShippingMethodAll from './shipping-method-all.graphql';
 import { ShippingMethod } from './types';
 
 const localizePath = (shippingMethod: ShippingMethod) => {
@@ -41,6 +42,7 @@ const ShippingMethodSearchInput: FC<
       searchQuery={ShippingMethodSearch}
       byKeyQuery={ShippingMethodByKey}
       byIdQuery={ShippingMethodById}
+      allQuery={ShippingMethodAll}
       {...props}
     />
   );

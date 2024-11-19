@@ -6,6 +6,7 @@ import { TEntity } from '../../types';
 import ProductById from './product-by-id.graphql';
 import ProductByKey from './product-by-key.graphql';
 import ProductSearch from './product-search.graphql';
+import ProductAll from './product-all.graphql';
 import { Product, ProductProjectionItem } from './types';
 
 const localizePathProductprojection = (product: ProductProjectionItem) => {
@@ -40,6 +41,7 @@ const ProductSearchInput: FC<
       searchQuery={ProductSearch}
       byKeyQuery={ProductByKey}
       byIdQuery={ProductById}
+      allQuery={ProductAll}
       {...props}
     />
   );

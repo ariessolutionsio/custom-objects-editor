@@ -6,6 +6,7 @@ import { TEntity } from '../../types';
 import ShoppingListById from './shopping-list-by-id.graphql';
 import ShoppingListByKey from './shopping-list-by-key.graphql';
 import ShoppingListSearch from './shopping-list-search.graphql';
+import ShoppingListAll from './shopping-list-all.graphql';
 import { ShoppingList } from './types';
 
 const localizePath = (shoppingList: ShoppingList) => {
@@ -41,6 +42,7 @@ const ShoppingListSearchInput: FC<
       searchQuery={ShoppingListSearch}
       byKeyQuery={ShoppingListByKey}
       byIdQuery={ShoppingListById}
+      allQuery={ShoppingListAll}
       {...props}
     />
   );

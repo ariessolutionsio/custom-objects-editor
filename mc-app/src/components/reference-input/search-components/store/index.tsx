@@ -8,6 +8,7 @@ import { TEntity } from '../../types';
 import StoreById from './store-by-id.graphql';
 import StoreByKey from './store-by-key.graphql';
 import StoreSearch from './store-search.graphql';
+import StoreAll from './store-all.graphql';
 import { Store } from './types';
 
 const localizePath = (store: Store) => {
@@ -40,6 +41,7 @@ const StoreSearchInput: FC<
       searchQuery={StoreSearch}
       byKeyQuery={StoreByKey}
       byIdQuery={StoreById}
+      allQuery={StoreAll}
       {...props}
     />
   );

@@ -1,0 +1,16 @@
+query SearchProducts($locale: Locale!) {
+  productProjectionSearch(limit: 50) {
+    total
+    results {
+      id
+      productType {
+        key
+      }
+      key
+      name(locale:$locale)
+      masterVariant {
+        sku
+      }
+    }
+  }
+}

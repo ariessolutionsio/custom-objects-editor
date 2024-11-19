@@ -1,0 +1,10 @@
+query DiscountCodeSearch($locale: Locale!) {
+  discountCodes(limit: 50) {
+    results {
+      id
+      name(locale: $locale)
+      key
+      code
+    }
+  }
+}

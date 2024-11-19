@@ -1,0 +1,9 @@
+query TaxCategorySearch {
+  taxCategories(limit: 50) {
+    results {
+      id
+      name
+      key
+    }
+  }
+}

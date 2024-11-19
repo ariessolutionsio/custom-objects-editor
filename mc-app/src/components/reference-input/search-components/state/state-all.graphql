@@ -1,0 +1,12 @@
+query StateSearch($locale: Locale!) {
+  states(limit: 50) {
+    results {
+      id
+      name(locale: $locale)
+      key
+      description(locale: $locale)
+      roles
+      type
+    }
+  }
+}

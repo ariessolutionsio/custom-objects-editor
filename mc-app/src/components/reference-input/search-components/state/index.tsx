@@ -6,6 +6,7 @@ import { TEntity } from '../../types';
 import StateById from './state-by-id.graphql';
 import StateByKey from './state-by-key.graphql';
 import StateSearch from './state-search.graphql';
+import StateAll from './state-all.graphql';
 import { State } from './types';
 
 const localizePath = (state: State) => {
@@ -39,6 +40,7 @@ const StateSearchInput: FC<
       searchQuery={StateSearch}
       byKeyQuery={StateByKey}
       byIdQuery={StateById}
+      allQuery={StateAll}
       {...props}
     />
   );
