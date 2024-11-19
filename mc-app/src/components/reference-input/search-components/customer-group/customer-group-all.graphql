@@ -1,0 +1,9 @@
+query CustomerGroupSearch {
+  customerGroups(limit: 50) {
+    results {
+      id
+      name
+      key
+    }
+  }
+}

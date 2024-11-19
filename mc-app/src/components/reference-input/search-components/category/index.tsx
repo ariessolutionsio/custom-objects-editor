@@ -6,6 +6,7 @@ import { TEntity } from '../../types';
 import CategoryById from './category-by-id.graphql';
 import CategoryByKey from './category-by-key.graphql';
 import CategorySearch from './category-search.graphql';
+import CategoryAll from './category-all.graphql';
 import { Category } from './types';
 
 const localizePath = (category: Category, showProductCount = false) => {
@@ -45,6 +46,7 @@ const CategorySearchInput: FC<
       searchQuery={CategorySearch}
       byKeyQuery={CategoryByKey}
       byIdQuery={CategoryById}
+      allQuery={CategoryAll}
       {...props}
     />
   );

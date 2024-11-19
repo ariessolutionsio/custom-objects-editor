@@ -8,6 +8,7 @@ import { TEntity } from '../../types';
 import ChannelById from './channel-by-id.graphql';
 import ChannelByKey from './channel-by-key.graphql';
 import ChannelSearch from './channel-search.graphql';
+import ChannelAll from './channel-all.graphql';
 import { Channel } from './types';
 
 const localizePath = (channel: Channel) => {
@@ -42,6 +43,7 @@ const ChannelSearchInput: FC<
       searchQuery={ChannelSearch}
       byKeyQuery={ChannelByKey}
       byIdQuery={ChannelById}
+      allQuery={ChannelAll}
       {...props}
     />
   );

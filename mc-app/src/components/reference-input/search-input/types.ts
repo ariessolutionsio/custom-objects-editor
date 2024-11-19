@@ -23,6 +23,7 @@ export interface AsyncSearchInputProps<T, R>
   byIdQuery: DocumentNode;
   byKeyQuery: DocumentNode;
   searchQuery: DocumentNode;
+  allQuery?: DocumentNode;
   optionMapper: (data: R) => TEntity[];
   variableBuilder: (text: string) => OperationVariables;
   localizePath: (value: T, ...args: any[]) => string | undefined;

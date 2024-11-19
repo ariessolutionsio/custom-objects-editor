@@ -5,6 +5,7 @@ import { TEntity } from '../../types';
 import CartById from './cart-by-id.graphql';
 import CartByKey from './cart-by-key.graphql';
 import CartSearch from './cart-search.graphql';
+import CartAll from './cart-all.graphql';
 import { Cart } from './types';
 
 const localizePath = (cart: Cart) => {
@@ -37,6 +38,7 @@ const CartSearchInput: FC<
       optionMapper={optionMapper}
       localizePath={localizePath}
       variableBuilder={variableBuilder}
+      allQuery={CartAll}
       searchQuery={CartSearch}
       byKeyQuery={CartByKey}
       byIdQuery={CartById}

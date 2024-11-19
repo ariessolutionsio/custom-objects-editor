@@ -5,6 +5,7 @@ import { TEntity } from '../../types';
 import CustomerById from './customer-by-id.graphql';
 import CustomerByKey from './customer-by-key.graphql';
 import CustomerSearch from './customer-search.graphql';
+import CustomerAll from './customer-all.graphql';
 import { Customer } from './types';
 
 const localizePath = (customer: Customer) => {
@@ -36,6 +37,7 @@ const CustomerSearchInput: FC<
       searchQuery={CustomerSearch}
       byKeyQuery={CustomerByKey}
       byIdQuery={CustomerById}
+      allQuery={CustomerAll}
       {...props}
     />
   );
