@@ -6,7 +6,16 @@ import Text from '@commercetools-uikit/text';
 
 export const AsyncSelectOption: FC<OptionProps<any>> = (props) => {
   return (
-    <AsyncSelectInput.Option {...props}>
+    <AsyncSelectInput.Option
+      {...props}
+      getStyles={() => ({
+        padding: '8px',
+        cursor: 'pointer',
+        '&:hover': {
+          backgroundColor: 'var(--color-primary-90)',
+        },
+      })}
+    >
       <Spacings.Stack scale="xs">
         <Text.Detail>{props.data.name}</Text.Detail>
       </Spacings.Stack>
