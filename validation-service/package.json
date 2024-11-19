@@ -6,7 +6,6 @@
   "private": true,
   "scripts": {
     "start": "node build/index.js",
-    "gcp-build": "yarn --cwd ../shared-code install && yarn --cwd ../shared-code run build && tsc",
     "start:dev": "concurrently -k \"tsc --watch\" \"nodemon -q build/index.js\"",
     "build": "yarn --cwd ../shared-code install && yarn --cwd ../shared-code run build && rimraf ./build && tsc",
     "lint": "eslint . --ext .ts",
