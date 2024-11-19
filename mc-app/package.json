@@ -4,7 +4,6 @@
   "description": "",
   "private": true,
   "scripts": {
-    "preinstall": "yarn --cwd ../shared-code install && yarn --cwd ../shared-code run build",
     "build": "yarn --cwd ../shared-code install && yarn --cwd ../shared-code run build && mc-scripts build",
     "start": "mc-scripts start",
     "compile-html": "mc-scripts compile-html",
