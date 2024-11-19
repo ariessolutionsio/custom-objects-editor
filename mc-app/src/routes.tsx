@@ -12,7 +12,6 @@ import LoadingSpinner from '@commercetools-uikit/loading-spinner';
 import Spacings from '@commercetools-uikit/spacings';
 import Link from '@commercetools-uikit/link';
 import Text from '@commercetools-uikit/text';
-import ariesLabsLogo from './assets/aries-labs-logo.svg';
 import ContainerList from './components/container-list';
 import CustomObjectsList from './components/custom-objects-list';
 import { messages } from './messages';
@@ -97,11 +96,6 @@ const ApplicationRoutes = (_props: ApplicationRoutesProps) => {
         <Route path={`${match.path}/containers`} component={ContainerList} />
         <Route component={CustomObjectsList} />
       </Switch>
-      <Spacings.Stack alignItems="center">
-        <Link to="https://www.ariessolutions.io/" isExternal={true}>
-          <img src={ariesLabsLogo} alt="Aries Labs Logo" width="100" />
-        </Link>
-      </Spacings.Stack>
     </ContainerProvider>
   );
 };

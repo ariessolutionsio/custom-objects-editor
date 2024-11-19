@@ -18,20 +18,24 @@ const config = {
   },
   oAuthScopes: {
     view: [
-      'view_products',
-      'view_stores',
-      'view_orders',
+      'view_categories',
+      'view_cart_discounts',
+      'view_customer_groups',
       'view_customers',
+      'view_discount_codes',
       'view_key_value_documents',
-      'view_shopping_lists',
-      'view_types',
+      'view_orders',
       'view_payments',
-      'view_standalone_prices'
+      'view_products',
+      'view_shipping_methods',
+      'view_shopping_lists',
+      'view_standalone_prices',
+      'view_states',
+      'view_stores',
+      'view_tax_categories',
+      'view_types',
     ],
     manage: [
-      'manage_products',
-      'manage_orders',
-      'manage_customers',
       'manage_key_value_documents',
     ],
   },
@@ -42,10 +46,10 @@ const config = {
     permissions: [PERMISSIONS.View],
   },
   submenuLinks: [
-    // {
-    //   defaultLabel: 'Custom Objects Editor List',
-    //   uriPath: 'custom-objects',
-    // },
+    {
+      defaultLabel: 'Custom Objects Editor',
+      uriPath: '/',
+    },
     {
       defaultLabel: 'Container Schema Manager',
       uriPath: 'containers',
