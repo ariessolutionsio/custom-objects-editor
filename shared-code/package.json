@@ -15,7 +15,7 @@
   "description": "",
   "dependencies": {
     "@apollo/client": "^3.11.10",
-    "@commercetools-backend/loggers": "^22.3.0",
+    "@commercetools-backend/loggers": "^21.19.0",
     "graphql": "^16.9.0",
     "graphql-tag": "^2.12.6"
   },
