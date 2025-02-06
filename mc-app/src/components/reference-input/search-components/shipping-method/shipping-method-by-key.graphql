@@ -1,0 +1,13 @@
+query ShippingMethodByKey($key: String!) {
+  shippingMethod(key: $key) {
+    id
+    name
+    key
+    zoneRates {
+      zone {
+        id
+        name
+      }
+    }
+  }
+}

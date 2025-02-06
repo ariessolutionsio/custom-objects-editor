@@ -1,0 +1,19 @@
+query SearchCart {
+  carts(limit: 50) {
+    results {
+      id
+      key
+      customerEmail
+      billingAddress {
+        streetName
+        city
+        state
+        country
+      }
+      totalPrice {
+        centAmount
+        currencyCode
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+query CustomerGroupSearch($where: String!, $limit: Int!, $offset: Int!) {
+  customerGroups(where: $where, limit: $limit, offset: $offset) {
+    results {
+      id
+      name
+      key
+    }
+  }
+}

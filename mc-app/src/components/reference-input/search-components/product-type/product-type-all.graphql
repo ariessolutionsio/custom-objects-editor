@@ -1,0 +1,9 @@
+query ProductTypeSearch {
+  productTypes(limit: 50) {
+    results {
+      id
+      name
+      key
+    }
+  }
+}

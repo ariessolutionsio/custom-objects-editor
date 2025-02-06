@@ -1,0 +1,21 @@
+query StandalonePriceSearch($where: String!, $limit: Int!, $offset: Int!) {
+  standalonePrices(where: $where, limit: $limit, offset: $offset) {
+    results {
+      id
+      sku
+      key
+      customerGroup {
+        key
+      }
+      channel {
+        key
+      }
+      value {
+        centAmount
+        currencyCode
+      }
+      validFrom
+      validUntil
+    }
+  }
+}

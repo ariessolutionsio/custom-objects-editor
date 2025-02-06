@@ -1,0 +1,12 @@
+query StateSearch($where: String!, $limit: Int!, $offset: Int!, $locale: Locale!) {
+  states(where: $where, limit: $limit, offset: $offset) {
+    results {
+      id
+      name(locale: $locale)
+      key
+      description(locale: $locale)
+      roles
+      type
+    }
+  }
+}

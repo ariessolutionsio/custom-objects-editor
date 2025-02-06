@@ -1,0 +1,16 @@
+query getOrderByOrderNumber($orderNumber: String!) {
+  order(orderNumber: $orderNumber) {
+    id
+    orderNumber
+    customerEmail
+    billingAddress {
+      streetName
+      city
+      state
+      country
+    }
+    totalPrice {
+      centAmount
+    }
+  }
+}

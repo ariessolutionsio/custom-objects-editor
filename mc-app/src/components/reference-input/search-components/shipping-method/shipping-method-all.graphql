@@ -1,0 +1,15 @@
+query ShippingMethodSearch {
+  shippingMethods(limit: 50) {
+    results {
+      id
+      name
+      key
+      zoneRates {
+        zone {
+          id
+          name
+        }
+      }
+    }
+  }
+}

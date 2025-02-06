@@ -1,0 +1,13 @@
+query CartDiscountSearch($locale: Locale!) {
+  cartDiscounts(limit: 50) {
+    results {
+      id
+      name(locale: $locale)
+      key
+      isActive
+      value {
+        type
+      }
+    }
+  }
+}

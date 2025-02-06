@@ -1,0 +1,9 @@
+query CustomerByKey($key:String!) {
+  customer (key: $key) {
+      email,
+      firstName,
+      lastName,
+      id,
+      key,
+  }
+}

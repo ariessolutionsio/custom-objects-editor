@@ -1,0 +1,7 @@
+query TaxCategoryById($id: String!) {
+  taxCategory(id: $id) {
+    id
+    name
+    key
+  }
+}

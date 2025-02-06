@@ -1,0 +1,19 @@
+query SearchOrder($where: String!, $limit: Int!, $offset: Int!) {
+  orders(where: $where, limit: $limit, offset: $offset) {
+    results {
+      id
+      orderNumber
+      customerEmail
+      billingAddress {
+        streetName
+        city
+        state
+        country
+      }
+      totalPrice {
+        centAmount
+        currencyCode
+      }
+    }
+  }
+}

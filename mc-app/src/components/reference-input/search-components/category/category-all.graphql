@@ -1,0 +1,24 @@
+query CategorySearch($locale: Locale) {
+  categories: categorySearch(
+    limit: 50
+  ) {
+    results {
+      id
+      key
+      name(locale: $locale)
+      nameAllLocales {
+        locale
+        value
+      }
+      ancestors {
+        id
+        name(locale: $locale)
+        nameAllLocales {
+          locale
+          value
+        }
+      }
+      stagedProductCount
+    }
+  }
+}

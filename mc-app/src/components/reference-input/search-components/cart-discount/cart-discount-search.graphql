@@ -1,0 +1,13 @@
+query CartDiscountSearch($where: String!, $locale: Locale!) {
+  cartDiscounts(where: $where) {
+    results {
+      id
+      name(locale:$locale)
+      key,
+      isActive
+      value {
+        type
+      }
+    }
+  }
+}

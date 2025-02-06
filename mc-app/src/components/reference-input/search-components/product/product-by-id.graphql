@@ -1,0 +1,18 @@
+query getProductById($id: String!, $locale: Locale!) {
+  product(id: $id) {
+    id
+      productType {
+        key
+      }
+      key
+      masterData {
+        current {
+          name (locale: $locale)
+          masterVariant {
+            sku
+          }
+        }
+      }
+
+  }
+}

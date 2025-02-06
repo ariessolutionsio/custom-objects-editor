@@ -1,0 +1,10 @@
+query TypeSearch( $locale: Locale!) {
+  typeDefinitions(limit: 50) {
+    results {
+        id
+        name(locale:$locale)
+        key
+        resourceTypeIds
+    }
+  }
+}

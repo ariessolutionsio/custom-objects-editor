@@ -1,0 +1,23 @@
+query PaymentSearch($locale: Locale!) {
+  payments(limit: 50) {
+    results {
+      id
+      key
+      amountPlanned {
+        centAmount
+        currencyCode
+      }
+      customer {
+        email
+      }
+      paymentMethodInfo {
+        name(locale: $locale)
+      }
+      paymentStatus {
+        state {
+          key
+        }
+      }
+    }
+  }
+}

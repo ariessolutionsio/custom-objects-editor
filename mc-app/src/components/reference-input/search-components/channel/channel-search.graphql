@@ -1,0 +1,10 @@
+query ChannelSearch($where: String!, $limit: Int!, $offset: Int!, $locale: Locale!) {
+  channels(where: $where, limit: $limit, offset: $offset) {
+    results {
+      id
+      name(locale: $locale)
+      key
+      roles
+    }
+  }
+}

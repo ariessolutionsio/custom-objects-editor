@@ -1,0 +1,15 @@
+query ShippingMethodSearch($where: String!, $limit: Int!, $offset: Int!) {
+  shippingMethods(where: $where, limit: $limit, offset: $offset) {
+    results {
+      id
+      name
+      key
+      zoneRates {
+        zone {
+          id
+          name
+        }
+      }
+    }
+  }
+}
