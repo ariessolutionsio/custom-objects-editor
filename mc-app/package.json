@@ -4,7 +4,7 @@
   "description": "",
   "private": true,
   "scripts": {
-    "build": "yarn --cwd ../shared-code install && yarn --cwd ../shared-code run build && mc-scripts build",
+    "build": "mc-scripts build",
     "start": "mc-scripts start",
     "compile-html": "mc-scripts compile-html",
     "compile-html:local": "MC_APP_ENV=development mc-scripts compile-html --transformer @commercetools-frontend/mc-dev-authentication/transformer-local.js",
@@ -90,7 +90,6 @@
     "react-redux": "7.2.9",
     "react-router-dom": "5.3.4",
     "redux": "4.2.0",
-    "shared-code": "link:../shared-code",
     "typescript": "^5.4.2",
     "yup": "^1.4.0"
   },

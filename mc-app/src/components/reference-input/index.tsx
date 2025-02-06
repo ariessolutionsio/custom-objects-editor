@@ -5,8 +5,8 @@ import TextInput from '@commercetools-uikit/text-input';
 import get from 'lodash/get';
 import React, { Suspense, lazy } from 'react';
 import { Link } from 'react-router-dom';
-import { referenceTypeToSingleValueMap } from 'shared-code';
 import { ReferenceInputProps } from './search-input/types';
+import { referenceTypeToSingleValueMap } from '../../shared-code';
 
 const referenceTypeToComponentMap: Record<string, any> = {
   category: lazy(() => import('./search-components/category')),

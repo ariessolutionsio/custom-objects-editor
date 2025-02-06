@@ -7,7 +7,6 @@ import {
   useMcQuery,
 } from '@commercetools-frontend/application-shell';
 import { GRAPHQL_TARGETS } from '@commercetools-frontend/constants';
-import { CustomObjectController } from 'shared-code';
 import { extractErrorFromGraphQlResponse } from '../../helpers';
 import {
   TCustomObjectDraft,
@@ -20,6 +19,8 @@ import {
 import DeleteCustomObject from './delete-custom-object.rest.graphql';
 import GetCustomObject from './get-custom-object.rest.graphql';
 import GetCustomObjects from './get-custom-objects.ctp.graphql';
+import { CustomObjectController } from '../../shared-code';
+import { GraphQLClient } from '../../shared-code/types/graphql';
 
 type TUseCustomObjectsFetcher = (variables: TQuery_CustomObjectsArgs) => {
   customObjectsPaginatedResult?: TQuery['customObjects'];
@@ -89,7 +90,7 @@ export const useCustomObjectUpdater = () => {
     onCompleted?: () => void;
     onError?: (message?: string) => void;
   }) => {
-    const controller = new CustomObjectController(client, {
+    const controller = new CustomObjectController(client as GraphQLClient, {
       target: GRAPHQL_TARGETS.COMMERCETOOLS_PLATFORM,
     });
     try {

@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import { apiSuccess } from '../api/success.api';
 import CustomError from '../errors/custom.error';
 import { getNodeClient } from '../client/apollo.client';
-import { CustomObjectController } from 'shared-code';
+import { CustomObjectController } from '../shared-code';
 
 export const post = async (request: Request, response: Response) => {
   // Deserialize the action and resource from the body
