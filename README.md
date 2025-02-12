@@ -25,3 +25,128 @@ Refer to [documentation](https://docs.commercetools.com/merchant-center/connect)
 ### Configuration
 - [mc-app](./mc-app/README.md)
 - [validation-service](./validation-service/README.md)
+
+
+### TODO
+
+- Add more references types:
+
+    [ ] approval-flow
+    References an ApprovalFlow.
+
+    [ ] approval-rule
+    References an ApprovalRule.
+
+    [ ] associate-role
+    References an AssociateRole.
+
+    [ ] attribute-group
+    References an AttributeGroup.
+
+    [ ] business-unit
+    References a BusinessUnit.
+
+    [x] cart
+    References a Cart.
+
+    [x] cart-discount
+    References a CartDiscount.
+
+    [x] category
+    References a Category.
+
+    [x] channel
+    References a Channel.
+
+    [x] customer
+    References a Customer.
+
+    [ ] customer-email-token
+    References a CustomerToken for email verification.
+
+    [x] customer-group
+    References a CustomerGroup.
+
+    [ ] customer-password-token
+    References a CustomerToken for password reset.
+
+    [ ] direct-discount
+    References a DirectDiscount.
+
+    [x] discount-code
+    References a DiscountCode.
+
+    [ ] extension
+    References an Extension.
+
+    [ ] inventory-entry
+    References an InventoryEntry.
+
+    [x] key-value-document
+    References a CustomObject.
+
+    [x] order
+    References an Order.
+
+    [x] order-edit
+    References an Order Edit.
+
+    [x] payment
+    References a Payment.
+
+    [x] product
+    References a Product.
+
+    [x] product-discount
+    References a ProductDiscount.
+
+    [x] product-price
+    References an Embedded Price.
+
+    [ ] product-selection
+    References a ProductSelection.
+
+    [ ] product-tailoring
+    References a ProductTailoring.
+
+    [x] product-type
+    References a ProductType.
+
+    [ ] quote
+    References a Quote.
+
+    quote-request
+    References a QuoteRequest.
+
+    [ ] review
+    References a Review.
+
+    [x] shipping-method
+    References a ShippingMethod.
+
+    [x] shopping-list
+    References a ShoppingList.
+
+    [ ] staged-quote
+    References a StagedQuote.
+
+    [ ] standalone-price
+    References a StandalonePrice.
+
+    [x] state
+    References a State.
+
+    [x] store
+    References a Store.
+
+    [ ] subscription
+    References a Subscription.
+
+    [ ] tax-category
+    References a TaxCategory.
+
+    [x] type
+    References a Type.
+
+    [x] zone
+    References a Zone.
