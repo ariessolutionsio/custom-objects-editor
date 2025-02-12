@@ -1,0 +1,7 @@
+query CustomerGroupById($id: String!) {
+  customerGroup(id: $id) {
+    id
+    name
+    key
+  }
+}

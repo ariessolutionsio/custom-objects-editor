@@ -1,0 +1,16 @@
+query getCartById($id: String!) {
+  cart(id: $id) {
+    id
+    key
+    customerEmail
+    billingAddress {
+      streetName
+      city
+      state
+      country
+    }
+    totalPrice {
+      centAmount
+    }
+  }
+}

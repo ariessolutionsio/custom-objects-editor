@@ -1,0 +1,11 @@
+query CustomerSearch {
+  customers (limit: 50) {
+    results {
+      email,
+      firstName,
+      lastName,
+      id,
+      key,
+    }
+  }
+}

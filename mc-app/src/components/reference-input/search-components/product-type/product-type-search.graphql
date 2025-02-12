@@ -1,0 +1,9 @@
+query ProductTypeSearch($where: String!, $limit: Int!, $offset: Int!) {
+  productTypes(where: $where, limit: $limit, offset: $offset) {
+    results {
+      id
+      name
+      key
+    }
+  }
+}

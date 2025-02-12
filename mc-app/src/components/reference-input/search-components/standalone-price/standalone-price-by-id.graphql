@@ -1,0 +1,19 @@
+query StandalonePriceById($id: String!) {
+  standalonePrice(id: $id) {
+    id
+      sku
+      key
+      customerGroup {
+        key
+      }
+      channel {
+        key
+      }
+      value {
+        centAmount
+        currencyCode
+      }
+      validFrom
+      validUntil
+  }
+}

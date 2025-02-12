@@ -1,0 +1,9 @@
+query KeyValueDocumentSearch($container:String!, $where: String, $limit: Int!, $offset: Int!) {
+  customObjects(container:$container, where: $where, limit: $limit, offset: $offset, sort:"key asc") {
+    results {
+      id
+      key
+      container
+    }
+  }
+}

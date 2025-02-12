@@ -1,0 +1,16 @@
+query SearchProducts($text: String!, $limit: Int!, $offset: Int!, $locale: Locale!) {
+  productProjectionSearch(text: $text, limit: $limit, offset: $offset, locale:$locale) {
+    total
+    results {
+      id
+      productType {
+        key
+      }
+      key
+      name(locale:$locale)
+      masterVariant {
+        sku
+      }
+    }
+  }
+}

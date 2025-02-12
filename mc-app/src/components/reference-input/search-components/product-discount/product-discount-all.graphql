@@ -1,0 +1,13 @@
+query ProductDiscountSearch($locale: Locale!) {
+  productDiscounts(limit: 50) {
+    results {
+      id
+      name(locale:$locale)
+      key,
+      isActive
+      value {
+        type
+      }
+    }
+  }
+}

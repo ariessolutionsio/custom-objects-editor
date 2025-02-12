@@ -1,0 +1,8 @@
+query TypeById($id: String!, $locale: Locale!) {
+  typeDefinition(id: $id) {
+    id
+    name(locale:$locale)
+    key
+    resourceTypeIds
+  }
+}

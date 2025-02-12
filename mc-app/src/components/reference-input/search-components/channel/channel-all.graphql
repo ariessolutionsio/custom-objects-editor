@@ -1,0 +1,10 @@
+query ChannelSearch($locale: Locale!) {
+  channels(limit: 50) {
+    results {
+      id
+      name(locale: $locale)
+      key
+      roles
+    }
+  }
+}

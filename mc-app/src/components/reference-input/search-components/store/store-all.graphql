@@ -1,0 +1,15 @@
+query StorelSearch($locale: Locale) {
+  stores(limit: 50) {
+    results {
+      id
+      name(locale: $locale)
+      key
+      distributionChannels {
+        name
+      }
+      supplyChannels {
+        name
+      }
+    }
+  }
+}

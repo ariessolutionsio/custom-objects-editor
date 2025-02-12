@@ -1,0 +1,15 @@
+query StorelSearch($where: String!, $limit: Int!, $offset: Int!, $locale: Locale) {
+  stores(where: $where, limit: $limit, offset: $offset) {
+    results {
+      id
+      name(locale: $locale)
+      key
+      distributionChannels {
+        name
+      }
+      supplyChannels {
+        name
+      }
+    }
+  }
+}

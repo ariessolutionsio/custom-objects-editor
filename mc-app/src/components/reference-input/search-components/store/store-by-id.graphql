@@ -1,0 +1,13 @@
+query StorelSearch($id: String!, $locale: Locale) {
+  store(id: $id) {
+    id
+    name(locale: $locale)
+    key
+    distributionChannels {
+      name
+    }
+    supplyChannels {
+      name
+    }
+  }
+}

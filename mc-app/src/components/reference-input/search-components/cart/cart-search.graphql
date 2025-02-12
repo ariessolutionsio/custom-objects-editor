@@ -1,0 +1,19 @@
+query SearchCart($where: String!, $limit: Int!, $offset: Int!) {
+  carts(where: $where, limit: $limit, offset: $offset) {
+    results {
+      id
+      key
+      customerEmail
+      billingAddress {
+        streetName
+        city
+        state
+        country
+      }
+      totalPrice {
+        centAmount
+        currencyCode
+      }
+    }
+  }
+}
