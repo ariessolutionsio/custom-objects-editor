@@ -36,6 +36,9 @@ const config = {
     labelAllLocales: [],
     permissions: [PERMISSIONS.View],
   },
+  additionalEnv: {
+    logoMustBeVisible: '${env:LOGO_MUST_BE_VISIBLE}',
+  },
   submenuLinks: [
     // {
     //   defaultLabel: 'Custom Objects Editor List',
