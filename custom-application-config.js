@@ -1,4 +1,5 @@
-import { PERMISSIONS, entryPointUriPath } from './src/constants';
+// eslint-disable-next-line import/extensions
+import { PERMISSIONS, entryPointUriPath } from './src/constants.ts';
 
 /**
  * @type {import('@commercetools-frontend/application-config').ConfigOptions}
