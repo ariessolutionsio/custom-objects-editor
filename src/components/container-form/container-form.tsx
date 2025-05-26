@@ -43,14 +43,15 @@ const ContainerForm: FC<Props> = ({ onSubmit, initialValues, children }) => {
     required: bool(),
     display: bool(),
     attributes: array(lazy(() => object(attributeSchema))),
-    reference: object()
-      .when('type', {
-        is: (val: any) => val === TYPES.Reference,
-        then: (schema) => object({
+    reference: object().when('type', {
+      is: (val: any) => val === TYPES.Reference,
+      then: (schema) =>
+        schema.shape({
           by: stringSchema,
           type: stringSchema,
-        })
-      }),
+        }),
+      otherwise: (schema) => schema.strip(),
+    }),
     enum: array().when('type', {
       is: (val: any) => val === TYPES.Enum,
       then: (schema) => array(
