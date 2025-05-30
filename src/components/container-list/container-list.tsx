@@ -1,4 +1,5 @@
 import React, { lazy, ReactNode } from 'react';
+import { useApplicationContext } from '@commercetools-frontend/application-shell-connectors';
 import { Link, Switch, useHistory, useRouteMatch } from 'react-router-dom';
 import { SuspendedRoute } from '@commercetools-frontend/application-shell';
 import { FormattedMessage, useIntl } from 'react-intl';
@@ -25,6 +26,7 @@ import LoadingSpinner from '@commercetools-uikit/loading-spinner';
 import { CONTAINER, SORT_OPTIONS } from '../../constants';
 import { getErrorMessage } from '../../helpers';
 import { useCustomObjectsFetcher } from '../../hooks/use-custom-object-connector/use-custom-object-connector';
+import { Logo } from '../../images/logo';
 import { FIELDS } from './constants';
 import messages from './messages';
 
@@ -65,6 +67,12 @@ const ContainerList = () => {
     key: FIELDS.KEY,
     order: 'asc',
   });
+
+  const { environment } = useApplicationContext<{
+    logoMustBeVisible?: unknown;
+  }>();
+  const logoMustBeVisible =
+    String(environment.logoMustBeVisible).toLowerCase() === 'true';
 
   const { customObjectsPaginatedResult, loading, error, refetch } =
     useCustomObjectsFetcher({
@@ -185,6 +193,9 @@ const ContainerList = () => {
           />
         )
       )}
+      <Spacings.Stack scale="m" alignItems="center">
+        {logoMustBeVisible && <Logo />}
+      </Spacings.Stack>
       <Switch>
         <SuspendedRoute path={`${match.path}/new`}>
           <CreateContainer

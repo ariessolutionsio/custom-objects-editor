@@ -1,4 +1,5 @@
-import { PERMISSIONS, entryPointUriPath } from './src/constants';
+// eslint-disable-next-line import/extensions
+import { PERMISSIONS, entryPointUriPath } from './src/constants.ts';
 
 /**
  * @type {import('@commercetools-frontend/application-config').ConfigOptions}
@@ -35,6 +36,9 @@ const config = {
     defaultLabel: 'Custom Objects Editor',
     labelAllLocales: [],
     permissions: [PERMISSIONS.View],
+  },
+  additionalEnv: {
+    logoMustBeVisible: '${env:LOGO_MUST_BE_VISIBLE}',
   },
   submenuLinks: [
     // {

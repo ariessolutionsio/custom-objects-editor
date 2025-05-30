@@ -20,6 +20,7 @@ import { SuspendedRoute } from '@commercetools-frontend/application-shell';
 import SecondaryButton from '@commercetools-uikit/secondary-button';
 import SelectInput from '@commercetools-uikit/select-input';
 import { Link, Switch, useHistory, useRouteMatch } from 'react-router-dom';
+import { useApplicationContext } from '@commercetools-frontend/application-shell-connectors';
 import DataTable, { TColumn } from '@commercetools-uikit/data-table';
 import {
   usePaginationState,
@@ -34,12 +35,13 @@ import { useContainerContext } from '../../context/container-context';
 import { TCustomObject, TQuery } from '../../types/generated/ctp';
 import { getErrorMessage } from '../../helpers';
 import { AttributeValue } from '../../constants';
-
+import { Logo } from '../../images/logo';
 import { useCustomObjectsFetcher } from '../../hooks/use-custom-object-connector/use-custom-object-connector';
 import { columnDefinitions, COLUMN_KEYS } from './column-definitions';
 import messages from './messages';
 import styles from './custom-objects-list.module.css';
 import TextFilter from './text-filter';
+
 
 const CreateCustomObject = lazy(() => import('../create-custom-object'));
 const CustomObjectDetails = lazy(() => import('../custom-object-details'));
@@ -49,6 +51,12 @@ const CustomObjectsList = () => {
   const match = useRouteMatch();
   const { push } = useHistory();
   const { hasContainers, containers } = useContainerContext();
+
+  const { environment } = useApplicationContext<{
+    logoMustBeVisible?: unknown;
+  }>();
+  const logoMustBeVisible =
+    String(environment.logoMustBeVisible).toLowerCase() === 'true';
 
   const [key, setKey] = useState('');
   const { page, perPage } = usePaginationState();
@@ -340,7 +348,11 @@ const CustomObjectsList = () => {
             />
           )
         )}
+        
       </SpacingsStack>
+      <Spacings.Stack scale="m" alignItems="center">
+        {logoMustBeVisible && <Logo />}
+      </Spacings.Stack>
       <Switch>
         <SuspendedRoute path={`${match.path}/new`}>
           <CreateCustomObject
