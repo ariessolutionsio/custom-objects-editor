@@ -9,11 +9,27 @@ import Card from '@commercetools-uikit/card';
 import Constraints from '@commercetools-uikit/constraints';
 import { BinLinearIcon, PlusBoldIcon } from '@commercetools-uikit/icons';
 import Spacings from '@commercetools-uikit/spacings';
+import {
+  closestCenter,
+  DndContext,
+  DragEndEvent,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
 import { TYPES } from '../../constants';
 import { getValueByType } from '../../helpers';
 import AttributeLabel from './attribute-label';
 import AttributeInput from './attribute-input';
 import messages from './messages';
+import { SortableItem } from './sortable-item';
 import styles from './attribute-field.module.css';
 
 type Props = {
@@ -67,73 +83,110 @@ const AttributeField: FC<Props> = ({
   const selectOptions =
     type === TYPES.LocalizedEnum
       ? options?.map((option) => {
-        return {
-          value: option.value,
-          label: option.label[dataLocale],
-        };
-      })
+          return {
+            value: option.value,
+            label: option.label[dataLocale],
+          };
+        })
       : options;
+
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
 
   return (
     <>
       {isSet ? (
         <FieldArray
           name={name}
-          render={({ push, remove }) => (
-            <Spacings.Stack scale="s">
-              <AttributeLabel
-                data-testid="set-attribute-label"
-                type={type}
-                title={title}
-                isRequired={isRequired}
-                reference={reference}
-              />
-              <Constraints.Horizontal max="scale">
-                <SecondaryButton
-                  data-testid="add-attribute"
-                  iconLeft={<PlusBoldIcon />}
-                  label={intl.formatMessage(messages.addLabel)}
-                  onClick={() => push(emptyValue)}
+          render={({ push, remove, form }) => {
+            const handleDragEnd = (event: DragEndEvent) => {
+              const { active, over } = event;
+              if (active.id !== over?.id) {
+                const oldIndex = active.data.current?.sortable.index;
+                const newIndex = over?.data.current?.sortable.index;
+
+                if (
+                  typeof oldIndex === 'number' &&
+                  typeof newIndex === 'number'
+                ) {
+                  const updated = arrayMove(value, oldIndex, newIndex);
+                  form.setFieldValue(name, updated);
+                }
+              }
+            };
+
+            return (
+              <Spacings.Stack scale="s">
+                <AttributeLabel
+                  data-testid="set-attribute-label"
+                  type={type}
+                  title={title}
+                  isRequired={isRequired}
+                  reference={reference}
                 />
-              </Constraints.Horizontal>
-              {value.map((val: any, index: number) => (
-                <Card
-                  key={index}
-                  theme={isNestedSet ? 'light' : 'dark'}
-                  type="flat"
+                <Constraints.Horizontal max="scale">
+                  <SecondaryButton
+                    data-testid="add-attribute"
+                    iconLeft={<PlusBoldIcon />}
+                    label={intl.formatMessage(messages.addLabel)}
+                    onClick={() => push(emptyValue)}
+                  />
+                </Constraints.Horizontal>
+                <DndContext
+                  sensors={sensors}
+                  collisionDetection={closestCenter}
+                  onDragEnd={handleDragEnd}
                 >
-                  <Spacings.Inline alignItems="center">
-                    <div className={styles.fullWidth}>
-                      <AttributeInput
-                        data-testid={`set-attribute-input-${index}`}
-                        type={type}
-                        title={title}
-                        name={`${name}.${index}`}
-                        value={val}
-                        touched={get(touched, index)}
-                        errors={get(errors, index)}
-                        onChange={onChange}
-                        onBlur={onBlur}
-                        isRequired={isRequired}
-                        isSet={isSet}
-                        isNestedSet={isNestedSet}
-                        attributes={attributes}
-                        reference={reference}
-                        options={selectOptions}
-                      />
-                    </div>
-                    <SecondaryIconButton
-                      data-testid={`remove-attribute-${index}`}
-                      icon={<BinLinearIcon />}
-                      label={intl.formatMessage(messages.removeLabel)}
-                      isDisabled={index === 0 && value.length === 1}
-                      onClick={() => remove(index)}
-                    />
-                  </Spacings.Inline>
-                </Card>
-              ))}
-            </Spacings.Stack>
-          )}
+                  <SortableContext
+                    items={value.map((_: any, i: number) => `${i}`)}
+                    strategy={verticalListSortingStrategy}
+                  >
+                    {value.map((val: any, index: number) => (
+                      <SortableItem key={index} id={`${index}`}>
+                        <Card
+                          theme={isNestedSet ? 'light' : 'dark'}
+                          type="flat"
+                        >
+                          <Spacings.Inline alignItems="center">
+                            <div className={styles.fullWidth}>
+                              <AttributeInput
+                                data-testid={`set-attribute-input-${index}`}
+                                type={type}
+                                title={title}
+                                name={`${name}.${index}`}
+                                value={val}
+                                touched={get(touched, index)}
+                                errors={get(errors, index)}
+                                onChange={onChange}
+                                onBlur={onBlur}
+                                isRequired={isRequired}
+                                isSet={isSet}
+                                isNestedSet={isNestedSet}
+                                attributes={attributes}
+                                reference={reference}
+                                options={selectOptions}
+                              />
+                            </div>
+                            <SecondaryIconButton
+                              data-testid={`remove-attribute-${index}`}
+                              icon={<BinLinearIcon />}
+                              label={intl.formatMessage(messages.removeLabel)}
+                              isDisabled={index === 0 && value.length === 1}
+                              onClick={() => remove(index)}
+                            />
+                          </Spacings.Inline>
+                        </Card>
+                      </SortableItem>
+                    ))}
+                  </SortableContext>
+                </DndContext>
+              </Spacings.Stack>
+            );
+          }}
         />
       ) : (
         <Spacings.Stack scale="xs">
