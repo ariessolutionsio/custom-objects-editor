@@ -65,6 +65,10 @@ const typeOptions = [
     label: <FormattedMessage {...messages.referenceLabel} />,
     value: TYPES.Reference,
   },
+  {
+    label: <FormattedMessage {...messages.richTextLabel} />,
+    value: TYPES.RichText,
+  },
 ];
 
 type Props = {

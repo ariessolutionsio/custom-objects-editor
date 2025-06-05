@@ -1,7 +1,6 @@
 node_modules/
 dist/
 coverage/
-public/
 csp.json
 env.json
 .env.local

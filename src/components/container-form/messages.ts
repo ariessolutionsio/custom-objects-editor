@@ -187,4 +187,9 @@ export default defineMessages({
     description: 'The error message for required fields',
     defaultMessage: 'This field is required. Provide a value.',
   },
+  richTextLabel: {
+    id: 'Container.form.type.label.richText',
+    description: 'Label for attributes rich text value',
+    defaultMessage: 'Rich Text',
+  },
 });
