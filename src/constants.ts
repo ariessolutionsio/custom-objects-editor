@@ -36,6 +36,7 @@ export const TYPES = {
   LocalizedEnum: 'LocalizedEnum',
   Object: 'Object',
   Reference: 'Reference',
+  RichText: 'RichText',
 };
 
 export enum TYPES_ENUM {
@@ -51,6 +52,7 @@ export enum TYPES_ENUM {
   LocalizedEnum = 'LocalizedEnum',
   Object = 'Object',
   Reference = 'Reference',
+  RichText = 'RichText',
 }
 
 export const REFERENCE_BY = {

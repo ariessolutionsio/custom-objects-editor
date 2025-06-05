@@ -18,6 +18,7 @@ import Spacings from '@commercetools-uikit/spacings';
 import { TYPES } from '../../constants';
 import nestedStyles from '../container-form/nested-attributes.module.css';
 import AttributeField from './attribute-field'; // eslint-disable-line import/no-cycle
+import LexicalEditorField from './lexical-editor-field';
 
 type Props = {
   type: string;
@@ -253,6 +254,27 @@ const AttributeInput: FC<Props> = ({
         </Spacings.Stack>
       );
     }
+
+    case TYPES.RichText:
+      return (
+        <Spacings.Stack scale="xs">
+          <LexicalEditorField
+            name={name}
+            initialValue={value}
+            onChange={(fieldName, newValue) => {
+              onChange({ target: { name: fieldName, value: newValue } });
+            }}
+            onBlur={() => {
+              if (onBlur) {
+                onBlur({ target: { name } });
+              }
+            }}
+          />
+          {touched && errors && (
+            <ErrorMessage data-testid="field-error-richtext">{errors}</ErrorMessage>
+          )}
+        </Spacings.Stack>
+      );
 
     case TYPES.Object:
       return (
