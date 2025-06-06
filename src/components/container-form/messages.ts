@@ -192,4 +192,9 @@ export default defineMessages({
     description: 'Label for attributes rich text value',
     defaultMessage: 'Rich Text',
   },
+  assetLabel: {
+    id: 'Container.form.type.label.asset',
+    description: 'Asset type label',
+    defaultMessage: 'Asset',
+  },
 });
