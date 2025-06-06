@@ -19,6 +19,7 @@ import { TYPES } from '../../constants';
 import nestedStyles from '../container-form/nested-attributes.module.css';
 import AttributeField from './attribute-field'; // eslint-disable-line import/no-cycle
 import LexicalEditorField from './lexical-editor-field';
+import AssetInput from './asset-input/asset-input';
 
 type Props = {
   type: string;
@@ -271,7 +272,9 @@ const AttributeInput: FC<Props> = ({
             }}
           />
           {touched && errors && (
-            <ErrorMessage data-testid="field-error-richtext">{errors}</ErrorMessage>
+            <ErrorMessage data-testid="field-error-richtext">
+              {errors}
+            </ErrorMessage>
           )}
         </Spacings.Stack>
       );
@@ -305,6 +308,25 @@ const AttributeInput: FC<Props> = ({
             })}
           </Spacings.Stack>
         </div>
+      );
+
+    case TYPES.Asset:
+      return (
+        <Spacings.Stack scale="xs">
+          <AssetInput
+            name={name}
+            value={value}
+            touched={touched}
+            errors={errors}
+            onChange={onChange}
+            onBlur={onBlur}
+          />
+          {touched && errors && (
+            <ErrorMessage data-testid="field-error">
+              {typeof errors === 'string' ? errors : 'Invalid Asset data'}
+            </ErrorMessage>
+          )}
+        </Spacings.Stack>
       );
 
     default:
