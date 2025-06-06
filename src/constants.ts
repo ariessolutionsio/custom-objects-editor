@@ -37,6 +37,7 @@ export const TYPES = {
   Object: 'Object',
   Reference: 'Reference',
   RichText: 'RichText',
+  Asset: 'Asset',
 };
 
 export enum TYPES_ENUM {
@@ -53,6 +54,7 @@ export enum TYPES_ENUM {
   Object = 'Object',
   Reference = 'Reference',
   RichText = 'RichText',
+  Asset= 'Asset'
 }
 
 export const REFERENCE_BY = {
