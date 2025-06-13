@@ -37,8 +37,24 @@ const config = {
     labelAllLocales: [],
     permissions: [PERMISSIONS.View],
   },
+  headers: {
+    csp: {
+      'script-src': ['https://upload-widget.cloudinary.com'],
+      'connect-src': ['https://api.cloudinary.com'],
+      'img-src': ['res.cloudinary.com'],
+      'frame-src': [
+        'https://widget.cloudinary.com',
+        'https://upload-widget.cloudinary.com',
+        'https://www.facebook.com',
+        'https://www.instagram.com',
+      ],
+    },
+  },
   additionalEnv: {
     logoMustBeVisible: '${env:LOGO_MUST_BE_VISIBLE}',
+    cloudinaryCloudName: '${env:MC_APP_CLOUDINARY_CLOUD_NAME}',
+    cloudinaryUploadPreset: '${env:MC_APP_CLOUDINARY_UPLOAD_PRESET}',
+    cloudinaryEnabled: '${env:MC_APP_CLOUDINARY_ENABLED}',
   },
   submenuLinks: [
     // {
