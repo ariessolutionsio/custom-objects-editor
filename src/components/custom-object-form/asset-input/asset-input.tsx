@@ -1,11 +1,12 @@
-// src/components/attribute-input/asset-input.js
-
 import Spacings from '@commercetools-uikit/spacings';
 import TextInput from '@commercetools-uikit/text-input';
 import LocalizedTextInput from '@commercetools-uikit/localized-text-input';
 import { useApplicationContext } from '@commercetools-frontend/application-shell-connectors';
 import Text from '@commercetools-uikit/text';
-import { FC } from 'react';
+import { FC, useState } from 'react';
+import PrimaryButton from '@commercetools-uikit/primary-button';
+import LoadingSpinner from '@commercetools-uikit/loading-spinner';
+import useCloudinary from '../../../hooks/use-cloudinary';
 import SourceArrayInput from './source-array-input';
 import { Asset, LocalizedString, Source } from './types';
 
@@ -25,12 +26,79 @@ const AssetInput: FC<Props> = ({
   touched,
   errors,
 }) => {
-  const { dataLocale } = useApplicationContext((context) => ({
-    dataLocale: context.dataLocale ?? '',
-  }));
+  const { dataLocale, environment } = useApplicationContext<{
+    cloudinaryEnabled?: string | boolean;
+    cloudinaryCloudName?: string;
+    cloudinaryUploadPreset?: string;
+  }>();
+
+  const [isWidgetOpening, setIsWidgetOpening] = useState(false);
+  const isCloudinaryEnabled =
+    environment.cloudinaryEnabled === true &&
+    !!environment.cloudinaryCloudName &&
+    !!environment.cloudinaryUploadPreset;
+
+  const cloudinaryLoaded = useCloudinary();
 
   const triggerChange = (updatedValue: Partial<Asset>) => {
     onChange({ target: { name, value: updatedValue } });
+  };
+
+  const handleOpenMediaLibrary = () => {
+    if (cloudinaryLoaded && (window as any).cloudinary) {
+      setIsWidgetOpening(true);
+      (window as any).cloudinary.openUploadWidget(
+        {
+          cloudName: environment.cloudinaryCloudName || '',
+          uploadPreset: environment.cloudinaryUploadPreset || '',
+          sources: [
+            'local',
+            'url',
+            'camera',
+            'image_search',
+            'google_drive',
+            'facebook',
+            'dropbox',
+            'instagram',
+            'shutterstock',
+            'getty',
+            'istock',
+            'unsplash',
+          ],
+          multiple: false,
+        },
+        (error: any, result: any) => {
+          if (
+            result &&
+            (result.event === 'success' ||
+              result.event === 'close' ||
+              result.event === 'abort')
+          ) {
+            setIsWidgetOpening(false);
+          }
+
+          if (!error && result && result.event === 'success') {
+            const assetData = result.info;
+            triggerChange({
+              key: assetData.public_id,
+              name: { [dataLocale || '']: assetData.original_filename || '' },
+              description: { [dataLocale || '']: '' },
+              tags: assetData.tags,
+              folder: assetData.asset_folder,
+              sources: [
+                {
+                  uri: assetData.secure_url,
+                  key: assetData.public_id,
+                  contentType: assetData.format,
+                  width: assetData.width,
+                  height: assetData.height,
+                },
+              ],
+            });
+          }
+        }
+      );
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,7 +125,17 @@ const AssetInput: FC<Props> = ({
   };
 
   return (
-    <Spacings.Stack scale="l">
+    <Spacings.Stack scale="l" alignItems="flex-start">
+      {isCloudinaryEnabled && (
+        <PrimaryButton
+          label={
+            isWidgetOpening ? 'Loading...' : 'Open Cloudinary Media Library'
+          }
+          onClick={handleOpenMediaLibrary}
+          isDisabled={!cloudinaryLoaded || isWidgetOpening}
+          iconLeft={isWidgetOpening ? <LoadingSpinner /> : undefined}
+        />
+      )}
       <TextInput
         name="key"
         placeholder="Key (publicId)"
@@ -73,7 +151,7 @@ const AssetInput: FC<Props> = ({
         name="name"
         placeholder={'Asset Name' as unknown as Record<string, string>}
         value={value?.name || {}}
-        selectedLanguage={dataLocale}
+        selectedLanguage={dataLocale || ''}
         onChange={(event) =>
           handleLocalizedChange(
             event.target.value as unknown as LocalizedString,
@@ -87,7 +165,7 @@ const AssetInput: FC<Props> = ({
         name="description"
         placeholder={'Asset Description' as unknown as Record<string, string>}
         value={value?.description || {}}
-        selectedLanguage={dataLocale}
+        selectedLanguage={dataLocale || ''}
         onChange={(event) =>
           handleLocalizedChange(
             event.target.value as unknown as LocalizedString,

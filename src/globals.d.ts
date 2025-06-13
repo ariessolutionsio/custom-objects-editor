@@ -1,3 +1,18 @@
+declare module '@commercetools-frontend/application-shell-connectors' {
+  export interface ApplicationRuntimeEnvironment {
+    cloudinaryEnabled?: string;
+    cloudinaryCloudName?: string;
+    cloudinaryUploadPreset?: string;
+  }
+}
+
+declare global {
+  interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    cloudinary?: any;
+  }
+}
+
 declare module '*.graphql' {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const content: any;
@@ -11,3 +26,5 @@ declare module '*.module.css' {
 
 declare module '*.png';
 declare module '*.svg';
+
+export {};
