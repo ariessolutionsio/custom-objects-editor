@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import get from 'lodash/get';
 import { useIntl } from 'react-intl';
 import { FieldArray } from 'formik';
@@ -7,7 +7,11 @@ import SecondaryButton from '@commercetools-uikit/secondary-button';
 import SecondaryIconButton from '@commercetools-uikit/secondary-icon-button';
 import Card from '@commercetools-uikit/card';
 import Constraints from '@commercetools-uikit/constraints';
-import { BinLinearIcon, PlusBoldIcon } from '@commercetools-uikit/icons';
+import {
+  BinLinearIcon,
+  PlusBoldIcon,
+  SearchIcon,
+} from '@commercetools-uikit/icons';
 import Spacings from '@commercetools-uikit/spacings';
 import {
   closestCenter,
@@ -30,6 +34,7 @@ import AttributeLabel from './attribute-label';
 import AttributeInput from './attribute-input';
 import messages from './messages';
 import { SortableItem } from './sortable-item';
+import { CustomObjectsModal } from './custom-objects-modal';
 import styles from './attribute-field.module.css';
 
 type Props = {
@@ -73,6 +78,8 @@ const AttributeField: FC<Props> = ({
       dataLocale: context.dataLocale ?? '',
     })
   );
+  const [isSearchOpen, setSearchOpen] = useState(false);
+
   const emptyValue = getValueByType(
     type,
     attributes,
@@ -83,18 +90,16 @@ const AttributeField: FC<Props> = ({
   const selectOptions =
     type === TYPES.LocalizedEnum
       ? options?.map((option) => {
-          return {
-            value: option.value,
-            label: option.label[dataLocale],
-          };
-        })
+        return {
+          value: option.value,
+          label: option.label[dataLocale],
+        };
+      })
       : options;
 
   const sensors = useSensors(
     useSensor(PointerSensor),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    })
+    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
   );
 
   return (
@@ -103,6 +108,31 @@ const AttributeField: FC<Props> = ({
         <FieldArray
           name={name}
           render={({ push, remove, form }) => {
+            const handleSelect = (selectedId: string) => {
+              const newItem = {
+                typeId: 'key-value-document',
+                key: selectedId,
+              };
+
+              // clone to avoid direct mutation
+              const updatedValue = [...(value || [])];
+
+              // Find the first empty item
+              const emptyIndex = updatedValue.findIndex(
+                (item: any) => item?.key === ''
+              );
+
+              if (emptyIndex !== -1) {
+                // Replace the empty item
+                updatedValue[emptyIndex] = newItem;
+              } else {
+                // No empty item found — push a new one
+                updatedValue.push(newItem);
+              }
+
+              form.setFieldValue(name, updatedValue);
+              setSearchOpen(false);
+            };
             const handleDragEnd = (event: DragEndEvent) => {
               const { active, over } = event;
               if (active.id !== over?.id) {
@@ -142,10 +172,10 @@ const AttributeField: FC<Props> = ({
                   onDragEnd={handleDragEnd}
                 >
                   <SortableContext
-                    items={value.map((_: any, i: number) => `${i}`)}
+                    items={value?.map((_: any, i: number) => `${i}`)}
                     strategy={verticalListSortingStrategy}
                   >
-                    {value.map((val: any, index: number) => (
+                    {value?.map((val: any, index: number) => (
                       <SortableItem key={index} id={`${index}`}>
                         <Card
                           theme={isNestedSet ? 'light' : 'dark'}
@@ -172,6 +202,11 @@ const AttributeField: FC<Props> = ({
                               />
                             </div>
                             <SecondaryIconButton
+                              icon={<SearchIcon />}
+                              label="Search"
+                              onClick={() => setSearchOpen(true)}
+                            />
+                            <SecondaryIconButton
                               data-testid={`remove-attribute-${index}`}
                               icon={<BinLinearIcon />}
                               label={intl.formatMessage(messages.removeLabel)}
@@ -184,6 +219,11 @@ const AttributeField: FC<Props> = ({
                     ))}
                   </SortableContext>
                 </DndContext>
+                <CustomObjectsModal
+                  isOpen={isSearchOpen}
+                  close={() => setSearchOpen(false)}
+                  handleSelect={handleSelect}
+                />
               </Spacings.Stack>
             );
           }}
