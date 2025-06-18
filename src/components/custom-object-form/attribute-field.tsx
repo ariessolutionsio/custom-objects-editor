@@ -9,6 +9,7 @@ import Card from '@commercetools-uikit/card';
 import Constraints from '@commercetools-uikit/constraints';
 import {
   BinLinearIcon,
+  EyeIcon,
   PlusBoldIcon,
   SearchIcon,
 } from '@commercetools-uikit/icons';
@@ -78,7 +79,7 @@ const AttributeField: FC<Props> = ({
       dataLocale: context.dataLocale ?? '',
     })
   );
-  const [isSearchOpen, setSearchOpen] = useState(false);
+  const [searchModalIndex, setSearchModalIndex] = useState<number | null>(null);
 
   const emptyValue = getValueByType(
     type,
@@ -89,12 +90,10 @@ const AttributeField: FC<Props> = ({
   );
   const selectOptions =
     type === TYPES.LocalizedEnum
-      ? options?.map((option) => {
-        return {
-          value: option.value,
-          label: option.label[dataLocale],
-        };
-      })
+      ? options?.map((option) => ({
+        value: option.value,
+        label: option.label[dataLocale],
+      }))
       : options;
 
   const sensors = useSensors(
@@ -114,25 +113,21 @@ const AttributeField: FC<Props> = ({
                 key: selectedId,
               };
 
-              // clone to avoid direct mutation
               const updatedValue = [...(value || [])];
-
-              // Find the first empty item
               const emptyIndex = updatedValue.findIndex(
                 (item: any) => item?.key === ''
               );
 
               if (emptyIndex !== -1) {
-                // Replace the empty item
                 updatedValue[emptyIndex] = newItem;
               } else {
-                // No empty item found — push a new one
                 updatedValue.push(newItem);
               }
 
               form.setFieldValue(name, updatedValue);
-              setSearchOpen(false);
+              setSearchModalIndex(null);
             };
+
             const handleDragEnd = (event: DragEndEvent) => {
               const { active, over } = event;
               if (active.id !== over?.id) {
@@ -202,9 +197,9 @@ const AttributeField: FC<Props> = ({
                               />
                             </div>
                             <SecondaryIconButton
-                              icon={<SearchIcon />}
+                              icon={val.key ? <EyeIcon /> : <SearchIcon />}
                               label="Search"
-                              onClick={() => setSearchOpen(true)}
+                              onClick={() => setSearchModalIndex(index)}
                             />
                             <SecondaryIconButton
                               data-testid={`remove-attribute-${index}`}
@@ -219,11 +214,14 @@ const AttributeField: FC<Props> = ({
                     ))}
                   </SortableContext>
                 </DndContext>
-                <CustomObjectsModal
-                  isOpen={isSearchOpen}
-                  close={() => setSearchOpen(false)}
-                  handleSelect={handleSelect}
-                />
+                {searchModalIndex !== null && (
+                  <CustomObjectsModal
+                    isOpen={searchModalIndex !== null}
+                    close={() => setSearchModalIndex(null)}
+                    handleSelect={handleSelect}
+                    objectId={value?.[searchModalIndex]?.key}
+                  />
+                )}
               </Spacings.Stack>
             );
           }}

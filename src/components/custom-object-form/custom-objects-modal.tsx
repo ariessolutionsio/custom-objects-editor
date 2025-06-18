@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   InfoModalPage,
   PageNotFound,
@@ -17,23 +17,34 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import Constraints from '@commercetools-uikit/constraints';
 import SelectInput from '@commercetools-uikit/select-input';
 import map from 'lodash/map';
-import { useCustomObjectsFetcher } from '../../hooks/use-custom-object-connector/use-custom-object-connector';
+import SecondaryButton from '@commercetools-uikit/secondary-button';
+import { EditIcon } from '@commercetools-uikit/icons';
+import { useHistory, useRouteMatch } from 'react-router-dom';
+import {
+  useCustomObjectsFetcher,
+  useCustomObjectFetcher,
+} from '../../hooks/use-custom-object-connector/use-custom-object-connector';
 import messages from '../container-list/messages';
 import customObjectsMessages from '../custom-objects-list/messages';
 import { useContainerContext } from '../../context/container-context';
 import TextFilter from '../custom-objects-list/text-filter';
+import { renderObject } from '../custom-objects-list/render-object';
 
 export const CustomObjectsModal = ({
   isOpen,
   close,
   handleSelect,
+  objectId,
 }: {
   isOpen: boolean;
   close: () => void;
   handleSelect: (value: string) => void;
+  objectId?: string;
 }) => {
   const { hasContainers, containers } = useContainerContext();
   const intl = useIntl();
+  const match = useRouteMatch();
+  const { replace } = useHistory();
 
   const { page, perPage } = usePaginationState();
   const [container, setContainer] = useState(
@@ -42,14 +53,30 @@ export const CustomObjectsModal = ({
   const [key, setKey] = useState('');
   const tableSorting = useDataTableSortingState({ key: 'key', order: 'asc' });
 
-  const { customObjectsPaginatedResult, loading, error, refetch } =
-    useCustomObjectsFetcher({
-      limit: perPage.value,
-      offset: (page.value - 1) * perPage.value,
-      sort: [`${tableSorting.value.key} ${tableSorting.value.order}`],
-      container: container,
-      where: key && key !== '' ? `key="${key}"` : undefined,
-    });
+  // FETCH FOR SINGLE OBJECT (IF objectId provided)
+  const {
+    customObject,
+    loading: singleLoading,
+    error: singleError,
+    refetch: refetchSingleObject,
+  } = useCustomObjectFetcher({
+    id: objectId,
+  });
+
+  useEffect(() => {
+    if (objectId) {
+      refetchSingleObject();
+    }
+  }, [objectId, refetchSingleObject]);
+
+  // FETCH FOR LIST (if no objectId)
+  const { customObjectsPaginatedResult, loading } = useCustomObjectsFetcher({
+    limit: perPage.value,
+    offset: (page.value - 1) * perPage.value,
+    sort: [`${tableSorting.value.key} ${tableSorting.value.order}`],
+    container: container,
+    where: key && key !== '' ? `key="${key}"` : undefined,
+  });
 
   const containerOptions = map(containers, ({ key: containerKey }) => ({
     label: containerKey,
@@ -65,7 +92,34 @@ export const CustomObjectsModal = ({
     handleSelect(value);
   };
 
-  const modalContent = () => {
+  const renderSingleObject = () => {
+    if (singleLoading) return <LoadingSpinner />;
+    if (singleError || !customObject) return <PageNotFound />;
+
+    return (
+      <div>
+        {renderObject(customObject)}
+        <Spacings.Stack scale="l">
+          <Spacings.Inline justifyContent="flex-end">
+            <SecondaryButton
+              data-testid="edit-custom-object"
+              iconLeft={<EditIcon />}
+              as="a"
+              onClick={() => {
+                const baseUrl = match.url.split('/').slice(0, -1).join('/');
+                const newUrl = `${baseUrl}/${customObject.id}`;
+
+                replace(newUrl);
+              }}
+              label="Edit Custom Object"
+            />
+          </Spacings.Inline>
+        </Spacings.Stack>
+      </div>
+    );
+  };
+
+  const renderList = () => {
     if (
       !loading &&
       !hasContainers &&
@@ -74,9 +128,7 @@ export const CustomObjectsModal = ({
       return <PageNotFound />;
     }
 
-    if (loading) {
-      return <LoadingSpinner />;
-    }
+    if (loading) return <LoadingSpinner />;
 
     return (
       <Spacings.Stack scale="l">
@@ -138,12 +190,16 @@ export const CustomObjectsModal = ({
 
   return (
     <InfoModalPage
-      title="Select Custom Object"
-      subtitle={`Results: ${customObjectsPaginatedResult?.total ?? 0}`}
+      title={objectId ? String(customObject?.key) : 'Select Custom Object'}
+      subtitle={
+        objectId
+          ? 'Custom Object Detail'
+          : `Results: ${customObjectsPaginatedResult?.total ?? 0}`
+      }
       isOpen={isOpen}
       onClose={close}
     >
-      {modalContent()}
+      {objectId ? renderSingleObject() : renderList()}
     </InfoModalPage>
   );
 };
