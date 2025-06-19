@@ -1,12 +1,10 @@
 import { lazy, useState } from 'react';
-import { FormattedDate, FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import camelCase from 'lodash/camelCase';
 import includes from 'lodash/includes';
 import isEmpty from 'lodash/isEmpty';
 import isPlainObject from 'lodash/isPlainObject';
-import isString from 'lodash/isString';
 import map from 'lodash/map';
-import startCase from 'lodash/startCase';
 import LoadingSpinner from '@commercetools-uikit/loading-spinner';
 import { ContentNotification } from '@commercetools-uikit/notifications';
 import SpacingsStack from '@commercetools-uikit/spacings-stack';
@@ -41,6 +39,7 @@ import { columnDefinitions, COLUMN_KEYS } from './column-definitions';
 import messages from './messages';
 import styles from './custom-objects-list.module.css';
 import TextFilter from './text-filter';
+import { renderObject } from './render-object';
 
 
 const CreateCustomObject = lazy(() => import('../create-custom-object'));
@@ -94,73 +93,6 @@ const CustomObjectsList = () => {
 
   if (!customObjectsPaginatedResult || !customObjectsPaginatedResult.results) {
     return <PageNotFound />;
-  }
-
-  function renderValue(value: any) {
-    if (isPlainObject(value)) {
-      return (
-        <div data-testid="object-value" className={`${styles.nested}`}>
-          {renderObject(value)}
-        </div>
-      );
-    }
-
-    if (Array.isArray(value)) {
-      return (
-        <div className={styles.nested}>
-          {map(value, (val, index) => (
-            <div
-              data-testid="list-value"
-              className={styles.listItem}
-              key={index}
-            >
-              {renderValue(val)}
-            </div>
-          ))}
-        </div>
-      );
-    }
-
-    const dateRegex = /\d{4}-\d{2}-\d{2}/;
-    if (isString(value) && value.match(dateRegex)) {
-      return value.indexOf('T') >= 0 ? (
-        <FormattedDate
-          value={value}
-          year={'numeric'}
-          month={'numeric'}
-          day={'numeric'}
-          hour={'numeric'}
-          minute={'numeric'}
-          hour12={true}
-          timeZoneName={'short'}
-        />
-      ) : (
-        <FormattedDate
-          value={value}
-          year={'numeric'}
-          month={'numeric'}
-          day={'numeric'}
-        />
-      );
-    }
-
-    return value.toString();
-  }
-
-  function renderObject(value: { [key: string]: unknown }) {
-    const result = Object.entries(value).map(([key, value]) => {
-      return (
-        <div key={key} className={styles.item}>
-          <Text.Body data-testid="value-title" isBold as="span">
-            {startCase(key)}:
-          </Text.Body>
-          &nbsp;
-          {renderValue(value)}
-        </div>
-      );
-    });
-
-    return result;
   }
 
   function getDisplayAttributes(
