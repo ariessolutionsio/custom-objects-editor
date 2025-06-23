@@ -1,4 +1,5 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
+import { getIcon } from './icons';
 
 interface SvgIconProps {
   iconName: string;
@@ -9,7 +10,11 @@ interface SvgIconProps {
 }
 
 const SvgIcon: FC<SvgIconProps> = ({ iconName, alt, className, width = 20, height = 20 }) => {
-  const iconPath = '/assets/icons/' + iconName + '.svg';
+  const iconPath = getIcon(iconName);
+
+  if (!iconPath) {
+    return null;
+  }
 
   return (
     <img
