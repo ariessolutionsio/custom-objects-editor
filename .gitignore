@@ -10,3 +10,4 @@ firebase.json
 lambda.js
 _site/
 .sass-cache/
+public/*
