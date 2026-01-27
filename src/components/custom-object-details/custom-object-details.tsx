@@ -16,7 +16,7 @@ import { useParams } from 'react-router-dom';
 import LoadingSpinner from '@commercetools-uikit/loading-spinner';
 import { ContentNotification } from '@commercetools-uikit/notifications';
 import Spacings from '@commercetools-uikit/spacings';
-import { reduce, isPlainObject, get } from 'lodash';
+import { reduce, isPlainObject, camelCase } from 'lodash';
 import { useApplicationContext } from '@commercetools-frontend/application-shell-connectors';
 import { useIsAuthorized } from '@commercetools-frontend/permissions';
 import { PERMISSIONS, AttributeValue } from '../../constants';
@@ -39,15 +39,35 @@ type Props = {
   onClose: () => void;
 };
 
+// Find a value from the source object by matching camelCase keys
+// This handles cases where the stored data uses different naming conventions
+// (e.g., SCREAMING_SNAKE_CASE, snake_case) than the schema (camelCase)
+const findValueByKey = (obj: any, targetKey: string): any => {
+  if (!obj || typeof obj !== 'object') return undefined;
+
+  // First try direct key match
+  if (targetKey in obj) return obj[targetKey];
+
+  // Find key where camelCase version matches the target key
+  const matchingKey = Object.keys(obj).find(
+    (key) => camelCase(key) === targetKey
+  );
+
+  return matchingKey ? obj[matchingKey] : undefined;
+};
+
 const getValueForAttributes = (value: any, empty: any): any => {
   return reduce(
     empty,
-    (result, val, key) => ({
-      ...result,
-      [key]: isPlainObject(val)
-        ? getValueForAttributes(get(value, key), val)
-        : get(value, key) || val,
-    }),
+    (result, val, key) => {
+      const foundValue = findValueByKey(value, key);
+      return {
+        ...result,
+        [key]: isPlainObject(val)
+          ? getValueForAttributes(foundValue, val)
+          : foundValue ?? val,
+      };
+    },
     {}
   );
 };
